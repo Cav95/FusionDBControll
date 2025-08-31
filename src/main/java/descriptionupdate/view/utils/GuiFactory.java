@@ -58,7 +58,7 @@ public class GuiFactory {
         return new JComboBox<>(allGroupTypeString.toArray(new String[0]));
     }
 
-    public static JLabel getLabel(String text, Font font) {
+    public static JLabel getLabel(String text, Font font, Color color) {
         JLabel label = new JLabel(text);
         label.setFont(font);
         return label;

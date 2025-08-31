@@ -51,7 +51,7 @@ public class MainTableScene extends JPanel {
     private JButton saveButton;
     private JButton exitButton;
 
-    private JLabel titleLabel = new JLabel("TABELLA DESCRIZIONI");
+    private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
 
     @SuppressWarnings("unused")
     private final View view;
