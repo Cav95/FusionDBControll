@@ -33,8 +33,8 @@ public class UpdateDescriptionDialog extends JDialog {
     private static final String FONT = "Roboto";
     private static final int SIZE_FONT = 13;
 
-    private JLabel itaLabel = new JLabel("ITA Description:");
-    private JLabel engLabel = new JLabel("ENG Description:");
+    private JLabel itaLabel = GuiFactory.getLabel("ITA Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+    private JLabel engLabel = GuiFactory.getLabel("ENG Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
 
     private JTextField itaTextField = GuiFactory.getTextField(20);
     private JTextField engTextField = GuiFactory.getTextField(20);
@@ -43,6 +43,12 @@ public class UpdateDescriptionDialog extends JDialog {
     private final JPanel titlePannel = new JPanel();
     private JPanel bottomPanel = new JPanel();
     private JLabel titleLabel = new JLabel();
+
+    private final String exIta;
+    private final String exEng;
+    private final String exGroup;
+
+    private final View view;
 
     /**
      * Constructor for ResultPane.
@@ -56,6 +62,11 @@ public class UpdateDescriptionDialog extends JDialog {
             final String exGroup) {
 
         super(view.getMainFrame(), title, ModalityType.APPLICATION_MODAL);
+        this.exIta = exIta;
+        this.exEng = exEng;
+        this.exGroup = exGroup;
+
+        this.view = view;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(800, 500);
@@ -69,8 +80,9 @@ public class UpdateDescriptionDialog extends JDialog {
         titlePannel.setBorder(BorderFactory.createEmptyBorder(50, 20, 20, 20));
         this.add(titlePannel, BorderLayout.NORTH);
 
-        titleLabel = new JLabel(
-                "Stai aggiornando la descrizione: " + exGroup + " - " + exIta + " - " + exEng);
+        titleLabel = GuiFactory.getLabel(
+                "Stai aggiornando la descrizione:\n" + exGroup + " - " + exIta + " - " + exEng,
+                GuiFactory.getFont(FONT, 20), Color.BLACK);
         titleLabel.setFont(new Font(FONT, Font.BOLD, 15));
         titleLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         titlePannel.add(titleLabel, BorderLayout.CENTER);
@@ -98,20 +110,8 @@ public class UpdateDescriptionDialog extends JDialog {
                     public void actionPerformed(final ActionEvent e) {
 
                         try {
-                            var newDescription = new Description(
-                                    itaTextField.getText().toUpperCase(),
-                                    engTextField.getText().toUpperCase(), exGroup);
-                            var oldDescription = new Description(exIta, exEng, exGroup);
+                            action();
 
-                            ControllUtilies.descriptionValidCaracter(newDescription);
-                            ControllUtilies.descriptionNotBlank(newDescription);
-                            view.getController().updateDescription(oldDescription,
-                                    newDescription);
-                            JOptionPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this,
-                                    newDescription);
-                            view.getController().setSaved(false);
-                            view.goToInitialSceneFiltered();
-                            UpdateDescriptionDialog.this.dispose();
                         } catch (IllegalArgumentException t) {
                             JOptionPaneFactory.caractherInvalid(UpdateDescriptionDialog.this);
                         } catch (ExistentDescriptionException o) {
@@ -125,6 +125,23 @@ public class UpdateDescriptionDialog extends JDialog {
 
                 });
         bottomPanel.add(update);
+    }
+
+    private void action() {
+        var newDescription = new Description(
+                itaTextField.getText().toUpperCase(),
+                engTextField.getText().toUpperCase(), exGroup);
+        var oldDescription = new Description(exIta, exEng, exGroup);
+
+        ControllUtilies.descriptionValidCaracter(newDescription);
+        ControllUtilies.descriptionNotBlank(newDescription);
+        this.view.getController().updateDescription(oldDescription,
+                newDescription);
+        JOptionPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this,
+                newDescription);
+        this.view.getController().setSaved(false);
+        this.view.goToInitialSceneFiltered();
+        UpdateDescriptionDialog.this.dispose();
     }
 
 }

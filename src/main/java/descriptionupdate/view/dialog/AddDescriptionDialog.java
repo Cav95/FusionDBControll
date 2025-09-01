@@ -2,6 +2,7 @@ package descriptionupdate.view.dialog;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -31,13 +32,16 @@ public class AddDescriptionDialog extends JDialog {
 
     final JPanel mainPanel = new JPanel();
     private JPanel northPanel = new JPanel();
-    private JLabel titleLabel = new JLabel("Add Description Scene");
+    protected JLabel titleLabel = new JLabel("Add Description Scene");
     private JLabel itaLabel = GuiFactory.getLabel("ITA Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
     private JLabel engLabel = GuiFactory.getLabel("ENG Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
     private JLabel groupLabel = GuiFactory.getLabel("Group", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
     protected JTextField itaTextField = GuiFactory.getTextField(20);
     protected JTextField engTextField = GuiFactory.getTextField(20);
     protected JComboBox<String> groupTextField;
+
+    protected JButton addButton;
+    protected JButton cancelButton;
 
     @SuppressWarnings("unused")
     private final View view;
@@ -80,42 +84,50 @@ public class AddDescriptionDialog extends JDialog {
         mainPanel.add(groupTextField);
         this.add(mainPanel, BorderLayout.CENTER);
 
-        mainPanel.add(
-                GuiFactory.getButtom("Aggiungi", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
-                        new ActionListener() {
-                            @Override
-                            public void actionPerformed(java.awt.event.ActionEvent e) {
-                                try {
-                                    var newDescription = new Description(itaTextField.getText().toUpperCase(),
-                                            engTextField.getText().toUpperCase(),
-                                            groupTextField.getSelectedItem().toString().toUpperCase());
-                                    ControllUtilies.descriptionValidCaracter(newDescription);
-                                    ControllUtilies.descriptionNotBlank(newDescription);
-                                    view.getController().addDescription(newDescription);
-                                    JOptionPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this,
-                                            newDescription);
-                                    view.getController().setSaved(false);
-                                    view.goToInitialSceneFiltered();
-                                    AddDescriptionDialog.this.dispose();
-                                } catch (IllegalArgumentException t) {
-                                    JOptionPaneFactory.caractherInvalid(AddDescriptionDialog.this);
-                                } catch (BlankDescriptionException o) {
-                                    JOptionPaneFactory.blankDescription(AddDescriptionDialog.this);
-                                } catch (Exception ex) {
-                                    JOptionPaneFactory.generiError(AddDescriptionDialog.this);
+        addButton = GuiFactory.getButtom("Aggiungi", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent e) {
+                        try {
+                            action();
 
-                                }
+                        } catch (IllegalArgumentException t) {
+                            JOptionPaneFactory.caractherInvalid(AddDescriptionDialog.this);
+                        } catch (BlankDescriptionException o) {
+                            JOptionPaneFactory.blankDescription(AddDescriptionDialog.this);
+                        } catch (Exception ex) {
+                            JOptionPaneFactory.generiError(AddDescriptionDialog.this);
 
-                            }
-                        }));
-        mainPanel.add(GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, GuiFactory.getFont(FONT, SIZE_FONT),
+                        }
+
+                    }
+                });
+        cancelButton = GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         view.goToInitialSceneFiltered();
                         AddDescriptionDialog.this.dispose();
                     }
-                }));
+                });
+        mainPanel.add(addButton);
+        mainPanel.add(cancelButton);
 
     }
+
+    private void action() {
+        var newDescription = new Description(itaTextField.getText().toUpperCase(),
+                engTextField.getText().toUpperCase(),
+                groupTextField.getSelectedItem().toString().toUpperCase());
+        ControllUtilies.descriptionValidCaracter(newDescription);
+        ControllUtilies.descriptionNotBlank(newDescription);
+        view.getController().addDescription(newDescription);
+        JOptionPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this,
+                newDescription);
+        view.getController().setSaved(false);
+        view.goToInitialSceneFiltered();
+        AddDescriptionDialog.this.dispose();
+
+    }
+
 }
