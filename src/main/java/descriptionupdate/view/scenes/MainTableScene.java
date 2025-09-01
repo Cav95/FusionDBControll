@@ -8,7 +8,7 @@ import descriptionupdate.view.dialog.AddDescriptionDialog;
 import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
 import descriptionupdate.view.dialog.UpdateDescriptionDialog;
 import descriptionupdate.view.utils.GuiFactory;
-import descriptionupdate.view.utils.OptionalPaneFactory;
+import descriptionupdate.view.utils.JOptionPaneFactory;
 import descriptionupdate.view.utils.SelectionTable;
 
 import java.awt.*;
@@ -169,7 +169,7 @@ public class MainTableScene extends JPanel {
                             String group = (String) table.getValueAt(selectedRow, 0);
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
-                            if (OptionalPaneFactory.askDeleteConfirm(MainTableScene.this,
+                            if (JOptionPaneFactory.askDeleteConfirm(MainTableScene.this,
                                     ita + " - " + eng + " - " + group).equals(JOptionPane.YES_OPTION)) {
                                 view.getController().deleteDescription(new Description(ita, eng, group));
                                 view.getController().setSaved(false); // Mark as not saved
@@ -208,9 +208,9 @@ public class MainTableScene extends JPanel {
                         try {
                             view.getController().save();
                             view.getController().setSaved(true); // Mark as saved after successful save
-                            OptionalPaneFactory.savedSuccessfully(MainTableScene.this);
+                            JOptionPaneFactory.savedSuccessfully(MainTableScene.this);
                         } catch (Exception ex) {
-                            OptionalPaneFactory.errorOnSave(MainTableScene.this, ex.getMessage());
+                            JOptionPaneFactory.errorOnSave(MainTableScene.this, ex.getMessage());
                         }
                     }
                 });
@@ -221,12 +221,12 @@ public class MainTableScene extends JPanel {
                         if (view.getController().isSaved()) {
                             view.exitApplication();
                         } else {
-                            if (OptionalPaneFactory.askSaveConfirm(MainTableScene.this)
+                            if (JOptionPaneFactory.askSaveConfirm(MainTableScene.this)
                                     .equals(JOptionPane.YES_OPTION)) {
                                 view.getController().save();
-                                OptionalPaneFactory.savedSuccessfully(MainTableScene.this);
+                                JOptionPaneFactory.savedSuccessfully(MainTableScene.this);
                             } else {
-                                OptionalPaneFactory.saveDiscarded(MainTableScene.this);
+                                JOptionPaneFactory.saveDiscarded(MainTableScene.this);
                             }
                             view.exitApplication();
 

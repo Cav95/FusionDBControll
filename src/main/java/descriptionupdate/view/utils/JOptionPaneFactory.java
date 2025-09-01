@@ -9,7 +9,7 @@ import descriptionupdate.model.api.Description;
 /**
  * Utility class for displaying various optional dialog panes.
  */
-public class OptionalPaneFactory {
+public class JOptionPaneFactory {
 
     /**
      * Displays a message dialog indicating invalid characters were used.
@@ -122,7 +122,7 @@ public class OptionalPaneFactory {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    private OptionalPaneFactory() {
+    private JOptionPaneFactory() {
         // Prevent instantiation
     }
 

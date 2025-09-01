@@ -14,7 +14,7 @@ import descriptionupdate.view.View;
 import descriptionupdate.view.utils.ControllUtilies;
 import descriptionupdate.view.utils.ExistentDescriptionException;
 import descriptionupdate.view.utils.GuiFactory;
-import descriptionupdate.view.utils.OptionalPaneFactory;
+import descriptionupdate.view.utils.JOptionPaneFactory;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -91,19 +91,19 @@ public class AddDescriptionDialog extends JDialog {
                                             groupTextField.getSelectedItem().toString().toUpperCase());
                                     ControllUtilies.descriptionValidCaracter(newDescription);
                                     view.getController().addDescription(newDescription);
-                                    OptionalPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this,
+                                    JOptionPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this,
                                             newDescription);
                                     view.getController().setSaved(false);
                                     view.goToInitialSceneFiltered();
                                     AddDescriptionDialog.this.dispose();
                                 } catch (IllegalArgumentException t) {
-                                    OptionalPaneFactory.caractherInvalid(AddDescriptionDialog.this);
+                                    JOptionPaneFactory.caractherInvalid(AddDescriptionDialog.this);
                                 } catch (ExistentDescriptionException o) {
-                                    OptionalPaneFactory.existedDescription(AddDescriptionDialog.this);
+                                    JOptionPaneFactory.existedDescription(AddDescriptionDialog.this);
                                 }
 
                         catch (Exception ex) {
-                                    OptionalPaneFactory.generiError(AddDescriptionDialog.this);
+                                    JOptionPaneFactory.generiError(AddDescriptionDialog.this);
 
                                 }
 

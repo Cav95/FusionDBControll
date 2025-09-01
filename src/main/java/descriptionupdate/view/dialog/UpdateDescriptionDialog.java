@@ -14,7 +14,7 @@ import descriptionupdate.view.View;
 import descriptionupdate.view.utils.ControllUtilies;
 import descriptionupdate.view.utils.ExistentDescriptionException;
 import descriptionupdate.view.utils.GuiFactory;
-import descriptionupdate.view.utils.OptionalPaneFactory;
+import descriptionupdate.view.utils.JOptionPaneFactory;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -105,17 +105,17 @@ public class UpdateDescriptionDialog extends JDialog {
                             ControllUtilies.descriptionValidCaracter(newDescription);
                             view.getController().updateDescription(oldDescription,
                                     newDescription);
-                            OptionalPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this,
+                            JOptionPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this,
                                     newDescription);
                             view.getController().setSaved(false);
                             view.goToInitialSceneFiltered();
                             UpdateDescriptionDialog.this.dispose();
                         } catch (IllegalArgumentException t) {
-                            OptionalPaneFactory.caractherInvalid(UpdateDescriptionDialog.this);
+                            JOptionPaneFactory.caractherInvalid(UpdateDescriptionDialog.this);
                         } catch (ExistentDescriptionException o) {
-                            OptionalPaneFactory.existedDescription(UpdateDescriptionDialog.this);
+                            JOptionPaneFactory.existedDescription(UpdateDescriptionDialog.this);
                         } catch (Exception ex) {
-                            OptionalPaneFactory.generiError(UpdateDescriptionDialog.this);
+                            JOptionPaneFactory.generiError(UpdateDescriptionDialog.this);
                         }
                     }
 

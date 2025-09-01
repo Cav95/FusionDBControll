@@ -18,7 +18,7 @@ import descriptionupdate.view.View;
 import descriptionupdate.view.api.UserAdmit;
 import descriptionupdate.view.utils.ConnectionFailureViewIni;
 import descriptionupdate.view.utils.GuiFactory;
-import descriptionupdate.view.utils.OptionalPaneFactory;
+import descriptionupdate.view.utils.JOptionPaneFactory;
 
 /**
  * LogInScene class that extends JPanel to create a login scene for the
@@ -95,7 +95,7 @@ public class LogInScene extends JPanel {
                             view.goToInitialScene();
 
                         } else {
-                            OptionalPaneFactory.denediedAccess(LogInScene.this);
+                            JOptionPaneFactory.denediedAccess(LogInScene.this);
 
                         }
 
@@ -150,7 +150,7 @@ public class LogInScene extends JPanel {
 
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-            OptionalPaneFactory.connectionFailed(LogInScene.this);
+            JOptionPaneFactory.connectionFailed(LogInScene.this);
         } catch (DAOException ex) {
             new ConnectionFailureViewIni();
         }
