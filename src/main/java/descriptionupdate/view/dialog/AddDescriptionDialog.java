@@ -11,8 +11,8 @@ import javax.swing.JTextField;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
+import descriptionupdate.view.utils.BlankDescriptionException;
 import descriptionupdate.view.utils.ControllUtilies;
-import descriptionupdate.view.utils.ExistentDescriptionException;
 import descriptionupdate.view.utils.GuiFactory;
 import descriptionupdate.view.utils.JOptionPaneFactory;
 
@@ -90,6 +90,7 @@ public class AddDescriptionDialog extends JDialog {
                                             engTextField.getText().toUpperCase(),
                                             groupTextField.getSelectedItem().toString().toUpperCase());
                                     ControllUtilies.descriptionValidCaracter(newDescription);
+                                    ControllUtilies.descriptionNotBlank(newDescription);
                                     view.getController().addDescription(newDescription);
                                     JOptionPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this,
                                             newDescription);
@@ -98,11 +99,9 @@ public class AddDescriptionDialog extends JDialog {
                                     AddDescriptionDialog.this.dispose();
                                 } catch (IllegalArgumentException t) {
                                     JOptionPaneFactory.caractherInvalid(AddDescriptionDialog.this);
-                                } catch (ExistentDescriptionException o) {
-                                    JOptionPaneFactory.existedDescription(AddDescriptionDialog.this);
-                                }
-
-                        catch (Exception ex) {
+                                } catch (BlankDescriptionException o) {
+                                    JOptionPaneFactory.blankDescription(AddDescriptionDialog.this);
+                                } catch (Exception ex) {
                                     JOptionPaneFactory.generiError(AddDescriptionDialog.this);
 
                                 }

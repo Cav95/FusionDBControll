@@ -21,6 +21,7 @@ public class JOptionPaneFactory {
 
     /**
      * Displays a message dialog indicating access was denied.
+     * 
      * @param dialog the parent component for the dialog
      */
     public static void denediedAccess(Component dialog) {
@@ -29,9 +30,9 @@ public class JOptionPaneFactory {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-
     /**
      * Shows a message indicating the save was successful.
+     * 
      * @param dialog the parent component for the dialog
      */
     public static void savedSuccessfully(Component dialog) {
@@ -42,6 +43,7 @@ public class JOptionPaneFactory {
 
     /**
      * Shows a message indicating that changes were not saved.
+     * 
      * @param dialog the parent component for the dialog
      */
     public static void saveDiscarded(Component dialog) {
@@ -52,7 +54,8 @@ public class JOptionPaneFactory {
 
     /**
      * Shows an error message when saving fails.
-     * @param dialog the parent component for the dialog
+     * 
+     * @param dialog  the parent component for the dialog
      * @param message the error message to display
      */
     public static void errorOnSave(Component dialog, String message) {
@@ -63,6 +66,7 @@ public class JOptionPaneFactory {
 
     /**
      * Asks the user to confirm saving changes before exiting.
+     * 
      * @param dialog the parent component for the dialog
      * @return JOptionPane.YES_OPTION or JOptionPane.NO_OPTION
      */
@@ -74,7 +78,8 @@ public class JOptionPaneFactory {
 
     /**
      * Asks the user to confirm deletion of a description.
-     * @param dialog the parent component for the dialog
+     * 
+     * @param dialog      the parent component for the dialog
      * @param description the description to delete
      * @return JOptionPane.YES_OPTION or JOptionPane.NO_OPTION
      */
@@ -87,6 +92,7 @@ public class JOptionPaneFactory {
 
     /**
      * Shows an error message if the description already exists.
+     * 
      * @param dialog the parent component for the dialog
      */
     public static void existedDescription(Component dialog) {
@@ -97,7 +103,8 @@ public class JOptionPaneFactory {
 
     /**
      * Shows a success message for adding a description.
-     * @param dialog the parent component for the dialog
+     * 
+     * @param dialog      the parent component for the dialog
      * @param description the added description
      */
     public static void successfullyAddedDescription(Component dialog, Description description) {
@@ -108,6 +115,7 @@ public class JOptionPaneFactory {
 
     /**
      * Shows an error message when the database connection fails.
+     * 
      * @param dialog the parent component for the dialog
      */
     public static void connectionFailed(Component dialog) {
@@ -124,6 +132,12 @@ public class JOptionPaneFactory {
 
     private JOptionPaneFactory() {
         // Prevent instantiation
+    }
+
+    public static void blankDescription(Component dialog) {
+        JOptionPane.showMessageDialog(dialog,
+                "La descrizione non può essere vuota", "Errore",
+                JOptionPane.ERROR_MESSAGE);
     }
 
 }

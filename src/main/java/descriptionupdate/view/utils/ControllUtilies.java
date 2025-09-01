@@ -18,4 +18,10 @@ public class ControllUtilies {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void descriptionNotBlank(Description description) {
+        if (description.itaDescripion().isBlank() || description.engDescription().isBlank()) {
+            throw new BlankDescriptionException("Description cannot be blank");
+        }
+    }
 }

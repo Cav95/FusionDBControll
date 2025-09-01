@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
+import descriptionupdate.view.utils.BlankDescriptionException;
 import descriptionupdate.view.utils.ControllUtilies;
 import descriptionupdate.view.utils.ExistentDescriptionException;
 import descriptionupdate.view.utils.GuiFactory;
@@ -103,6 +104,7 @@ public class UpdateDescriptionDialog extends JDialog {
                             var oldDescription = new Description(exIta, exEng, exGroup);
 
                             ControllUtilies.descriptionValidCaracter(newDescription);
+                            ControllUtilies.descriptionNotBlank(newDescription);
                             view.getController().updateDescription(oldDescription,
                                     newDescription);
                             JOptionPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this,
@@ -114,6 +116,8 @@ public class UpdateDescriptionDialog extends JDialog {
                             JOptionPaneFactory.caractherInvalid(UpdateDescriptionDialog.this);
                         } catch (ExistentDescriptionException o) {
                             JOptionPaneFactory.existedDescription(UpdateDescriptionDialog.this);
+                        } catch (BlankDescriptionException ej) {
+                            JOptionPaneFactory.blankDescription(UpdateDescriptionDialog.this);
                         } catch (Exception ex) {
                             JOptionPaneFactory.generiError(UpdateDescriptionDialog.this);
                         }
