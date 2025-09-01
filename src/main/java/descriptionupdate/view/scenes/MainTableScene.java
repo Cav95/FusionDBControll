@@ -1,6 +1,8 @@
 package descriptionupdate.view.scenes;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
@@ -14,6 +16,9 @@ import descriptionupdate.view.utils.SelectionTable;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +39,8 @@ public class MainTableScene extends JPanel {
     private String engDescription;
     private String group;
 
+    private Boolean isAcending;
+
     private JPanel northPanel = new JPanel();
     private JPanel southPanel = new JPanel();
 
@@ -51,7 +58,8 @@ public class MainTableScene extends JPanel {
     private JButton saveButton;
     private JButton exitButton;
 
-    private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+    private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni", GuiFactory.getFont(FONT, SIZE_FONT),
+            Color.BLACK);
 
     @SuppressWarnings("unused")
     private final View view;
@@ -100,6 +108,8 @@ public class MainTableScene extends JPanel {
     }
 
     private void initial(View view) {
+        isAcending = true;
+
         this.setLayout(new BorderLayout());
 
         // North: Title panel
@@ -131,6 +141,9 @@ public class MainTableScene extends JPanel {
         table.getColumnModel().getColumn(0).setPreferredWidth(170);
         table.getColumnModel().getColumn(1).setPreferredWidth(150);
         table.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(sorter);
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(400, 200));
@@ -252,7 +265,8 @@ public class MainTableScene extends JPanel {
                         view.goToInitialSceneFiltered();
                     }
                 });
-        JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK,
+                GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -264,6 +278,22 @@ public class MainTableScene extends JPanel {
                         view.goToInitialScene();
                     }
                 });
+
+        table.getTableHeader().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int colIndex = table.columnAtPoint(e.getPoint());
+                if (colIndex != -1) {
+                    List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+                    if (isAcending)
+                        sortKeys.add(new RowSorter.SortKey(colIndex, SortOrder.ASCENDING));
+                    else
+                        sortKeys.add(new RowSorter.SortKey(colIndex, SortOrder.DESCENDING));
+                    isAcending = !isAcending;
+                    sorter.setSortKeys(sortKeys);
+                    sorter.sort();
+                }
+            }
+        });
         southPanel.add(Box.createHorizontalStrut(10));
         southPanel.add(desFilter);
         southPanel.add(itaTextField);
