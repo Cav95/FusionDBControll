@@ -11,10 +11,10 @@ import javax.swing.JTextField;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
-import descriptionupdate.view.utils.BlankDescriptionException;
+import descriptionupdate.view.exception.BlankDescriptionException;
+import descriptionupdate.view.factory.GuiFactory;
+import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.utils.ControllUtilies;
-import descriptionupdate.view.utils.GuiFactory;
-import descriptionupdate.view.utils.JOptionPaneFactory;
 
 import java.awt.*;
 import java.awt.event.ActionListener;

@@ -9,8 +9,8 @@ import descriptionupdate.view.View;
 import descriptionupdate.view.dialog.AddDescriptionDialog;
 import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
 import descriptionupdate.view.dialog.UpdateDescriptionDialog;
-import descriptionupdate.view.utils.GuiFactory;
-import descriptionupdate.view.utils.JOptionPaneFactory;
+import descriptionupdate.view.factory.GuiFactory;
+import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.utils.SelectionTable;
 
 import java.awt.*;

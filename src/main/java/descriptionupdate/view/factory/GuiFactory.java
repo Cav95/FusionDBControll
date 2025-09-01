@@ -1,4 +1,4 @@
-package descriptionupdate.view.utils;
+package descriptionupdate.view.factory;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;

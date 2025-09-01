@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.api.ProibenCaratter;
+import descriptionupdate.view.exception.BlankDescriptionException;
 
 public class ControllUtilies {
 

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import descriptionupdate.model.Model;
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
-import descriptionupdate.view.utils.ExistentDescriptionException;
+import descriptionupdate.view.exception.ExistentDescriptionException;
 
 /**
  * Controller class that manages the interaction between the model and the view.

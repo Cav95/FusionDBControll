@@ -1,4 +1,4 @@
-package descriptionupdate.view.utils;
+package descriptionupdate.view.exception;
 
 public class BlankDescriptionException extends RuntimeException {
 

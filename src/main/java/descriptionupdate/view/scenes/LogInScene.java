@@ -16,9 +16,9 @@ import descriptionupdate.data.utils.DAOUtils;
 import descriptionupdate.model.Model;
 import descriptionupdate.view.View;
 import descriptionupdate.view.api.UserAdmit;
+import descriptionupdate.view.factory.GuiFactory;
+import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.utils.ConnectionFailureViewIni;
-import descriptionupdate.view.utils.GuiFactory;
-import descriptionupdate.view.utils.JOptionPaneFactory;
 
 /**
  * LogInScene class that extends JPanel to create a login scene for the
