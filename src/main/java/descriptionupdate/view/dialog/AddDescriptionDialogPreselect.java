@@ -4,7 +4,6 @@ import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 import descriptionupdate.view.dialog.api.AbstactChangeDialog;
 import descriptionupdate.view.factory.JOptionPaneFactory;
-import descriptionupdate.view.utils.ControllUtilies;
 
 /**
  * Dialog for adding a preselected description.
@@ -33,12 +32,8 @@ public class AddDescriptionDialogPreselect extends AbstactChangeDialog {
      * {@inheritDoc}
      */
     @Override
-    public void action() {
-        var newDescription = new Description(itaTextField.getText().toUpperCase(),
-                engTextField.getText().toUpperCase(),
-                groupTextField.getSelectedItem().toString().toUpperCase());
-        ControllUtilies.descriptionValidCaracter(newDescription);
-        ControllUtilies.descriptionNotBlank(newDescription);
+    public void action(Description newDescription) {
+
         view.getController().addDescription(newDescription);
         JOptionPaneFactory.successfullyAddedDescription(AddDescriptionDialogPreselect.this,
                 newDescription);

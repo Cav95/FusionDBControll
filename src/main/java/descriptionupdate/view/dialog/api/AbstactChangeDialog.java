@@ -10,10 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 import descriptionupdate.view.exception.BlankDescriptionException;
+import descriptionupdate.view.exception.ExistentDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
+import descriptionupdate.view.utils.ControllUtilies;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -85,12 +89,19 @@ public abstract class AbstactChangeDialog extends JDialog {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            action();
+                            var newDescription = new Description(itaTextField.getText().toUpperCase(),
+                                    engTextField.getText().toUpperCase(),
+                                    groupTextField.getSelectedItem().toString().toUpperCase());
+                            ControllUtilies.descriptionValidCaracter(newDescription);
+                            ControllUtilies.descriptionNotBlank(newDescription);
+                            action(newDescription);
 
                         } catch (IllegalArgumentException t) {
                             JOptionPaneFactory.caractherInvalid(AbstactChangeDialog.this);
                         } catch (BlankDescriptionException o) {
                             JOptionPaneFactory.blankDescription(AbstactChangeDialog.this);
+                        } catch (ExistentDescriptionException t) {
+                            JOptionPaneFactory.existedDescription(AbstactChangeDialog.this);
                         } catch (Exception ex) {
                             JOptionPaneFactory.generiError(AbstactChangeDialog.this);
 
@@ -111,5 +122,5 @@ public abstract class AbstactChangeDialog extends JDialog {
 
     }
 
-    public abstract void action();
+    public abstract void action(Description newDescription);
 }
