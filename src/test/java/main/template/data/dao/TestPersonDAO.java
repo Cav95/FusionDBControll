@@ -37,6 +37,11 @@ class TestdescDao {
     }
 
     @Test
+    public void isConnected() throws SQLException {
+        assertEquals(true, connection.isValid(2));
+    }
+
+    @Test
     public void fromDescription() {
         var descDao = new DescriptionDAOImpl(connection);
         var actual = descDao.getDescription("ANTIVIBRANTE", "ANTI-VIBRATION", "ANV_ANTIVIBRANTI").get();

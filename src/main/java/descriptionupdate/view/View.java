@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import descriptionupdate.Controller;
-import descriptionupdate.view.dialog.unused.AddDescriptionDialog;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 
@@ -21,7 +20,6 @@ public final class View {
 
     private static final String SN_WELCOME = "welcome";
     private static final String SN_SECOND = "SecondScene";
-    private static final String ADD_SCENE = "addScene";
 
     private static final double FRAME_SIZE_FACTOR = 0.8;
 
@@ -58,6 +56,7 @@ public final class View {
 
     /**
      * Returns the main frame of the application.
+     * 
      * @return the main frame
      */
     public JFrame getMainFrame() {
@@ -89,7 +88,7 @@ public final class View {
      * @param controller the Controller to set
      * @throws NullPointerException if the provided controller is null
      */
-    public void setController(Controller controller) {
+    public void setController(final Controller controller) {
         Objects.requireNonNull(controller, "Set null controller in view");
         this.controller = Optional.of(controller);
     }
@@ -101,31 +100,26 @@ public final class View {
         this.mainPanel.add(new MainTableScene(this), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
+
     /**
      * Navigates to the initial scene of the application with filters applied.
      *
      * @param itaDescription the Italian description filter
      * @param engDescription the English description filter
-     * @param group         the group filter
+     * @param group          the group filter
      */
-        public void goToInitialSceneFiltered() {
-        this.mainPanel.add(new MainTableScene(this ,getController().getItaFilterTemp(),
-                                    getController().getEngFilterTemp(),
-                                    getController().getGroupFilterTemp()), SN_WELCOME);
+    public void goToInitialSceneFiltered() {
+        this.mainPanel.add(new MainTableScene(this, getController().getItaFilterTemp(),
+                getController().getEngFilterTemp(),
+                getController().getGroupFilterTemp()), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
+
     /**
      * Exits the application.
      */
-        public void exitApplication() {
+    public void exitApplication() {
         System.exit(0);
-    }
-    /**
-     * Navigates to the add scene of the application.
-     */
-        public void goToAddScene() {
-        this.mainPanel.add(new AddDescriptionDialog(this), ADD_SCENE);
-        this.cardLayout.show(this.mainPanel, ADD_SCENE);
     }
 
     /**
