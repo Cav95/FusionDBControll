@@ -6,9 +6,9 @@ import javax.swing.table.TableRowSorter;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
-import descriptionupdate.view.dialog.AddDescriptionDialog;
 import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
-import descriptionupdate.view.dialog.UpdateDescriptionDialog;
+import descriptionupdate.view.dialog.UpdateDescriptionDialogPreselect;
+import descriptionupdate.view.dialog.api.AbstactChangeDialog;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.utils.SelectionTable;
@@ -159,7 +159,7 @@ public class MainTableScene extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int selectedRow = table.getSelectedRow();
-                        AddDescriptionDialog dialog;
+                        AbstactChangeDialog dialog;
                         if (selectedRow >= 0) {
                             String group = (String) table.getValueAt(selectedRow, 0);
                             String ita = (String) table.getValueAt(selectedRow, 1);
@@ -167,7 +167,7 @@ public class MainTableScene extends JPanel {
 
                             dialog = new AddDescriptionDialogPreselect(view, ita, eng, group);
                         } else {
-                            dialog = new AddDescriptionDialog(view);
+                            dialog = new AddDescriptionDialogPreselect(view, "", "", "");
                         }
 
                         dialog.setVisible(true);
@@ -205,8 +205,7 @@ public class MainTableScene extends JPanel {
                             String group = (String) table.getValueAt(selectedRow, 0);
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
-                            UpdateDescriptionDialog dialog = new UpdateDescriptionDialog(view, "Update description",
-                                    ita, eng, group);
+                            var dialog = new UpdateDescriptionDialogPreselect(view, ita, eng, group);
                             dialog.setVisible(true);
 
                         } else {

@@ -142,9 +142,9 @@ public class LogInScene extends JPanel {
         try {
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            //connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
-                 //   username, psw);
-             connection = DAOUtils.localIniStringConnection();
+            connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
+                   username, psw);
+             //connection = DAOUtils.localIniStringConnection();
 
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();

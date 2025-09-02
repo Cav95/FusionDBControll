@@ -1,4 +1,4 @@
-package descriptionupdate.view.dialog;
+package descriptionupdate.view.dialog.unused;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;

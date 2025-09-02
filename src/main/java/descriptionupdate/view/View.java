@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import descriptionupdate.Controller;
-import descriptionupdate.view.dialog.AddDescriptionDialog;
+import descriptionupdate.view.dialog.unused.AddDescriptionDialog;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 

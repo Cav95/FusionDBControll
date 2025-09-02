@@ -1,4 +1,4 @@
-package descriptionupdate.view.dialog;
+package descriptionupdate.view.dialog.api;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -10,13 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 import descriptionupdate.view.exception.BlankDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
-import descriptionupdate.view.utils.ControllUtilies;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -24,7 +21,7 @@ import java.awt.event.ActionListener;
  * AddDescriptionScene class that extends JDialog to allow users to add a new
  * description.
  */
-public class AddDescriptionDialog extends JDialog {
+public abstract class AbstactChangeDialog extends JDialog {
 
     private static final int SIZE_FONT = 13;
 
@@ -32,7 +29,7 @@ public class AddDescriptionDialog extends JDialog {
 
     final JPanel mainPanel = new JPanel();
     private JPanel northPanel = new JPanel();
-    protected JLabel titleLabel = new JLabel("Add Description Scene");
+    protected JLabel titleLabel = new JLabel("Scene");
     private JLabel itaLabel = GuiFactory.getLabel("ITA Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
     private JLabel engLabel = GuiFactory.getLabel("ENG Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
     private JLabel groupLabel = GuiFactory.getLabel("Group", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
@@ -44,14 +41,14 @@ public class AddDescriptionDialog extends JDialog {
     protected JButton cancelButton;
 
     @SuppressWarnings("unused")
-    private final View view;
+    protected final View view;
 
     /**
      * Constructor for AddDescriptionScene.
      *
      * @param view the main view of the application
      */
-    public AddDescriptionDialog(View view) {
+    public AbstactChangeDialog(View view) {
         this.view = view;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -84,7 +81,7 @@ public class AddDescriptionDialog extends JDialog {
         mainPanel.add(groupTextField);
         this.add(mainPanel, BorderLayout.CENTER);
 
-        addButton = GuiFactory.getButtom("Aggiungi", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        addButton = GuiFactory.getButtom("Add", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -92,11 +89,11 @@ public class AddDescriptionDialog extends JDialog {
                             action();
 
                         } catch (IllegalArgumentException t) {
-                            JOptionPaneFactory.caractherInvalid(AddDescriptionDialog.this);
+                            JOptionPaneFactory.caractherInvalid(AbstactChangeDialog.this);
                         } catch (BlankDescriptionException o) {
-                            JOptionPaneFactory.blankDescription(AddDescriptionDialog.this);
+                            JOptionPaneFactory.blankDescription(AbstactChangeDialog.this);
                         } catch (Exception ex) {
-                            JOptionPaneFactory.generiError(AddDescriptionDialog.this);
+                            JOptionPaneFactory.generiError(AbstactChangeDialog.this);
 
                         }
 
@@ -107,7 +104,7 @@ public class AddDescriptionDialog extends JDialog {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         view.goToInitialSceneFiltered();
-                        AddDescriptionDialog.this.dispose();
+                        AbstactChangeDialog.this.dispose();
                     }
                 });
         mainPanel.add(addButton);
@@ -115,19 +112,5 @@ public class AddDescriptionDialog extends JDialog {
 
     }
 
-    private void action() {
-        var newDescription = new Description(itaTextField.getText().toUpperCase(),
-                engTextField.getText().toUpperCase(),
-                groupTextField.getSelectedItem().toString().toUpperCase());
-        ControllUtilies.descriptionValidCaracter(newDescription);
-        ControllUtilies.descriptionNotBlank(newDescription);
-        view.getController().addDescription(newDescription);
-        JOptionPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this,
-                newDescription);
-        view.getController().setSaved(false);
-        view.goToInitialSceneFiltered();
-        AddDescriptionDialog.this.dispose();
-
-    }
-
+    public abstract void action();
 }
