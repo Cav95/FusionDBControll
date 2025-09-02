@@ -26,6 +26,9 @@ public class AddDescriptionDialogPreselect extends AbstactChangeDialog {
         addButton.setText("Aggiungi");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void action() {
         var newDescription = new Description(itaTextField.getText().toUpperCase(),

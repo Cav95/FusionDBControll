@@ -33,6 +33,9 @@ public class UpdateDescriptionDialogPreselect extends AbstactChangeDialog {
         addButton.setText("Aggiorna");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void action() {
         var newDescription = new Description(

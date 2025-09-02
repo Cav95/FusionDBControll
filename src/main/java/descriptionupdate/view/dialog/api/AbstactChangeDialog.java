@@ -15,6 +15,7 @@ import descriptionupdate.view.exception.BlankDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -39,8 +40,6 @@ public abstract class AbstactChangeDialog extends JDialog {
 
     protected JButton addButton;
     protected JButton cancelButton;
-
-    @SuppressWarnings("unused")
     protected final View view;
 
     /**
@@ -84,7 +83,7 @@ public abstract class AbstactChangeDialog extends JDialog {
         addButton = GuiFactory.getButtom("Add", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
+                    public void actionPerformed(ActionEvent e) {
                         try {
                             action();
 
