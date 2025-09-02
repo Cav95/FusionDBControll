@@ -32,6 +32,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
         implementation("com.microsoft.sqlserver:mssql-jdbc:13.2.0.jre11")
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-text
+     implementation("org.apache.commons:commons-text:1.14.0")
 }
 
 java {
