@@ -14,7 +14,7 @@ public class JOptionPaneFactory {
     /**
      * Displays a message dialog indicating invalid characters were used.
      */
-    public static void caractherInvalid(Component dialog) {
+    public static void caractherInvalid(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Usati caratteri non validi");
     }
@@ -24,7 +24,7 @@ public class JOptionPaneFactory {
      * 
      * @param dialog the parent component for the dialog
      */
-    public static void denediedAccess(Component dialog) {
+    public static void denediedAccess(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Accesso negato.", "Errore",
                 JOptionPane.ERROR_MESSAGE);
@@ -35,7 +35,7 @@ public class JOptionPaneFactory {
      * 
      * @param dialog the parent component for the dialog
      */
-    public static void savedSuccessfully(Component dialog) {
+    public static void savedSuccessfully(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Salvataggio avvenuto con successo", "Info",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -46,7 +46,7 @@ public class JOptionPaneFactory {
      * 
      * @param dialog the parent component for the dialog
      */
-    public static void saveDiscarded(Component dialog) {
+    public static void saveDiscarded(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Modifiche non salvate", "Info",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -58,7 +58,7 @@ public class JOptionPaneFactory {
      * @param dialog  the parent component for the dialog
      * @param message the error message to display
      */
-    public static void errorOnSave(Component dialog, String message) {
+    public static void errorOnSave(final Component dialog, final String message) {
         JOptionPane.showMessageDialog(dialog,
                 "Errore durante il salvataggio: " + message, "Errore",
                 JOptionPane.ERROR_MESSAGE);
@@ -70,7 +70,7 @@ public class JOptionPaneFactory {
      * @param dialog the parent component for the dialog
      * @return JOptionPane.YES_OPTION or JOptionPane.NO_OPTION
      */
-    public static Integer askSaveConfirm(Component dialog) {
+    public static Integer askSaveConfirm(final Component dialog) {
         return JOptionPane.showConfirmDialog(dialog,
                 "Ci sono modifiche non salvate.\nVuoi salvare prima di uscire?",
                 "Conferma Salvataggio", JOptionPane.YES_NO_OPTION);
@@ -83,7 +83,7 @@ public class JOptionPaneFactory {
      * @param description the description to delete
      * @return JOptionPane.YES_OPTION or JOptionPane.NO_OPTION
      */
-    public static Integer askDeleteConfirm(Component dialog, String description) {
+    public static Integer askDeleteConfirm(final Component dialog, final String description) {
         String item = String.join("\n- ", description);
         return JOptionPane.showConfirmDialog(dialog,
                 "Sei sicuro di voler eliminare i seguenti elementi?\n- " + item,
@@ -95,7 +95,7 @@ public class JOptionPaneFactory {
      * 
      * @param dialog the parent component for the dialog
      */
-    public static void existedDescription(Component dialog) {
+    public static void existedDescription(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Descrizione Già Presente", "Errore",
                 JOptionPane.ERROR_MESSAGE);
@@ -107,7 +107,7 @@ public class JOptionPaneFactory {
      * @param dialog      the parent component for the dialog
      * @param description the added description
      */
-    public static void successfullyAddedDescription(Component dialog, Description description) {
+    public static void successfullyAddedDescription(final Component dialog, final Description description) {
         JOptionPane.showMessageDialog(dialog,
                 "Descrizione Aggiunta con Successo\n" + description.itaDescripion() + " - "
                         + description.engDescription() + " - " + description.group());
@@ -118,13 +118,13 @@ public class JOptionPaneFactory {
      * 
      * @param dialog the parent component for the dialog
      */
-    public static void connectionFailed(Component dialog) {
+    public static void connectionFailed(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Connessione al database fallita", "Errore",
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public static void generiError(Component dialog) {
+    public static void generiError(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Errore generico", "Errore",
                 JOptionPane.ERROR_MESSAGE);
@@ -134,7 +134,12 @@ public class JOptionPaneFactory {
         // Prevent instantiation
     }
 
-    public static void blankDescription(Component dialog) {
+    /**
+     * Shows an error message when a description field is left blank.
+     * 
+     * @param dialog the parent component for the dialog
+     */
+    public static void blankDescription(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "La descrizione non può essere vuota", "Errore",
                 JOptionPane.ERROR_MESSAGE);

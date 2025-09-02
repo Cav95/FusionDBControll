@@ -6,6 +6,9 @@ import descriptionupdate.view.dialog.api.AbstactChangeDialog;
 import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.utils.ControllUtilies;
 
+/**
+ * Dialog for adding a preselected description.
+ */
 public class AddDescriptionDialogPreselect extends AbstactChangeDialog {
 
     private static final long serialVersionUID = 1L;

@@ -27,7 +27,7 @@ public class GuiFactory {
      * @param action     the action listener to be added to the button
      * @return a JButton with the specified properties
      */
-    static public JButton getButtom(final String name, final Color backgroud, final Color foreGround,
+    public static JButton getButtom(final String name, final Color backgroud, final Color foreGround,
             final Font font, final ActionListener action) {
 
         final JButton button = new JButton(name);
@@ -43,28 +43,48 @@ public class GuiFactory {
 
     /**
      * Creates a JTextField with the specified number of columns.
+     * 
      * @param i the number of columns for the text field
+     * @return a JTextField with the specified number of columns
      */
-    public static JTextField getTextField(int i) {
+    public static JTextField getTextField(final Integer i) {
         JTextField textField = new JTextField(i);
         return textField;
     }
 
     /**
      * Creates a JComboBox with the specified list of strings.
+     * 
      * @param allGroupTypeString the list of strings to populate the combo box
+     * @return a JComboBox with the specified list of strings
      */
-    public static JComboBox<String> getComboBox(List<String> allGroupTypeString) {
+    public static JComboBox<String> getComboBox(final List<String> allGroupTypeString) {
         return new JComboBox<>(allGroupTypeString.toArray(new String[0]));
     }
 
-    public static JLabel getLabel(String text, Font font, Color color) {
+    /**
+     * Creates a JLabel with the specified properties.
+     * 
+     * @param text  the text to display on the label
+     * @param font  the font of the label text
+     * @param color the color of the label text
+     * @return a JLabel with the specified properties
+     */
+    public static JLabel getLabel(final String text, final Font font, final Color color) {
         JLabel label = new JLabel(text);
         label.setFont(font);
+        label.setForeground(color);
         return label;
     }
 
-    public static Font getFont(String style, int size) {
+    /**
+     * Creates a Font with the specified style and size.
+     * 
+     * @param style the style of the font
+     * @param size  the size of the font
+     * @return a Font with the specified style and size
+     */
+    public static Font getFont(final String style, final int size) {
         return Font.getFont(style, new Font(FONT, Font.PLAIN, size));
     }
 
