@@ -14,6 +14,9 @@ import descriptionupdate.data.DescriptionDAOImpl;
 import descriptionupdate.data.utils.DAOUtils;
 import descriptionupdate.model.api.Description;
 
+/**
+ * Test class for Description Data Access Object (DAO)
+ */
 class TestdescDao {
 
     private static Connection connection;
@@ -36,11 +39,17 @@ class TestdescDao {
         }
     }
 
+    /**
+     * Test if the database connection is valid.
+     */
     @Test
     public void isConnected() throws SQLException {
         assertEquals(true, connection.isValid(2));
     }
 
+    /**
+     * Test the fromDescription method.
+     */
     @Test
     public void fromDescription() {
         var descDao = new DescriptionDAOImpl(connection);
@@ -49,6 +58,9 @@ class TestdescDao {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Test the addDescription method.
+     */
     @Test
     public void addDescription() {
         var descDao = new DescriptionDAOImpl(connection);
@@ -59,6 +71,9 @@ class TestdescDao {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Test the deleteDescription method.
+     */
     @Test
     public void deleteDescription() {
         var descDao = new DescriptionDAOImpl(connection);
@@ -72,6 +87,9 @@ class TestdescDao {
         assertEquals(descDao.getDescription("PIPPO", "PLUTO", "VTS"), Optional.empty());
     }
 
+    /**
+     * Test the fixDescription method.
+     */
     @Test
     public void fixDescription() {
         var descDao = new DescriptionDAOImpl(connection);
