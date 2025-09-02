@@ -25,4 +25,10 @@ public class ControllUtilies {
             throw new BlankDescriptionException("Description cannot be blank");
         }
     }
+
+    public static void grammaticaItalianError(Description description) {
+        if (!description.itaDescripion().matches("[A-Z0-9 ]+")) {
+            throw new IllegalArgumentException("Italian description contains invalid characters");
+        }
+    }
 }
