@@ -35,8 +35,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-text
      implementation("org.apache.commons:commons-text:1.14.0")
-    // https://mvnrepository.com/artifact/org.languagetool/languagetool-core
-    implementation("org.languagetool:languagetool-core:6.6")
 }
 
 java {
