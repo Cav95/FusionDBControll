@@ -48,7 +48,7 @@ public abstract class AbstactChangeDialog extends JDialog {
      *
      * @param view the main view of the application
      */
-    public AbstactChangeDialog(View view) {
+    public AbstactChangeDialog(final View view) {
         this.view = view;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

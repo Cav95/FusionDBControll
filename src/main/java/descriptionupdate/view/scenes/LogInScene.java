@@ -132,12 +132,12 @@ public class LogInScene extends JPanel {
         this.add(centerPanel, BorderLayout.CENTER);
     }
 
-    private boolean isUserAdmitted(String username, String psw) {
+    private boolean isUserAdmitted(final String username, final String psw) {
         return Arrays.asList(UserAdmit.values()).stream()
                 .anyMatch(user -> user.getUsername().equals(username) && user.getPsw().equals(psw));
     }
 
-    private Connection doConnection(String username, String psw) {
+    private Connection doConnection(final String username, final String psw) {
         LOGGER.info("Attempting connection for user: {}", username);
         try {
 

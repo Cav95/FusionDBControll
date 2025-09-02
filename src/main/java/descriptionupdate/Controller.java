@@ -186,7 +186,7 @@ public final class Controller {
      * @param des the description to check.
      * @return true if the description exists, false otherwise.
      */
-    public boolean checkExistent(Description des) {
+    public boolean checkExistent(final Description des) {
         try {
             getDescription(des.itaDescripion(), des.engDescription(), des.group());
             return false;

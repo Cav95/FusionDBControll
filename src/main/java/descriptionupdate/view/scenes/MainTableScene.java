@@ -310,15 +310,15 @@ public class MainTableScene extends JPanel {
         this.add(southPanel, BorderLayout.SOUTH);
     }
 
-    private String controllBlankReturn(JTextField textField) {
+    private String controllBlankReturn(final JTextField textField) {
         return textField.getText().isBlank() ? ALL : textField.getText().toUpperCase();
     }
 
-    private String reversBlankReturn(String text) {
+    private String reversBlankReturn(final String text) {
         return text.equals(ALL) ? "" : text.toUpperCase();
     }
 
-    private String controllBlankGroup(String group) {
+    private String controllBlankGroup(final String group) {
         return group.isBlank() ? ALL : group;
     }
 }

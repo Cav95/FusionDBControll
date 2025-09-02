@@ -19,7 +19,7 @@ public class UpdateDescriptionDialogPreselect extends AbstactChangeDialog {
      * @param view  the main view of the application
      * @param group the group to preselect in the combo box
      */
-    public UpdateDescriptionDialogPreselect(View view, String ita, String eng, String group) {
+    public UpdateDescriptionDialogPreselect(final View view, final String ita, final String eng, final String group) {
         super(view);
         itaTextField.setText(ita);
         engTextField.setText(eng);
