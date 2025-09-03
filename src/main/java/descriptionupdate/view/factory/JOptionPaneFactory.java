@@ -124,6 +124,11 @@ public class JOptionPaneFactory {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Shows a generic error message.
+     * 
+     * @param dialog the parent component for the dialog
+     */
     public static void generiError(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Errore generico", "Errore",

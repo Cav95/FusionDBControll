@@ -23,8 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * AddDescriptionScene class that extends JDialog to allow users to add a new
- * description.
+ * Abstract class representing a dialog for adding or changing descriptions.
+ * 
  */
 public abstract class AbstactChangeDialog extends JDialog {
 
@@ -46,11 +46,10 @@ public abstract class AbstactChangeDialog extends JDialog {
     protected JButton cancelButton;
     protected final View view;
 
-    /**
-     * Constructor for AddDescriptionScene.
-     *
-     * @param view the main view of the application
-     */
+/**
+ * Constructor for AbstactChangeDialog.
+ * @param view the main view of the application
+ */
     public AbstactChangeDialog(final View view) {
         this.view = view;
 
@@ -122,5 +121,10 @@ public abstract class AbstactChangeDialog extends JDialog {
 
     }
 
+    /**
+     * Abstract method to be implemented by subclasses for specific actions.
+     *
+     * @param newDescription the new description to process.
+     */
     public abstract void action(Description newDescription);
 }

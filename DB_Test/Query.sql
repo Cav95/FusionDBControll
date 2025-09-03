@@ -21,3 +21,11 @@ SET Descrizione = 'PIPPO'
 where Descrizione = 'NUOVO'
 AND INGLESE = 'NEWADD'
 AND Gruppo = 'NUOVO';
+
+UPDATE descrizionigruppi
+SET DESCRIZIONE = replace(DESCRIZIONE,"TUBO","PIPPO")
+WHERE DESCRIZIONE LIKE '%TUBO%';
+
+SELECT *
+FROM descrizionigruppi
+WHERE DESCRIZIONE LIKE "%PIPPO%";
