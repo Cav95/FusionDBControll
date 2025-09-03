@@ -114,7 +114,7 @@ public class MainTableScene extends JPanel {
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
-        titleLabel.setFont(new Font(FONT, Font.BOLD, 24));
+        titleLabel.setFont(GuiFactory.getFont(FONT, 18));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
@@ -184,7 +184,7 @@ public class MainTableScene extends JPanel {
 
                     }
                 });
-        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -198,7 +198,7 @@ public class MainTableScene extends JPanel {
 
                     }
                 });
-        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -211,7 +211,7 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -237,7 +237,8 @@ public class MainTableScene extends JPanel {
         southPanel.add(saveButton);
         southPanel.add(exitButton);
 
-        JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK, Font.getFont(FONT),
+        JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK,
+                GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
