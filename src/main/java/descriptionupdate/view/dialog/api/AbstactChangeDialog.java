@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
+import descriptionupdate.view.api.DescrizioneEnum;
 import descriptionupdate.view.exception.BlankDescriptionException;
 import descriptionupdate.view.exception.ExistentDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
@@ -35,9 +36,12 @@ public abstract class AbstactChangeDialog extends JDialog {
     final JPanel mainPanel = new JPanel();
     private JPanel northPanel = new JPanel();
     protected JLabel titleLabel = new JLabel("Scene");
-    private JLabel itaLabel = GuiFactory.getLabel("ITA Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
-    private JLabel engLabel = GuiFactory.getLabel("ENG Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
-    private JLabel groupLabel = GuiFactory.getLabel("Group", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+    private JLabel itaLabel = GuiFactory.getLabel(DescrizioneEnum.ITA.getDescription(),
+            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+    private JLabel engLabel = GuiFactory.getLabel(DescrizioneEnum.ING.getDescription(),
+            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+    private JLabel groupLabel = GuiFactory.getLabel(DescrizioneEnum.GROUP.getDescription(),
+            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
     protected JTextField itaTextField = GuiFactory.getTextField(20);
     protected JTextField engTextField = GuiFactory.getTextField(20);
     protected JComboBox<String> groupTextField;
@@ -46,10 +50,11 @@ public abstract class AbstactChangeDialog extends JDialog {
     protected JButton cancelButton;
     protected final View view;
 
-/**
- * Constructor for AbstactChangeDialog.
- * @param view the main view of the application
- */
+    /**
+     * Constructor for AbstactChangeDialog.
+     * 
+     * @param view the main view of the application
+     */
     public AbstactChangeDialog(final View view) {
         this.view = view;
 

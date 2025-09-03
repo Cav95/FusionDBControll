@@ -6,6 +6,7 @@ import javax.swing.table.TableRowSorter;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
+import descriptionupdate.view.api.DescrizioneEnum;
 import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
 import descriptionupdate.view.dialog.UpdateDescriptionDialogPreselect;
 import descriptionupdate.view.dialog.api.AbstactChangeDialog;
@@ -26,9 +27,6 @@ import java.util.List;
  * the application.
  */
 public class MainTableScene extends JPanel {
-    private static final String ING_TAB_NAME = "Descrizione Inglese";
-    private static final String ITA_TAB_NAME = "Descrizione Italiano";
-    private static final String GROUP_TAB_NAME = "Gruppo Merceologico";
     private static final String ALL = "%";
     private static final String FONT = "Roboto";
     private static final int SIZE_FONT = 13;
@@ -135,7 +133,9 @@ public class MainTableScene extends JPanel {
                         })
                         .toArray(Object[][]::new),
                 new String[] {
-                        GROUP_TAB_NAME, ITA_TAB_NAME, ING_TAB_NAME
+                        DescrizioneEnum.GROUP.getDescription(),
+                        DescrizioneEnum.ITA.getDescription(),
+                        DescrizioneEnum.ING.getDescription()
                 });
         table.setFont(new Font(FONT, Font.PLAIN, 12));
         table.getColumnModel().getColumn(0).setPreferredWidth(170);
