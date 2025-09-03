@@ -9,7 +9,6 @@ import descriptionupdate.view.View;
 import descriptionupdate.view.api.DescrizioneEnum;
 import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
 import descriptionupdate.view.dialog.UpdateDescriptionDialogPreselect;
-import descriptionupdate.view.dialog.api.AbstactChangeDialog;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.utils.SelectionTable;
@@ -137,8 +136,8 @@ public class MainTableScene extends JPanel {
                         DescrizioneEnum.ITA.getDescription(),
                         DescrizioneEnum.ING.getDescription()
                 });
-        table.setFont(new Font(FONT, Font.PLAIN, 12));
-        table.getColumnModel().getColumn(0).setPreferredWidth(170);
+        table.setFont(GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT));
+        table.getColumnModel().getColumn(0).setPreferredWidth(150);
         table.getColumnModel().getColumn(1).setPreferredWidth(150);
         table.getColumnModel().getColumn(2).setPreferredWidth(150);
 
@@ -158,59 +157,45 @@ public class MainTableScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int selectedRow = table.getSelectedRow();
-                        AbstactChangeDialog dialog;
-                        if (selectedRow >= 0) {
-                            String group = (String) table.getValueAt(selectedRow, 0);
-                            String ita = (String) table.getValueAt(selectedRow, 1);
-                            String eng = (String) table.getValueAt(selectedRow, 2);
 
-                            dialog = new AddDescriptionDialogPreselect(view, ita, eng, group);
-                        } else {
-                            dialog = new AddDescriptionDialogPreselect(view, "", "", "");
+                        try {
+                            var dialog = new AddDescriptionDialogPreselect(view, getDescritionFromTable(table));
+                            dialog.setVisible(true);
+                        } catch (Exception ex) {
+                            var dialog = new AddDescriptionDialogPreselect(view, new Description("", "", ""));
+                            dialog.setVisible(true);
                         }
-
-                        dialog.setVisible(true);
                     }
                 });
         deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int selectedRow = table.getSelectedRow();
-                        if (selectedRow >= 0) {
-                            String group = (String) table.getValueAt(selectedRow, 0);
-                            String ita = (String) table.getValueAt(selectedRow, 1);
-                            String eng = (String) table.getValueAt(selectedRow, 2);
-                            if (JOptionPaneFactory.askDeleteConfirm(MainTableScene.this,
-                                    ita + " - " + eng + " - " + group).equals(JOptionPane.YES_OPTION)) {
-                                view.getController().deleteDescription(new Description(ita, eng, group));
-                                view.getController().setSaved(false); // Mark as not saved
+                        var description = getDescritionFromTable(table);
+                        if (JOptionPaneFactory.askDeleteConfirm(MainTableScene.this,
+                                description.itaDescripion() + " - " + description.engDescription() + " - "
+                                        + description.group())
+                                .equals(JOptionPane.YES_OPTION)) {
+                            view.getController().deleteDescription(description);
+                            view.getController().setSaved(false); // Mark as not saved
 
-                                view.goToInitialSceneFiltered();
-                                ;
-                            }
-
-                        } else {
-                            throw new IllegalStateException("No request selected for management");
+                            view.goToInitialSceneFiltered();
                         }
+
                     }
                 });
         updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int selectedRow = table.getSelectedRow();
-                        if (selectedRow >= 0) {
-                            String group = (String) table.getValueAt(selectedRow, 0);
-                            String ita = (String) table.getValueAt(selectedRow, 1);
-                            String eng = (String) table.getValueAt(selectedRow, 2);
-                            var dialog = new UpdateDescriptionDialogPreselect(view, ita, eng, group);
+                        try {
+                            var description = getDescritionFromTable(table);
+                            var dialog = new UpdateDescriptionDialogPreselect(view, description);
                             dialog.setVisible(true);
-
-                        } else {
-                            throw new IllegalStateException("No request selected for management");
+                        } catch (Exception ex) {
+                            JOptionPaneFactory.errorNoSelection(MainTableScene.this);
                         }
+
                     }
                 });
         saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK, Font.getFont(FONT),
@@ -320,5 +305,17 @@ public class MainTableScene extends JPanel {
 
     private String controllBlankGroup(final String group) {
         return group.isBlank() ? ALL : group;
+    }
+
+    private Description getDescritionFromTable(final JTable table) {
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow >= 0) {
+            String group = (String) table.getValueAt(selectedRow, 0);
+            String ita = (String) table.getValueAt(selectedRow, 1);
+            String eng = (String) table.getValueAt(selectedRow, 2);
+            return new Description(ita, eng, group);
+        } else {
+            throw new IllegalStateException("No request selected for management");
+        }
     }
 }

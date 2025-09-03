@@ -18,11 +18,11 @@ public class AddDescriptionDialogPreselect extends AbstactChangeDialog {
      * @param view  the main view of the application
      * @param group the group to preselect in the combo box
      */
-    public AddDescriptionDialogPreselect(final View view, final String ita, final String eng, final String group) {
+    public AddDescriptionDialogPreselect(final View view, Description description) {
         super(view);
-        itaTextField.setText(ita);
-        engTextField.setText(eng);
-        groupTextField.setSelectedItem(group);
+        itaTextField.setText(description.itaDescripion());
+        engTextField.setText(description.engDescription());
+        groupTextField.setSelectedItem(description.group());
 
         titleLabel.setText("AGGIUNGI DESCRIZIONE");
         addButton.setText("Aggiungi");

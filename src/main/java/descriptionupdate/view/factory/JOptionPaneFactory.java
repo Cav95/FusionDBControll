@@ -5,6 +5,7 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 
 import descriptionupdate.model.api.Description;
+import descriptionupdate.view.scenes.MainTableScene;
 
 /**
  * Utility class for displaying various optional dialog panes.
@@ -147,6 +148,17 @@ public class JOptionPaneFactory {
     public static void blankDescription(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "La descrizione non può essere vuota", "Errore",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Shows an error message when no description is selected.
+     * 
+     * @param mainTableScene the main table scene
+     */
+    public static void errorNoSelection(MainTableScene mainTableScene) {
+        JOptionPane.showMessageDialog(mainTableScene,
+                "Nessuna descrizione selezionata", "Errore",
                 JOptionPane.ERROR_MESSAGE);
     }
 
