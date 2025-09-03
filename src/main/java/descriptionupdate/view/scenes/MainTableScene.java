@@ -26,9 +26,9 @@ import java.util.List;
  * the application.
  */
 public class MainTableScene extends JPanel {
-    private static final String ING_TAB_NAME = "ING";
-    private static final String ITA_TAB_NAME = "ITA";
-    private static final String GROUP_TAB_NAME = "GROUP";
+    private static final String ING_TAB_NAME = "Descrizione Inglese";
+    private static final String ITA_TAB_NAME = "Descrizione Italiano";
+    private static final String GROUP_TAB_NAME = "Gruppo Merceologico";
     private static final String ALL = "%";
     private static final String FONT = "Roboto";
     private static final int SIZE_FONT = 13;

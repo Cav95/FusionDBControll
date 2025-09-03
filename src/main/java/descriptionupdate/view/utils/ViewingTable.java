@@ -1,10 +1,10 @@
 package descriptionupdate.view.utils;
 
-import java.awt.Font;
-
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
+import descriptionupdate.view.factory.GuiFactory;
 
 /**
  * A JTable subclass for displaying data in a non-editable format.
@@ -28,7 +28,7 @@ public class ViewingTable extends JTable {
                         return false;
                     }
                 });
-        this.setFont(new Font("Roboto", Font.PLAIN, 12));
+        this.setFont(GuiFactory.getFont(GuiFactory.FONT, 12));
         this.setRowHeight(30);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setRowSelectionAllowed(false);
