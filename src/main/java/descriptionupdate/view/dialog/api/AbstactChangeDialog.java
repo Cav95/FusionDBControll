@@ -10,17 +10,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
+import descriptionupdate.view.api.DescrizioneEnum;
 import descriptionupdate.view.exception.BlankDescriptionException;
+import descriptionupdate.view.exception.ExistentDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
+import descriptionupdate.view.utils.ControllUtilies;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * AddDescriptionScene class that extends JDialog to allow users to add a new
- * description.
+ * Abstract class representing a dialog for adding or changing descriptions.
+ * 
  */
 public abstract class AbstactChangeDialog extends JDialog {
 
@@ -31,9 +36,12 @@ public abstract class AbstactChangeDialog extends JDialog {
     final JPanel mainPanel = new JPanel();
     private JPanel northPanel = new JPanel();
     protected JLabel titleLabel = new JLabel("Scene");
-    private JLabel itaLabel = GuiFactory.getLabel("ITA Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
-    private JLabel engLabel = GuiFactory.getLabel("ENG Description:", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
-    private JLabel groupLabel = GuiFactory.getLabel("Group", GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+    private JLabel itaLabel = GuiFactory.getLabel(DescrizioneEnum.ITA.getDescription(),
+            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+    private JLabel engLabel = GuiFactory.getLabel(DescrizioneEnum.ING.getDescription(),
+            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+    private JLabel groupLabel = GuiFactory.getLabel(DescrizioneEnum.GROUP.getDescription(),
+            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
     protected JTextField itaTextField = GuiFactory.getTextField(20);
     protected JTextField engTextField = GuiFactory.getTextField(20);
     protected JComboBox<String> groupTextField;
@@ -43,8 +51,8 @@ public abstract class AbstactChangeDialog extends JDialog {
     protected final View view;
 
     /**
-     * Constructor for AddDescriptionScene.
-     *
+     * Constructor for AbstactChangeDialog.
+     * 
      * @param view the main view of the application
      */
     public AbstactChangeDialog(final View view) {
@@ -85,12 +93,19 @@ public abstract class AbstactChangeDialog extends JDialog {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            action();
+                            var newDescription = new Description(itaTextField.getText().toUpperCase(),
+                                    engTextField.getText().toUpperCase(),
+                                    groupTextField.getSelectedItem().toString().toUpperCase());
+                            ControllUtilies.descriptionValidCaracter(newDescription);
+                            ControllUtilies.descriptionNotBlank(newDescription);
+                            action(newDescription);
 
                         } catch (IllegalArgumentException t) {
                             JOptionPaneFactory.caractherInvalid(AbstactChangeDialog.this);
                         } catch (BlankDescriptionException o) {
                             JOptionPaneFactory.blankDescription(AbstactChangeDialog.this);
+                        } catch (ExistentDescriptionException t) {
+                            JOptionPaneFactory.existedDescription(AbstactChangeDialog.this);
                         } catch (Exception ex) {
                             JOptionPaneFactory.generiError(AbstactChangeDialog.this);
 
@@ -111,5 +126,10 @@ public abstract class AbstactChangeDialog extends JDialog {
 
     }
 
-    public abstract void action();
+    /**
+     * Abstract method to be implemented by subclasses for specific actions.
+     *
+     * @param newDescription the new description to process.
+     */
+    public abstract void action(Description newDescription);
 }

@@ -11,14 +11,24 @@ import org.languagetool.JLanguageTool;
 import org.languagetool.language.identifier.LanguageIdentifier;
 import org.languagetool.rules.RuleMatch;
 
-
 public class ControllUtilies {
 
+    /**
+     * Checks if the given character contains any prohibited characters.
+     *
+     * @param character the character to check
+     * @return true if the character contains prohibited characters, false otherwise
+     */
     public static boolean isProhibitedCharacter(String character) {
         return Arrays.asList(ProibenCaratter.values()).stream()
                 .anyMatch(c -> character.contains(c.getCharacter()));
     }
 
+    /**
+     * Validates the characters in the given description.
+     *
+     * @param description the description to validate
+     */
     public static void descriptionValidCaracter(Description description) {
         if (ControllUtilies.isProhibitedCharacter(description.itaDescripion())
                 || ControllUtilies.isProhibitedCharacter(description.engDescription())) {
@@ -26,6 +36,11 @@ public class ControllUtilies {
         }
     }
 
+    /**
+     * Validates that the given description is not blank.
+     *
+     * @param description the description to validate
+     */
     public static void descriptionNotBlank(Description description) {
         if (description.itaDescripion().isBlank() || description.engDescription().isBlank()) {
             throw new BlankDescriptionException("Description cannot be blank");
