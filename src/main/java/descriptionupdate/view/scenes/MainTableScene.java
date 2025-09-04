@@ -27,7 +27,6 @@ import java.util.List;
  */
 public class MainTableScene extends JPanel {
     private static final String ALL = "%";
-    private static final String FONT = "Roboto";
     private static final int SIZE_FONT = 13;
 
     private static final long serialVersionUID = 1L;
@@ -55,7 +54,7 @@ public class MainTableScene extends JPanel {
     private JButton saveButton;
     private JButton exitButton;
 
-    private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni", GuiFactory.getFont(FONT, SIZE_FONT),
+    private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni", GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
             Color.BLACK);
 
     @SuppressWarnings("unused")
@@ -114,7 +113,7 @@ public class MainTableScene extends JPanel {
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
-        titleLabel.setFont(GuiFactory.getFont(FONT, 18));
+        titleLabel.setFont(GuiFactory.getFont(GuiFactory.FONT, 18));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
@@ -153,7 +152,7 @@ public class MainTableScene extends JPanel {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 
-        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -167,7 +166,7 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -184,7 +183,7 @@ public class MainTableScene extends JPanel {
 
                     }
                 });
-        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -198,20 +197,20 @@ public class MainTableScene extends JPanel {
 
                     }
                 });
-        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         try {
                             view.getController().save();
-                            view.getController().setSaved(true); // Mark as saved after successful save
+                            view.getController().setSaved(true);
                             JOptionPaneFactory.savedSuccessfully(MainTableScene.this);
                         } catch (Exception ex) {
                             JOptionPaneFactory.errorOnSave(MainTableScene.this, ex.getMessage());
                         }
                     }
                 });
-        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -238,7 +237,7 @@ public class MainTableScene extends JPanel {
         southPanel.add(exitButton);
 
         JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK,
-                GuiFactory.getFont(FONT, SIZE_FONT),
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -251,7 +250,7 @@ public class MainTableScene extends JPanel {
                     }
                 });
         JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK,
-                GuiFactory.getFont(FONT, SIZE_FONT),
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
