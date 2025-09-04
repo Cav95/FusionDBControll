@@ -176,8 +176,6 @@ public class MainTableScene extends JPanel {
                                         + description.group())
                                 .equals(JOptionPane.YES_OPTION)) {
                             view.getController().deleteDescription(description);
-                            view.getController().setSaved(false); // Mark as not saved
-
                             view.goToInitialSceneFiltered();
                         }
 
@@ -203,7 +201,6 @@ public class MainTableScene extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             view.getController().save();
-                            view.getController().setSaved(true);
                             JOptionPaneFactory.savedSuccessfully(MainTableScene.this);
                         } catch (Exception ex) {
                             JOptionPaneFactory.errorOnSave(MainTableScene.this, ex.getMessage());
