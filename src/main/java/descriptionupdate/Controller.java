@@ -151,6 +151,7 @@ public final class Controller {
     public void deleteDescription(final Description description) {
         LOGGER.info("Delete description: {}", description);
         model.deleteDescription(description);
+        setSaved(false);
     }
 
     public void updateDescription(final Description oldDescription, final Description newDescription) {
@@ -168,6 +169,7 @@ public final class Controller {
     public void save() {
         LOGGER.info("Saving changes to the database");
         model.save();
+        setSaved(true);
     }
 
     /**
