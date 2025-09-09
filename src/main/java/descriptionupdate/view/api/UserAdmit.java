@@ -5,7 +5,8 @@ package descriptionupdate.view.api;
  * Each user is identified by a unique name.
  */
 public enum UserAdmit {
-    CEPIUT("CEPIUT","CEPIUT");
+    CEPIUT("CEPIUT","CEPIUT"),
+    TEST("TEST","TEST");
 
     private final String username;
     private final String psw;

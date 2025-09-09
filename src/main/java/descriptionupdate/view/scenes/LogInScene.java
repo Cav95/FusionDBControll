@@ -72,7 +72,6 @@ public class LogInScene extends JPanel {
         userField.setMaximumSize(new Dimension(300, 30));
         userField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
         passLabel.setFont(new Font(FONT, Font.PLAIN, 18));
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -89,7 +88,7 @@ public class LogInScene extends JPanel {
                     public void actionPerformed(java.awt.event.ActionEvent e) {
 
                         if (isUserAdmitted(userField.getText(), new String(passField.getPassword()))) {
-                            var connection = doConnection(PDM_USER, PDM_USER);
+                            var connection = doConnection(userField.getText(), new String(passField.getPassword()));
 
                             view.setController(new Controller(new Model(connection), view));
                             view.goToInitialScene();
@@ -137,18 +136,38 @@ public class LogInScene extends JPanel {
                 .anyMatch(user -> user.getUsername().equals(username) && user.getPsw().equals(psw));
     }
 
+    private Connection sqlProductionConnection(final String username, final String psw) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
+                    PDM_USER, PDM_USER);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
+    private Connection sqlTestConnection(final String username, final String psw) {
+
+        return DAOUtils.localMySQLConnection("DesFusion",
+                "root", "");
+    }
+
     private Connection doConnection(final String username, final String psw) {
         LOGGER.info("Attempting connection for user: {}", username);
         try {
+            if (username.equals("TEST")) {
+                connection = sqlTestConnection(username, psw);
+            } else if (username.equals("CEPIUT")) {
+                connection = sqlProductionConnection(username, psw);
+            } else {
+                JOptionPaneFactory.connectionFailed(LogInScene.this);
+            }
+            connection = sqlProductionConnection(username, psw);
 
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
-                   username, psw);
-             //connection = DAOUtils.localIniStringConnection();
-
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-            JOptionPaneFactory.connectionFailed(LogInScene.this);
+            // } catch (ClassNotFoundException ex) {
+            // ex.printStackTrace();
+            // JOptionPaneFactory.connectionFailed(LogInScene.this);
         } catch (DAOException ex) {
             new ConnectionFailureViewIni();
         }
