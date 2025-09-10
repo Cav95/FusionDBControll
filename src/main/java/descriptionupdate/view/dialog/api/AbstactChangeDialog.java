@@ -31,17 +31,15 @@ public abstract class AbstactChangeDialog extends JDialog {
 
     private static final int SIZE_FONT = 13;
 
-    private static final String FONT = "Roboto";
-
     final JPanel mainPanel = new JPanel();
     private JPanel northPanel = new JPanel();
     protected JLabel titleLabel = new JLabel("Scene");
     private JLabel itaLabel = GuiFactory.getLabel(DescrizioneEnum.ITA.getDescription(),
-            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+            GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT), Color.BLACK);
     private JLabel engLabel = GuiFactory.getLabel(DescrizioneEnum.ING.getDescription(),
-            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+            GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT), Color.BLACK);
     private JLabel groupLabel = GuiFactory.getLabel(DescrizioneEnum.GROUP.getDescription(),
-            GuiFactory.getFont(FONT, SIZE_FONT), Color.BLACK);
+            GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT), Color.BLACK);
     protected JTextField itaTextField = GuiFactory.getTextField(20);
     protected JTextField engTextField = GuiFactory.getTextField(20);
     protected JComboBox<String> groupTextField;
@@ -69,7 +67,7 @@ public abstract class AbstactChangeDialog extends JDialog {
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
-        titleLabel.setFont(new Font(FONT, Font.BOLD, 24));
+        titleLabel.setFont(GuiFactory.getFont(GuiFactory.FONT, 20));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
@@ -88,7 +86,7 @@ public abstract class AbstactChangeDialog extends JDialog {
         mainPanel.add(groupTextField);
         this.add(mainPanel, BorderLayout.CENTER);
 
-        addButton = GuiFactory.getButtom("Add", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        addButton = GuiFactory.getButtom("Add", Color.GRAY, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -113,7 +111,8 @@ public abstract class AbstactChangeDialog extends JDialog {
 
                     }
                 });
-        cancelButton = GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, GuiFactory.getFont(FONT, SIZE_FONT),
+        cancelButton = GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE,
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {

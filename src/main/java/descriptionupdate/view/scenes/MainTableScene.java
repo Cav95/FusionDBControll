@@ -54,7 +54,8 @@ public class MainTableScene extends JPanel {
     private JButton saveButton;
     private JButton exitButton;
 
-    private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni", GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
+    private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni",
+            GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
             Color.BLACK);
 
     @SuppressWarnings("unused")
@@ -152,7 +153,8 @@ public class MainTableScene extends JPanel {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 
-        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
+        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK,
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -166,7 +168,8 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
+        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK,
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -181,7 +184,8 @@ public class MainTableScene extends JPanel {
 
                     }
                 });
-        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
+        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK,
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -195,7 +199,8 @@ public class MainTableScene extends JPanel {
 
                     }
                 });
-        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
+        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK,
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -207,7 +212,8 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
+        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK,
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -226,12 +232,6 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        southPanel.add(Box.createHorizontalStrut(10));
-        southPanel.add(addButton);
-        southPanel.add(deleteButton);
-        southPanel.add(updateButton);
-        southPanel.add(saveButton);
-        southPanel.add(exitButton);
 
         JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
@@ -275,6 +275,12 @@ public class MainTableScene extends JPanel {
                 }
             }
         });
+        southPanel.add(Box.createHorizontalStrut(10));
+        southPanel.add(addButton);
+        southPanel.add(deleteButton);
+        southPanel.add(updateButton);
+        southPanel.add(saveButton);
+        southPanel.add(exitButton);
         southPanel.add(Box.createHorizontalStrut(10));
         southPanel.add(desFilter);
         southPanel.add(itaTextField);
