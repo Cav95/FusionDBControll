@@ -29,8 +29,6 @@ public class LogInScene extends JPanel {
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(LogInScene.class);
 
     private static final String PDM_USER = "PDMUser";
-
-    private static final String FONT = "Roboto";
     private static final int SIZE_FONT = 18;
 
     private JPanel northPanel = new JPanel();
@@ -57,7 +55,7 @@ public class LogInScene extends JPanel {
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
 
-        titleLabel.setFont(new Font(FONT, Font.BOLD, 32));
+        titleLabel.setFont(GuiFactory.getFont(GuiFactory.FONT, 36));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
@@ -66,13 +64,13 @@ public class LogInScene extends JPanel {
         centerPanel.setBorder(BorderFactory.createEmptyBorder(60, 20, 60, 20));
         centerPanel.setOpaque(false);
 
-        userLabel.setFont(new Font(FONT, Font.PLAIN, 18));
+        userLabel.setFont(GuiFactory.getFont(GuiFactory.FONT, 18));
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         userField.setMaximumSize(new Dimension(300, 30));
         userField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        passLabel.setFont(new Font(FONT, Font.PLAIN, 18));
+        passLabel.setFont(GuiFactory.getFont(GuiFactory.FONT, 18));
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         passField.setMaximumSize(new Dimension(300, 30));
@@ -82,7 +80,7 @@ public class LogInScene extends JPanel {
                 "Accedi",
                 Color.GRAY,
                 Color.BLACK,
-                GuiFactory.getFont(FONT, SIZE_FONT),
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -101,7 +99,8 @@ public class LogInScene extends JPanel {
                     }
                 });
 
-        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
+        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK,
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
