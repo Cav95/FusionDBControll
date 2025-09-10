@@ -11,6 +11,7 @@ import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
 import descriptionupdate.view.dialog.UpdateDescriptionDialogPreselect;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
+import descriptionupdate.view.utils.ControllUtilies;
 import descriptionupdate.view.utils.SelectionTable;
 
 import java.awt.*;
@@ -53,6 +54,8 @@ public class MainTableScene extends JPanel {
     private JButton updateButton;
     private JButton saveButton;
     private JButton exitButton;
+    private JButton filterButton;
+    private JButton resetButton;
 
     private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni",
             GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
@@ -93,14 +96,14 @@ public class MainTableScene extends JPanel {
         this.engDescription = engDescription + ALL;
         this.group = group;
 
-        this.itaTextField.setText(reversBlankReturn(itaDescription));
-        this.engTextField.setText(reversBlankReturn(engDescription));
+        this.itaTextField.setText(ControllUtilies.reversBlankReturn(itaDescription));
+        this.engTextField.setText(ControllUtilies.reversBlankReturn(engDescription));
 
         listGroup = view.getController().getAllGroupTypeString();
         listGroup.add(0, "");
         this.groupTextField = GuiFactory.getComboBox(listGroup);
 
-        this.groupTextField.setSelectedItem(reversBlankReturn(group));
+        this.groupTextField.setSelectedItem(ControllUtilies.reversBlankReturn(group));
         initial(view);
     }
 
@@ -160,7 +163,8 @@ public class MainTableScene extends JPanel {
                     public void actionPerformed(ActionEvent e) {
 
                         try {
-                            var dialog = new AddDescriptionDialogPreselect(view, getDescritionFromTable(table));
+                            var dialog = new AddDescriptionDialogPreselect(view,
+                                    ControllUtilies.getDescritionFromTable(table));
                             dialog.setVisible(true);
                         } catch (Exception ex) {
                             var dialog = new AddDescriptionDialogPreselect(view, new Description("", "", ""));
@@ -173,7 +177,7 @@ public class MainTableScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        var description = getDescritionFromTable(table);
+                        var description = ControllUtilies.getDescritionFromTable(table);
                         if (JOptionPaneFactory.askDeleteConfirm(MainTableScene.this,
                                 description.itaDescripion() + " - " + description.engDescription() + " - "
                                         + description.group())
@@ -190,7 +194,7 @@ public class MainTableScene extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            var description = getDescritionFromTable(table);
+                            var description = ControllUtilies.getDescritionFromTable(table);
                             var dialog = new UpdateDescriptionDialogPreselect(view, description);
                             dialog.setVisible(true);
                         } catch (Exception ex) {
@@ -233,20 +237,21 @@ public class MainTableScene extends JPanel {
                     }
                 });
 
-        JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK,
+        filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        view.getController().setAllFilterTemp(controllBlankReturn(itaTextField),
-                                controllBlankReturn(engTextField),
-                                controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
+                        view.getController().setAllFilterTemp(ControllUtilies.controllBlankReturn(itaTextField),
+                                ControllUtilies.controllBlankReturn(engTextField),
+                                ControllUtilies
+                                        .controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
 
                         view.goToInitialSceneFiltered();
                     }
                 });
-        JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK,
+        resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -298,27 +303,4 @@ public class MainTableScene extends JPanel {
         this.add(southPanel, BorderLayout.SOUTH);
     }
 
-    private String controllBlankReturn(final JTextField textField) {
-        return textField.getText().isBlank() ? ALL : textField.getText().toUpperCase();
-    }
-
-    private String reversBlankReturn(final String text) {
-        return text.equals(ALL) ? "" : text.toUpperCase();
-    }
-
-    private String controllBlankGroup(final String group) {
-        return group.isBlank() ? ALL : group;
-    }
-
-    private Description getDescritionFromTable(final JTable table) {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow >= 0) {
-            String group = (String) table.getValueAt(selectedRow, 0);
-            String ita = (String) table.getValueAt(selectedRow, 1);
-            String eng = (String) table.getValueAt(selectedRow, 2);
-            return new Description(ita, eng, group);
-        } else {
-            throw new IllegalStateException("No request selected for management");
-        }
-    }
 }

@@ -2,6 +2,9 @@ package descriptionupdate.view.utils;
 
 import java.util.Arrays;
 
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.api.ProibenCaratter;
 import descriptionupdate.view.exception.BlankDescriptionException;
@@ -10,6 +13,7 @@ import descriptionupdate.view.exception.BlankDescriptionException;
  * Utility class for controlling and validating descriptions.
  */
 public class ControllUtilies {
+    private static final String ALL = "%";
 
     /**
      * Checks if the given character contains any prohibited characters.
@@ -42,6 +46,30 @@ public class ControllUtilies {
     public static void descriptionNotBlank(Description description) {
         if (description.itaDescripion().isBlank() || description.engDescription().isBlank()) {
             throw new BlankDescriptionException("Description cannot be blank");
+        }
+    }
+
+        public static String controllBlankReturn(final JTextField textField) {
+        return textField.getText().isBlank() ? ALL : textField.getText().toUpperCase();
+    }
+
+    public static String reversBlankReturn(final String text) {
+        return text.equals(ALL) ? "" : text.toUpperCase();
+    }
+
+    public static String controllBlankGroup(final String group) {
+        return group.isBlank() ? ALL : group;
+    }
+
+    public static Description getDescritionFromTable(final JTable table) {
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow >= 0) {
+            String group = (String) table.getValueAt(selectedRow, 0);
+            String ita = (String) table.getValueAt(selectedRow, 1);
+            String eng = (String) table.getValueAt(selectedRow, 2);
+            return new Description(ita, eng, group);
+        } else {
+            throw new IllegalStateException("No request selected for management");
         }
     }
 }
