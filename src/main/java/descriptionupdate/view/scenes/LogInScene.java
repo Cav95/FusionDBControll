@@ -158,16 +158,19 @@ public class LogInScene extends JPanel {
         try {
             if (username.equals("TEST")) {
                 connection = sqlTestConnection(username, psw);
+                LOGGER.info("Connection established for user: {}", username);
             } else if (username.equals("CEPIUT")) {
                 connection = sqlProductionConnection(username, psw);
+
             } else {
                 JOptionPaneFactory.connectionFailed(LogInScene.this);
             }
-            connection = sqlProductionConnection(username, psw);
 
-            // } catch (ClassNotFoundException ex) {
-            // ex.printStackTrace();
-            // JOptionPaneFactory.connectionFailed(LogInScene.this);
+            try {
+                LOGGER.info("Connection established in database: {}", connection.getCatalog());
+            } catch (Exception e) {
+                LOGGER.error("Failed to retrieve database catalog", e);
+            }
         } catch (DAOException ex) {
             new ConnectionFailureViewIni();
         }
