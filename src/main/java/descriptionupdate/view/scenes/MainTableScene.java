@@ -7,16 +7,10 @@ import javax.swing.table.TableRowSorter;
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 import descriptionupdate.view.api.DescrizioneEnum;
-import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
-import descriptionupdate.view.dialog.UpdateDescriptionDialogPreselect;
 import descriptionupdate.view.factory.GuiFactory;
-import descriptionupdate.view.factory.JOptionPaneFactory;
-import descriptionupdate.view.utils.ControllUtilies;
 import descriptionupdate.view.utils.SelectionTable;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -39,23 +33,10 @@ public class MainTableScene extends JPanel {
     private Boolean isAcending;
 
     private JPanel northPanel = new JPanel();
-    private JPanel southPanel = new JPanel();
 
-    private JLabel desFilter = new JLabel("Filtro Descrizione:");
-    private JTextField itaTextField = GuiFactory.getTextField(20);
-    private JLabel engFilter = new JLabel("Filtro Inglese:");
-    private JTextField engTextField = GuiFactory.getTextField(20);
-    private JLabel groupFilter = new JLabel("Filtro Gruppo:");
     private List<String> listGroup;
-    private JComboBox<String> groupTextField;
 
-    private JButton addButton;
-    private JButton deleteButton;
-    private JButton updateButton;
-    private JButton saveButton;
-    private JButton exitButton;
-    private JButton filterButton;
-    private JButton resetButton;
+    private JTable table;
 
     private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni",
             GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
@@ -77,7 +58,6 @@ public class MainTableScene extends JPanel {
 
         listGroup = view.getController().getAllGroupTypeString();
         listGroup.add(0, "");
-        this.groupTextField = GuiFactory.getComboBox(listGroup);
         initial(view);
 
     }
@@ -92,18 +72,10 @@ public class MainTableScene extends JPanel {
      */
     public MainTableScene(View view, String itaDescription, String engDescription, String group) {
         this.view = view;
-        this.itaDescription = itaDescription + ALL;
-        this.engDescription = engDescription + ALL;
+        this.itaDescription = itaDescription;
+        this.engDescription = engDescription;
         this.group = group;
-
-        this.itaTextField.setText(ControllUtilies.reversBlankReturn(itaDescription));
-        this.engTextField.setText(ControllUtilies.reversBlankReturn(engDescription));
-
-        listGroup = view.getController().getAllGroupTypeString();
-        listGroup.add(0, "");
-        this.groupTextField = GuiFactory.getComboBox(listGroup);
-
-        this.groupTextField.setSelectedItem(ControllUtilies.reversBlankReturn(group));
+        this.table = new JTable();
         initial(view);
     }
 
@@ -124,9 +96,10 @@ public class MainTableScene extends JPanel {
 
         // Center: JTable in JScrollPane
 
-        final List<Description> des = view.getController().getListDescription(itaDescription, engDescription, group);
+        final List<Description> des = view.getController().getListDescription(itaDescription + ALL,
+                engDescription + ALL, group + ALL);
 
-        final JTable table = new SelectionTable(
+        table = new SelectionTable(
                 des.stream()
                         .map(desc -> new Object[] {
                                 desc.group(),
@@ -150,121 +123,6 @@ public class MainTableScene extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(400, 200));
         this.add(scrollPane, BorderLayout.CENTER);
-
-        // South: Buttons panel
-
-        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
-        southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
-
-        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK,
-                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-
-                        try {
-                            var dialog = new AddDescriptionDialogPreselect(view,
-                                    ControllUtilies.getDescritionFromTable(table));
-                            dialog.setVisible(true);
-                        } catch (Exception ex) {
-                            var dialog = new AddDescriptionDialogPreselect(view, new Description("", "", ""));
-                            dialog.setVisible(true);
-                        }
-                    }
-                });
-        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK,
-                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        var description = ControllUtilies.getDescritionFromTable(table);
-                        if (JOptionPaneFactory.askDeleteConfirm(MainTableScene.this,
-                                description.itaDescripion() + " - " + description.engDescription() + " - "
-                                        + description.group())
-                                .equals(JOptionPane.YES_OPTION)) {
-                            view.getController().deleteDescription(description);
-                            view.goToInitialSceneFiltered();
-                        }
-
-                    }
-                });
-        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK,
-                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        try {
-                            var description = ControllUtilies.getDescritionFromTable(table);
-                            var dialog = new UpdateDescriptionDialogPreselect(view, description);
-                            dialog.setVisible(true);
-                        } catch (Exception ex) {
-                            JOptionPaneFactory.errorNoSelection(MainTableScene.this);
-                        }
-
-                    }
-                });
-        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK,
-                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        try {
-                            view.getController().save();
-                            JOptionPaneFactory.savedSuccessfully(MainTableScene.this);
-                        } catch (Exception ex) {
-                            JOptionPaneFactory.errorOnSave(MainTableScene.this, ex.getMessage());
-                        }
-                    }
-                });
-        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK,
-                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (view.getController().isSaved()) {
-                            view.exitApplication();
-                        } else {
-                            if (JOptionPaneFactory.askSaveConfirm(MainTableScene.this)
-                                    .equals(JOptionPane.YES_OPTION)) {
-                                view.getController().save();
-                                JOptionPaneFactory.savedSuccessfully(MainTableScene.this);
-                            } else {
-                                JOptionPaneFactory.saveDiscarded(MainTableScene.this);
-                            }
-                            view.exitApplication();
-
-                        }
-                    }
-                });
-
-        filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK,
-                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-
-                        view.getController().setAllFilterTemp(ControllUtilies.controllBlankReturn(itaTextField),
-                                ControllUtilies.controllBlankReturn(engTextField),
-                                ControllUtilies
-                                        .controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
-
-                        view.goToInitialSceneFiltered();
-                    }
-                });
-        resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK,
-                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        itaTextField.setText("");
-                        engTextField.setText("");
-                        groupTextField.setSelectedIndex(0);
-                        view.getController().resetFilterTemp();
-                        view.getController().setSaved(true);
-                        view.goToInitialScene();
-                    }
-                });
-
         table.getTableHeader().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int colIndex = table.columnAtPoint(e.getPoint());
@@ -280,27 +138,13 @@ public class MainTableScene extends JPanel {
                 }
             }
         });
-        southPanel.add(Box.createHorizontalStrut(10));
-        southPanel.add(addButton);
-        southPanel.add(deleteButton);
-        southPanel.add(updateButton);
-        southPanel.add(saveButton);
-        southPanel.add(exitButton);
-        southPanel.add(Box.createHorizontalStrut(10));
-        southPanel.add(desFilter);
-        southPanel.add(itaTextField);
-        southPanel.add(engFilter);
-        southPanel.add(engTextField);
-        southPanel.add(groupFilter);
-        southPanel.add(groupTextField);
-        southPanel.add(filterButton);
-        southPanel.add(Box.createHorizontalStrut(10));
-        southPanel.add(resetButton);
-        southPanel.add(Box.createHorizontalGlue());
-        southPanel.add(Box.createHorizontalStrut(10));
-        southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
+
         this.setBackground(Color.WHITE);
-        this.add(southPanel, BorderLayout.SOUTH);
+        this.add(new ButtomMainPannel(this, view, itaDescription, engDescription, group), BorderLayout.SOUTH);
     }
 
+    public JTable getTable() {
+        return this.table;
+
+    }
 }
