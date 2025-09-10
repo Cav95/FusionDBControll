@@ -2,23 +2,14 @@ package descriptionupdate.view.scenes;
 
 import javax.swing.*;
 
-import org.slf4j.Logger;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Arrays;
-
-import descriptionupdate.Controller;
-import descriptionupdate.data.utils.DAOException;
-import descriptionupdate.data.utils.DAOUtils;
+import descriptionupdate.controller.Controller;
+import descriptionupdate.controller.ControllerDAO;
 import descriptionupdate.model.Model;
 import descriptionupdate.view.View;
-import descriptionupdate.view.api.UserAdmit;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
-import descriptionupdate.view.utils.ConnectionFailureViewIni;
 
 /**
  * LogInScene class that extends JPanel to create a login scene for the
@@ -26,9 +17,6 @@ import descriptionupdate.view.utils.ConnectionFailureViewIni;
  */
 public class LogInScene extends JPanel {
 
-    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(LogInScene.class);
-
-    private static final String PDM_USER = "PDMUser";
     private static final int SIZE_FONT = 18;
 
     private JPanel northPanel = new JPanel();
@@ -41,7 +29,7 @@ public class LogInScene extends JPanel {
     private JPasswordField passField = new JPasswordField(20);
     private JButton accediButton;
 
-    private Connection connection;
+    private Controller controller;
 
     /**
      * Constructor for LogInScene.
@@ -49,6 +37,7 @@ public class LogInScene extends JPanel {
      * @param view the main view of the application
      */
     public LogInScene(View view) {
+        this.controller = new Controller();
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(600, 400)); // Pannello più grande
 
@@ -85,10 +74,14 @@ public class LogInScene extends JPanel {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
 
-                        if (isUserAdmitted(userField.getText(), new String(passField.getPassword()))) {
-                            var connection = doConnection(userField.getText(), new String(passField.getPassword()));
-
-                            view.setController(new Controller(new Model(connection), view));
+                        if (controller.isUserAdmitted(userField.getText(), new String(passField.getPassword()))) {
+                            try {
+                                var connection = controller.doConnection(userField.getText(),
+                                        new String(passField.getPassword()));
+                                view.setController(new ControllerDAO(new Model(connection), view));
+                            } catch (Exception el) {
+                                JOptionPaneFactory.connectionFailed(LogInScene.this);
+                            }
                             view.goToInitialScene();
 
                         } else {
@@ -130,52 +123,4 @@ public class LogInScene extends JPanel {
         this.add(centerPanel, BorderLayout.CENTER);
     }
 
-    private boolean isUserAdmitted(final String username, final String psw) {
-        return Arrays.asList(UserAdmit.values()).stream()
-                .anyMatch(user -> user.getUsername().equals(username) && user.getPsw().equals(psw));
-    }
-
-    private Connection sqlProductionConnection(final String username, final String psw) {
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
-                    PDM_USER, PDM_USER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
-
-    private Connection sqlTestConnection(final String username, final String psw) {
-
-        return DAOUtils.localMySQLConnection("DesFusion",
-                "root", "");
-    }
-
-    private Connection doConnection(final String username, final String psw) {
-        LOGGER.info("Attempting connection for user: {}", username);
-        try {
-            if (username.equals("TEST")) {
-                connection = sqlTestConnection(username, psw);
-                LOGGER.info("Connection established for user: {}", username);
-            } else if (username.equals("CEPIUT")) {
-                connection = sqlProductionConnection(username, psw);
-
-            } else {
-                JOptionPaneFactory.connectionFailed(LogInScene.this);
-            }
-
-            try {
-                LOGGER.info("Connection established in database: {}", connection.getCatalog());
-                connection.setAutoCommit(false);
-                LOGGER.info("Auto-commit disabled for the connection");
-            } catch (SQLException e) {
-                LOGGER.error("Failed to retrieve database catalog", e);
-            }
-        } catch (DAOException ex) {
-            new ConnectionFailureViewIni();
-        }
-        return connection;
-
-    }
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import descriptionupdate.Controller;
+import descriptionupdate.controller.ControllerDAO;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 
@@ -23,7 +23,7 @@ public final class View {
 
     private static final double FRAME_SIZE_FACTOR = 0.8;
 
-    private Optional<Controller> controller;
+    private Optional<ControllerDAO> controller;
     private final JFrame mainFrame;
     private final JPanel mainPanel;
     private final CardLayout cardLayout;
@@ -68,7 +68,7 @@ public final class View {
      *
      * @return the Controller
      */
-    public Controller getController() {
+    public ControllerDAO getController() {
         if (this.controller.isPresent()) {
             return this.controller.get();
         } else {
@@ -88,7 +88,7 @@ public final class View {
      * @param controller the Controller to set
      * @throws NullPointerException if the provided controller is null
      */
-    public void setController(final Controller controller) {
+    public void setController(final ControllerDAO controller) {
         Objects.requireNonNull(controller, "Set null controller in view");
         this.controller = Optional.of(controller);
     }

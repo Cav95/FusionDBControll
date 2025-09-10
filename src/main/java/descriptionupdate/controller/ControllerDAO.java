@@ -1,4 +1,4 @@
-package descriptionupdate;
+package descriptionupdate.controller;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,52 +19,12 @@ import descriptionupdate.view.exception.ExistentDescriptionException;
  * descriptions,
  * and manage the application's state.
  */
-public final class Controller {
+public final class ControllerDAO extends Controller {
 
-    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(Controller.class);
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ControllerDAO.class);
 
     private final Model model;
     private boolean isSaved;
-
-    private String itaFilterTemp = "%";
-    private String engFilterTemp = "%";
-    private String groupFilterTemp = "%";
-
-    public String getItaFilterTemp() {
-        return itaFilterTemp;
-    }
-
-    private void setItaFilterTemp(String itaFilterTemp) {
-        this.itaFilterTemp = itaFilterTemp;
-    }
-
-    public String getEngFilterTemp() {
-        return engFilterTemp;
-    }
-
-    private void setEngFilterTemp(String engFilterTemp) {
-        this.engFilterTemp = engFilterTemp;
-    }
-
-    public String getGroupFilterTemp() {
-        return groupFilterTemp;
-    }
-
-    private void setGroupFilterTemp(String groupFilterTemp) {
-        this.groupFilterTemp = groupFilterTemp;
-    }
-
-    public void setAllFilterTemp(String ita, String eng, String group) {
-        setItaFilterTemp(ita);
-        setEngFilterTemp(eng);
-        setGroupFilterTemp(group);
-    }
-
-    public void resetFilterTemp() {
-        setItaFilterTemp("%");
-        setEngFilterTemp("%");
-        setGroupFilterTemp("%");
-    }
 
     /**
      * Indicates whether the current scene is saved or not.
@@ -91,7 +51,7 @@ public final class Controller {
      * @param view  the view to be managed by the controller
      * @throws NullPointerException if model or view is null
      */
-    public Controller(final Model model, final View view) {
+    public ControllerDAO(final Model model, final View view) {
         Objects.requireNonNull(model, "Controller created with null model");
         Objects.requireNonNull(view, "Controller created with null view");
         this.model = model;
