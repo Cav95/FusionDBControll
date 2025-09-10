@@ -26,10 +26,6 @@ public class MainTableScene extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    private String itaDescription;
-    private String engDescription;
-    private String group;
-
     private Boolean isAcending;
 
     private JPanel northPanel = new JPanel();
@@ -52,9 +48,6 @@ public class MainTableScene extends JPanel {
      */
     public MainTableScene(View view) {
         this.view = view;
-        this.itaDescription = ALL;
-        this.engDescription = ALL;
-        this.group = ALL;
 
         listGroup = view.getController().getAllGroupTypeString();
         listGroup.add(0, "");
@@ -72,9 +65,6 @@ public class MainTableScene extends JPanel {
      */
     public MainTableScene(View view, String itaDescription, String engDescription, String group) {
         this.view = view;
-        this.itaDescription = itaDescription;
-        this.engDescription = engDescription;
-        this.group = group;
         this.table = new JTable();
         initial(view);
     }
@@ -96,8 +86,9 @@ public class MainTableScene extends JPanel {
 
         // Center: JTable in JScrollPane
 
-        final List<Description> des = view.getController().getListDescription(itaDescription + ALL,
-                engDescription + ALL, group + ALL);
+        final List<Description> des = view.getController().getListDescription(
+                view.getController().getItaFilterTemp() + ALL,
+                view.getController().getEngFilterTemp() + ALL, view.getController().getGroupFilterTemp() + ALL);
 
         table = new SelectionTable(
                 des.stream()
@@ -140,7 +131,7 @@ public class MainTableScene extends JPanel {
         });
 
         this.setBackground(Color.WHITE);
-        this.add(new ButtomMainPannel(this, view, itaDescription, engDescription, group), BorderLayout.SOUTH);
+        this.add(new ButtomMainPannel(this, view), BorderLayout.SOUTH);
     }
 
     public JTable getTable() {

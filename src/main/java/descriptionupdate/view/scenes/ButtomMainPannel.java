@@ -25,9 +25,6 @@ import descriptionupdate.view.utils.ControllUtilies;
 public class ButtomMainPannel extends JPanel {
 
     private static final int SIZE_FONT = 13;
-    private MainTableScene mainTableScene;
-
-    private View view;
     private JLabel desFilter = new JLabel("Filtro Descrizione:");
     private JTextField itaTextField = GuiFactory.getTextField(20);
     private JLabel engFilter = new JLabel("Filtro Inglese:");
@@ -44,17 +41,7 @@ public class ButtomMainPannel extends JPanel {
     private JButton filterButton;
     private JButton resetButton;
 
-    private String itaDescriptionAll;
-    private String engDescriptionAll;
-    private String groupAll;
-
-    public ButtomMainPannel(MainTableScene mainTableScene, View view, String itaDescription, String engDescription,
-            String group) {
-        this.itaDescriptionAll = itaDescription;
-        this.engDescriptionAll = engDescription;
-        this.groupAll = group;
-        this.mainTableScene = mainTableScene;
-        this.view = view;
+    public ButtomMainPannel(MainTableScene mainTableScene, View view) {
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
@@ -62,10 +49,11 @@ public class ButtomMainPannel extends JPanel {
         listGroup = view.getController().getAllGroupTypeString();
         listGroup.add(0, "");
         this.groupTextField = GuiFactory.getComboBox(listGroup);
-        this.groupTextField.setSelectedItem(ControllUtilies.reversBlankReturn(group));
+        this.groupTextField
+                .setSelectedItem(ControllUtilies.reversBlankReturn(view.getController().getGroupFilterTemp()));
 
-        this.itaTextField.setText(ControllUtilies.reversBlankReturn(itaDescription));
-        this.engTextField.setText(ControllUtilies.reversBlankReturn(engDescription));
+        this.itaTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getItaFilterTemp()));
+        this.engTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getEngFilterTemp()));
 
         addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
