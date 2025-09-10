@@ -168,16 +168,13 @@ public class LogInScene extends JPanel {
 
             try {
                 LOGGER.info("Connection established in database: {}", connection.getCatalog());
-            } catch (Exception e) {
+                connection.setAutoCommit(false);
+                LOGGER.info("Auto-commit disabled for the connection");
+            } catch (SQLException e) {
                 LOGGER.error("Failed to retrieve database catalog", e);
             }
         } catch (DAOException ex) {
             new ConnectionFailureViewIni();
-        }
-        try {
-            connection.setAutoCommit(false);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
         }
         return connection;
 
