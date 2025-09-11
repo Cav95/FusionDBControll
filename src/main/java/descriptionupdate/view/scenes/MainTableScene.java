@@ -1,19 +1,10 @@
 package descriptionupdate.view.scenes;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
-import descriptionupdate.view.api.DescrizioneEnum;
 import descriptionupdate.view.factory.GuiFactory;
-import descriptionupdate.view.utils.SelectionTable;
-
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,13 +17,11 @@ public class MainTableScene extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    private Boolean isAcending;
-
     private JPanel northPanel = new JPanel();
 
     private List<String> listGroup;
 
-    private JTable table;
+    private TableScrollPane tableScrollPane;
 
     private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni",
             GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
@@ -65,13 +54,10 @@ public class MainTableScene extends JPanel {
      */
     public MainTableScene(View view, String itaDescription, String engDescription, String group) {
         this.view = view;
-        this.table = new JTable();
         initial(view);
     }
 
     private void initial(View view) {
-        isAcending = true;
-
         this.setLayout(new BorderLayout());
 
         // North: Title panel
@@ -90,52 +76,13 @@ public class MainTableScene extends JPanel {
                 view.getController().getItaFilterTemp() + ALL,
                 view.getController().getEngFilterTemp() + ALL, view.getController().getGroupFilterTemp() + ALL);
 
-        table = new SelectionTable(
-                des.stream()
-                        .map(desc -> new Object[] {
-                                desc.group(),
-                                desc.itaDescripion(),
-                                desc.engDescription()
-                        })
-                        .toArray(Object[][]::new),
-                new String[] {
-                        DescrizioneEnum.GROUP.getDescription(),
-                        DescrizioneEnum.ITA.getDescription(),
-                        DescrizioneEnum.ING.getDescription()
-                });
-        table.setFont(GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT));
-        table.getColumnModel().getColumn(0).setPreferredWidth(150);
-        table.getColumnModel().getColumn(1).setPreferredWidth(150);
-        table.getColumnModel().getColumn(2).setPreferredWidth(150);
-
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
-        table.setRowSorter(sorter);
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(400, 200));
-        this.add(scrollPane, BorderLayout.CENTER);
-        table.getTableHeader().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                int colIndex = table.columnAtPoint(e.getPoint());
-                if (colIndex != -1) {
-                    List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-                    if (isAcending)
-                        sortKeys.add(new RowSorter.SortKey(colIndex, SortOrder.ASCENDING));
-                    else
-                        sortKeys.add(new RowSorter.SortKey(colIndex, SortOrder.DESCENDING));
-                    isAcending = !isAcending;
-                    sorter.setSortKeys(sortKeys);
-                    sorter.sort();
-                }
-            }
-        });
-
+        this.tableScrollPane = new TableScrollPane(des);
+        this.add(tableScrollPane, BorderLayout.CENTER);
         this.setBackground(Color.WHITE);
         this.add(new ButtomMainPannel(this, view), BorderLayout.SOUTH);
     }
 
     public JTable getTable() {
-        return this.table;
-
+        return tableScrollPane.getTable();
     }
 }
