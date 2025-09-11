@@ -1,5 +1,7 @@
 package descriptionupdate.view.dialog;
 
+import java.util.function.Supplier;
+
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 import descriptionupdate.view.dialog.api.AbstactChangeDialog;
@@ -12,17 +14,20 @@ public class AddDescriptionDialogPreselect extends AbstactChangeDialog {
 
     private static final long serialVersionUID = 1L;
 
+    private final Supplier<Void> action;
+
     /**
      * Constructor for AddDescriptionScenePreselect.
      *
      * @param view  the main view of the application
      * @param group the group to preselect in the combo box
      */
-    public AddDescriptionDialogPreselect(final View view, Description description) {
+    public AddDescriptionDialogPreselect(final View view, Description description, Supplier<Void> action) {
         super(view);
         itaTextField.setText(description.itaDescripion());
         engTextField.setText(description.engDescription());
         groupTextField.setSelectedItem(description.group());
+        this.action = action;
 
         titleLabel.setText("AGGIUNGI DESCRIZIONE");
         addButton.setText("Aggiungi");
@@ -38,7 +43,8 @@ public class AddDescriptionDialogPreselect extends AbstactChangeDialog {
         JOptionPaneFactory.successfullyAddedDescription(AddDescriptionDialogPreselect.this,
                 newDescription);
         view.getController().setSaved(false);
-        view.goToInitialSceneFiltered();
+        // view.goToInitialSceneFiltered();
+        action.get();
         AddDescriptionDialogPreselect.this.dispose();
     }
 

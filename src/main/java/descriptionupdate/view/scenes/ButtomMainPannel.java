@@ -63,10 +63,17 @@ public class ButtomMainPannel extends JPanel {
 
                         try {
                             var dialog = new AddDescriptionDialogPreselect(view,
-                                    ControllUtilies.getDescritionFromTable(mainTableScene.getTable()));
+                                    ControllUtilies.getDescritionFromTable(mainTableScene.getTable()),
+                                    () -> {
+                                        view.goToInitialSceneFiltered();
+                                        return null;
+                                    });
                             dialog.setVisible(true);
                         } catch (Exception ex) {
-                            var dialog = new AddDescriptionDialogPreselect(view, new Description("", "", ""));
+                            var dialog = new AddDescriptionDialogPreselect(view, new Description("", "", ""), () -> {
+                                view.goToInitialSceneFiltered();
+                                return null;
+                            });
                             dialog.setVisible(true);
                         }
                     }
@@ -94,7 +101,11 @@ public class ButtomMainPannel extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             var description = ControllUtilies.getDescritionFromTable(mainTableScene.getTable());
-                            var dialog = new UpdateDescriptionDialogPreselect(view, description);
+                            var dialog = new UpdateDescriptionDialogPreselect(view, description,
+                                    () -> {
+                                        view.goToInitialSceneFiltered();
+                                        return null;
+                                    });
                             dialog.setVisible(true);
                         } catch (Exception ex) {
                             JOptionPaneFactory.errorNoSelection(mainTableScene);
