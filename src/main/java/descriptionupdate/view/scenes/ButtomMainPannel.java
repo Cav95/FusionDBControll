@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.function.Supplier;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -46,7 +45,7 @@ public class ButtomMainPannel extends JPanel {
     private final JPanel greenButtonsPanel = new JPanel();
     private final JPanel filterPanel = new JPanel();
 
-    public ButtomMainPannel(MainTableScene mainTableScene, View view , Supplier<Void> action) {
+    public ButtomMainPannel(MainTableScene mainTableScene, View view) {
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
@@ -68,11 +67,15 @@ public class ButtomMainPannel extends JPanel {
 
                         try {
                             var dialog = new AddDescriptionDialogPreselect(view,
-                                    ControllUtilies.getDescritionFromTable(mainTableScene.getTable()),action);
+                                    ControllUtilies.getDescritionFromTable(mainTableScene.getTable()),
+                                    () -> {
+                                        view.goToInitialSceneFiltered();
+                                        return null;
+                                    });
                             dialog.setVisible(true);
                         } catch (Exception ex) {
                             var dialog = new AddDescriptionDialogPreselect(view, new Description("", "", ""), () -> {
-                                view.goToInitialScene();
+                                view.goToInitialSceneFiltered();
                                 return null;
                             });
                             dialog.setVisible(true);
@@ -90,7 +93,7 @@ public class ButtomMainPannel extends JPanel {
                                         + description.group())
                                 .equals(JOptionPane.YES_OPTION)) {
                             view.getController().deleteDescription(description);
-                            action.get();
+                            view.goToInitialSceneFiltered();
                         }
 
                     }
@@ -102,7 +105,11 @@ public class ButtomMainPannel extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             var description = ControllUtilies.getDescritionFromTable(mainTableScene.getTable());
-                            var dialog = new UpdateDescriptionDialogPreselect(view, description,action);
+                            var dialog = new UpdateDescriptionDialogPreselect(view, description,
+                                    () -> {
+                                        view.goToInitialSceneFiltered();
+                                        return null;
+                                    });
                             dialog.setVisible(true);
                         } catch (Exception ex) {
                             JOptionPaneFactory.errorNoSelection(mainTableScene);
@@ -156,7 +163,7 @@ public class ButtomMainPannel extends JPanel {
                                 ControllUtilies
                                         .controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
 
-                        view.goToInitialScene();
+                        view.goToInitialSceneFiltered();
                     }
                 });
         resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK,
@@ -166,7 +173,7 @@ public class ButtomMainPannel extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         view.getController().resetFilterTemp();
                         view.getController().setSaved(true);
-                        view.goToInitialScene();
+                        view.goToInitialSceneFiltered();
                     }
                 });
 
