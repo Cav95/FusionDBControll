@@ -25,7 +25,7 @@ import descriptionupdate.view.utils.ControllUtilies;
 public class ButtomMainPannel extends JPanel {
 
     private static final int SIZE_FONT = 13;
-    
+
     private JLabel desFilter = new JLabel("Filtro Descrizione:");
     private JTextField itaTextField = GuiFactory.getTextField(20);
     private JLabel engFilter = new JLabel("Filtro Inglese:");
@@ -171,17 +171,14 @@ public class ButtomMainPannel extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        itaTextField.setText("");
-                        engTextField.setText("");
-                        groupTextField.setSelectedIndex(0);
                         view.getController().resetFilterTemp();
                         view.getController().setSaved(true);
-                        view.goToInitialScene();
+                        view.goToInitialSceneFiltered();
                     }
                 });
 
         // BoxLayout for green buttons
-        
+
         greenButtonsPanel.setLayout(new BoxLayout(greenButtonsPanel, BoxLayout.X_AXIS));
         greenButtonsPanel.setOpaque(false);
 
@@ -194,7 +191,7 @@ public class ButtomMainPannel extends JPanel {
         greenButtonsPanel.add(Box.createHorizontalStrut(10));
 
         // BoxLayout for filter components
-        
+
         filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.X_AXIS));
         filterPanel.setOpaque(false);
 
