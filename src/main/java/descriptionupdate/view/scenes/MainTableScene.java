@@ -79,7 +79,10 @@ public class MainTableScene extends JPanel {
         this.tableScrollPane = new TableScrollPane(des);
         this.add(tableScrollPane, BorderLayout.CENTER);
         this.setBackground(Color.WHITE);
-        this.add(new ButtomMainPannel(this, view), BorderLayout.SOUTH);
+        this.add(new ButtomMainPannel(this, view, () -> {
+            view.goToInitialSceneFiltered();
+            return null;
+        }), BorderLayout.SOUTH);
     }
 
     public JTable getTable() {
