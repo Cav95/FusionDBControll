@@ -5,8 +5,6 @@ package descriptionupdate.view.api;
  */
 public enum ProibenCaratter {
 
-    PARENTHESES_OPEN("("),
-    PARENTHESES_CLOSE(")"),
     AMPERSAND("&"),
     PERCENT("%"),
     COMMA(","),
