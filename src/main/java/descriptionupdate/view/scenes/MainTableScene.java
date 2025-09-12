@@ -38,37 +38,19 @@ public class MainTableScene extends JPanel {
     public MainTableScene(View view) {
         this.view = view;
 
-        listGroup = view.getController().getAllGroupTypeString();
-        listGroup.add(0, "");
-        initial(view);
-
-    }
-
-    /**
-     * Constructor for MainTableScene with specific descriptions and group.
-     *
-     * @param view           the main view of the application
-     * @param itaDescription Italian description to filter
-     * @param engDescription English description to filter
-     * @param group          group to filter
-     */
-    public MainTableScene(View view, String itaDescription, String engDescription, String group) {
-        this.view = view;
-        initial(view);
-    }
-
-    private void initial(View view) {
+        this.listGroup = view.getController().getAllGroupTypeString();
+        this.listGroup.add(0, "");
         this.setLayout(new BorderLayout());
 
         // North: Title panel
 
-        northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
-        northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+        this.northPanel.setLayout(new BoxLayout(this.northPanel, BoxLayout.Y_AXIS));
+        this.northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
-        titleLabel.setFont(GuiFactory.getFont(GuiFactory.FONT, 18));
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        northPanel.add(titleLabel);
-        this.add(northPanel, BorderLayout.NORTH);
+        this.titleLabel.setFont(GuiFactory.getFont(GuiFactory.FONT, 18));
+        this.titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.northPanel.add(this.titleLabel);
+        this.add(this.northPanel, BorderLayout.NORTH);
 
         // Center: JTable in JScrollPane
 
@@ -76,10 +58,12 @@ public class MainTableScene extends JPanel {
                 view.getController().getItaFilterTemp() + ALL,
                 view.getController().getEngFilterTemp() + ALL, view.getController().getGroupFilterTemp() + ALL);
 
-        this.tableScrollPane = new TableScrollPane(des);
-        this.add(tableScrollPane, BorderLayout.CENTER);
+        this.add(new TableScrollPane(des), BorderLayout.CENTER);
         this.setBackground(Color.WHITE);
-        this.add(new ButtomMainPannel(this, view), BorderLayout.SOUTH);
+        this.add(new ButtomMainPannel(this, view, () -> {
+            view.goToInitialScene();
+            return null;
+        }), BorderLayout.SOUTH);
     }
 
     public JTable getTable() {
