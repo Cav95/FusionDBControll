@@ -25,6 +25,7 @@ import descriptionupdate.view.utils.ControllUtilies;
 public class ButtomMainPannel extends JPanel {
 
     private static final int SIZE_FONT = 13;
+    
     private JLabel desFilter = new JLabel("Filtro Descrizione:");
     private JTextField itaTextField = GuiFactory.getTextField(20);
     private JLabel engFilter = new JLabel("Filtro Inglese:");
@@ -33,13 +34,16 @@ public class ButtomMainPannel extends JPanel {
     private List<String> listGroup;
     private JComboBox<String> groupTextField;
 
-    private JButton addButton;
-    private JButton deleteButton;
-    private JButton updateButton;
-    private JButton saveButton;
-    private JButton exitButton;
-    private JButton filterButton;
-    private JButton resetButton;
+    private final JButton addButton;
+    private final JButton deleteButton;
+    private final JButton updateButton;
+    private final JButton saveButton;
+    private final JButton exitButton;
+    private final JButton filterButton;
+    private final JButton resetButton;
+
+    private final JPanel greenButtonsPanel = new JPanel();
+    private final JPanel filterPanel = new JPanel();
 
     public ButtomMainPannel(MainTableScene mainTableScene, View view) {
 
@@ -176,24 +180,38 @@ public class ButtomMainPannel extends JPanel {
                     }
                 });
 
-        this.add(Box.createHorizontalStrut(10));
-        this.add(addButton);
-        this.add(deleteButton);
-        this.add(updateButton);
-        this.add(saveButton);
-        this.add(exitButton);
-        this.add(Box.createHorizontalStrut(10));
-        this.add(desFilter);
-        this.add(itaTextField);
-        this.add(engFilter);
-        this.add(engTextField);
-        this.add(groupFilter);
-        this.add(groupTextField);
-        this.add(filterButton);
-        this.add(Box.createHorizontalStrut(10));
-        this.add(resetButton);
-        this.add(Box.createHorizontalGlue());
-        this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
+        // BoxLayout for green buttons
+        
+        greenButtonsPanel.setLayout(new BoxLayout(greenButtonsPanel, BoxLayout.X_AXIS));
+        greenButtonsPanel.setOpaque(false);
 
+        greenButtonsPanel.add(Box.createHorizontalStrut(10));
+        greenButtonsPanel.add(addButton);
+        greenButtonsPanel.add(deleteButton);
+        greenButtonsPanel.add(updateButton);
+        greenButtonsPanel.add(saveButton);
+        greenButtonsPanel.add(exitButton);
+        greenButtonsPanel.add(Box.createHorizontalStrut(10));
+
+        // BoxLayout for filter components
+        
+        filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.X_AXIS));
+        filterPanel.setOpaque(false);
+
+        filterPanel.add(desFilter);
+        filterPanel.add(itaTextField);
+        filterPanel.add(engFilter);
+        filterPanel.add(engTextField);
+        filterPanel.add(groupFilter);
+        filterPanel.add(groupTextField);
+        filterPanel.add(filterButton);
+        filterPanel.add(Box.createHorizontalStrut(10));
+        filterPanel.add(resetButton);
+        filterPanel.add(Box.createHorizontalGlue());
+
+        // Add both panels to main panel
+        this.add(greenButtonsPanel);
+        this.add(Box.createHorizontalStrut(20));
+        this.add(filterPanel);
     }
 }
