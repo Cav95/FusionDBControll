@@ -142,4 +142,24 @@ public class DescriptionDAOImpl implements DescriptionDAO {
         }
         return groupTypes;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Description> getSimilarItalianDescriptions() throws DAOException {
+        List<Description> descriptions = new ArrayList<>();
+        try (
+                var statement = DAOUtils.prepare(connection, Queries.SIMILAR_ITA_DES);
+                var resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
+                descriptions.add(new Description(resultSet.getString(DescriptionColumnName.ITA_DES.getColumnName()),
+                        resultSet.getString(DescriptionColumnName.ENG_DES.getColumnName()),
+                        resultSet.getString(DescriptionColumnName.GROUP.getColumnName())));
+            }
+        } catch (Exception e) {
+            throw new DAOException(e);
+        }
+        return descriptions;
+    }
 }

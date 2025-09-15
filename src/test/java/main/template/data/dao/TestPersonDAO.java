@@ -1,6 +1,8 @@
 package main.template.data.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Savepoint;
@@ -48,17 +50,6 @@ class TestdescDao {
     }
 
     /**
-     * Test the fromDescription method.
-     */
-    @Test
-    public void fromDescription() {
-        var descDao = new DescriptionDAOImpl(connection);
-        var actual = descDao.getDescription("ANTIVIBRANTE", "ANTI-VIBRATION", "ANV_ANTIVIBRANTI").get();
-        var expected = new Description("ANTIVIBRANTE", "ANTI-VIBRATION", "ANV_ANTIVIBRANTI");
-        assertEquals(expected, actual);
-    }
-
-    /**
      * Test the addDescription method.
      */
     @Test
@@ -68,6 +59,18 @@ class TestdescDao {
 
         var actual = descDao.getDescription("PIPPO", "PLUTO", "VTS").get();
         var expected = new Description("PIPPO", "PLUTO", "VTS");
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Test the fromDescription method.
+     */
+    @Test
+    public void fromDescription() {
+        var descDao = new DescriptionDAOImpl(connection);
+        descDao.addDescription("ANTIVIBRANTE", "ANTI-VIBRATION", "ANV_ANTIVIBRANTI");
+        var actual = descDao.getDescription("ANTIVIBRANTE", "ANTI-VIBRATION", "ANV_ANTIVIBRANTI").get();
+        var expected = new Description("ANTIVIBRANTE", "ANTI-VIBRATION", "ANV_ANTIVIBRANTI");
         assertEquals(expected, actual);
     }
 
@@ -104,4 +107,21 @@ class TestdescDao {
                 new Description("CIAO", "HELLO", "TVB"));
     }
 
+    @Test
+    public void getAllGroupTypeString() {
+        var descDao = new DescriptionDAOImpl(connection);
+        descDao.addDescription("PIPPO", "PLUTO", "PROVA");
+        var actual = descDao.getAllGroupTypeString();
+        assertTrue(actual.contains("PROVA"));
+    }
+
+    @Test
+    public void getSimilarItalianDescriptions() {
+        var descDao = new DescriptionDAOImpl(connection);
+        descDao.addDescription("TEST1", "TEST1-PLUTO", "VTS");
+        descDao.addDescription("TEST1", "TEST2-PLUTO", "VTS");
+
+        var actual = descDao.getSimilarItalianDescriptions();
+        assertEquals(2, actual.stream().filter(d -> d.itaDescripion().equals("TEST1")).count());
+    }
 }

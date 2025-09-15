@@ -64,4 +64,14 @@ public final class Queries {
                          ORDER BY Gruppo;
                                      """;
 
+        /**
+         * SQL query to retrieve records with similar Italian descriptions from the
+         * DescrizioniGruppi table.
+         */
+        public static final String SIMILAR_ITA_DES = """
+                        select distinct des1.DESCRIZIONE AS descrizione, des1.INGLESE AS inglese, des1.Gruppo AS gruppo
+                        from descrizionigruppi as des1 , descrizionigruppi as des2
+                        where des1.DESCRIZIONE = des2.DESCRIZIONE
+                        and des1.INGLESE <> des2.INGLESE
+                        """;
 }
