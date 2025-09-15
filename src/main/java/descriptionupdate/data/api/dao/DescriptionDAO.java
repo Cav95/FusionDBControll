@@ -77,5 +77,5 @@ public interface DescriptionDAO {
      */
     List<Description> getListDescription(String itaDescription, String engDescription, String group);
 
-    List<Description> getSimilarItalianDescriptions() throws DAOException;
+    List<Description> getSimilarItalianDescriptions(String itaDescription, String engDescription, String group) throws DAOException;
 }

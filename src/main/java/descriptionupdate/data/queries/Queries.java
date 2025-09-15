@@ -73,5 +73,9 @@ public final class Queries {
                         from descrizionigruppi as des1 , descrizionigruppi as des2
                         where des1.DESCRIZIONE = des2.DESCRIZIONE
                         and des1.INGLESE <> des2.INGLESE
+                        and des1.DESCRIZIONE like ?
+                        and des1.INGLESE like ?
+                        and des1.Gruppo like ?
+                        order by 1,2,3;
                         """;
 }

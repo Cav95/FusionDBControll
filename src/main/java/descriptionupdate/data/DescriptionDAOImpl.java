@@ -147,10 +147,10 @@ public class DescriptionDAOImpl implements DescriptionDAO {
      * {@inheritDoc}
      */
     @Override
-    public List<Description> getSimilarItalianDescriptions() throws DAOException {
+    public List<Description> getSimilarItalianDescriptions(String itaDescription, String engDescription, String group) throws DAOException {
         List<Description> descriptions = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, Queries.SIMILAR_ITA_DES);
+                var statement = DAOUtils.prepare(connection, Queries.SIMILAR_ITA_DES, itaDescription, engDescription, group);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 descriptions.add(new Description(resultSet.getString(DescriptionColumnName.ITA_DES.getColumnName()),

@@ -121,7 +121,7 @@ class TestdescDao {
         descDao.addDescription("TEST1", "TEST1-PLUTO", "VTS");
         descDao.addDescription("TEST1", "TEST2-PLUTO", "VTS");
 
-        var actual = descDao.getSimilarItalianDescriptions();
+        var actual = descDao.getSimilarItalianDescriptions("%", "%", "%");
         assertEquals(2, actual.stream().filter(d -> d.itaDescripion().equals("TEST1")).count());
     }
 }
