@@ -69,7 +69,8 @@ public final class ControllerDAO extends Controller {
      *                                  parameters
      */
     public Description getDescription(Description description) {
-        LOGGER.info("Getting description for: {}, {}, {}", description.itaDescripion(), description.engDescription(), description.group());
+        LOGGER.info("Getting description for: {}, {}, {}", description.itaDescripion(), description.engDescription(),
+                description.group());
         return model.getDescription(description)
                 .orElseThrow(() -> new IllegalArgumentException("No description found for the provided parameters"));
     }
@@ -154,5 +155,9 @@ public final class ControllerDAO extends Controller {
         } catch (IllegalArgumentException e) {
             return true;
         }
+    }
+
+    public List<Description> getSimilarItalianDescriptions(Description description) {
+        return model.getSimilarItalianDescriptions(description);
     }
 }
