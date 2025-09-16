@@ -116,7 +116,7 @@ public abstract class AbstactChangeDialog extends JDialog {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
-                        view.goToInitialSceneFiltered();
+                        view.goToInitialScene();
                         AbstactChangeDialog.this.dispose();
                     }
                 });

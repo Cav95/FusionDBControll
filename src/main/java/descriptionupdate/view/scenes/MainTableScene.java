@@ -22,6 +22,7 @@ public class MainTableScene extends JPanel {
     private List<String> listGroup;
 
     private TableScrollPane tableScrollPane;
+    final List<Description> des;
 
     private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni",
             GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
@@ -40,21 +41,12 @@ public class MainTableScene extends JPanel {
 
         listGroup = view.getController().getAllGroupTypeString();
         listGroup.add(0, "");
+        des = view.getController().getListDescription(
+                view.getController().getItaFilterTemp() + ALL,
+                view.getController().getEngFilterTemp() + ALL, view.getController().getGroupFilterTemp() + ALL);
+
         initial(view);
 
-    }
-
-    /**
-     * Constructor for MainTableScene with specific descriptions and group.
-     *
-     * @param view           the main view of the application
-     * @param itaDescription Italian description to filter
-     * @param engDescription English description to filter
-     * @param group          group to filter
-     */
-    public MainTableScene(View view, String itaDescription, String engDescription, String group) {
-        this.view = view;
-        initial(view);
     }
 
     private void initial(View view) {
@@ -71,16 +63,11 @@ public class MainTableScene extends JPanel {
         this.add(northPanel, BorderLayout.NORTH);
 
         // Center: JTable in JScrollPane
-
-        final List<Description> des = view.getController().getListDescription(
-                view.getController().getItaFilterTemp() + ALL,
-                view.getController().getEngFilterTemp() + ALL, view.getController().getGroupFilterTemp() + ALL);
-
         this.tableScrollPane = new TableScrollPane(des);
         this.add(tableScrollPane, BorderLayout.CENTER);
         this.setBackground(Color.WHITE);
         this.add(new ButtomMainPannel(this, view, () -> {
-            view.goToInitialSceneFiltered();
+            view.goToInitialScene();
             return null;
         }), BorderLayout.SOUTH);
     }

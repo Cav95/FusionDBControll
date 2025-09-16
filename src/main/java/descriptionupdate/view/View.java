@@ -102,20 +102,6 @@ public final class View {
     }
 
     /**
-     * Navigates to the initial scene of the application with filters applied.
-     *
-     * @param itaDescription the Italian description filter
-     * @param engDescription the English description filter
-     * @param group          the group filter
-     */
-    public void goToInitialSceneFiltered() {
-        this.mainPanel.add(new MainTableScene(this, getController().getItaFilterTemp(),
-                getController().getEngFilterTemp(),
-                getController().getGroupFilterTemp()), SN_WELCOME);
-        this.cardLayout.show(this.mainPanel, SN_WELCOME);
-    }
-
-    /**
      * Exits the application.
      */
     public void exitApplication() {
