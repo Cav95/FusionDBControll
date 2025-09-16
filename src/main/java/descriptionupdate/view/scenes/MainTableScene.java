@@ -22,7 +22,7 @@ public class MainTableScene extends JPanel {
     private List<String> listGroup;
 
     private TableScrollPane tableScrollPane;
-    final List<Description> des;
+    private List<Description> des;
 
     private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni",
             GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
