@@ -71,4 +71,20 @@ public class MainTableScene extends JPanel {
     public JTable getTable() {
         return tableScrollPane.getTable();
     }
+
+    protected void refreshTable(List<Description> des) {
+        this.remove(tableScrollPane);
+        this.tableScrollPane = new TableScrollPane(des);
+        this.add(tableScrollPane, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }
+
+    protected void refreshButtonPanel(JPanel newButtonPanel) {
+        this.remove(buttonPanel);
+        this.buttonPanel = newButtonPanel;
+        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.revalidate();
+        this.repaint();
+    }
 }
