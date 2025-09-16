@@ -19,9 +19,10 @@ public class MainTableScene extends JPanel {
 
     private JPanel northPanel = new JPanel();
 
-    private List<String> listGroup;
+    // private List<String> listGroup;
 
     private TableScrollPane tableScrollPane;
+    private JPanel buttonPanel;
     private List<Description> des;
 
     private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni",
@@ -38,22 +39,15 @@ public class MainTableScene extends JPanel {
      */
     public MainTableScene(View view) {
         this.view = view;
+        this.setLayout(new BorderLayout());
+        this.setBackground(Color.WHITE);
 
-        listGroup = view.getController().getAllGroupTypeString();
-        listGroup.add(0, "");
+        // Get descriptions based on filters
         des = view.getController().getListDescription(
                 view.getController().getItaFilterTemp() + ALL,
                 view.getController().getEngFilterTemp() + ALL, view.getController().getGroupFilterTemp() + ALL);
 
-        initial(view);
-
-    }
-
-    private void initial(View view) {
-        this.setLayout(new BorderLayout());
-
         // North: Title panel
-
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
@@ -65,11 +59,13 @@ public class MainTableScene extends JPanel {
         // Center: JTable in JScrollPane
         this.tableScrollPane = new TableScrollPane(des);
         this.add(tableScrollPane, BorderLayout.CENTER);
-        this.setBackground(Color.WHITE);
-        this.add(new ButtomMainPannel(this, view, () -> {
+
+        // South: Button panel
+        buttonPanel = new ButtomMainPannel(this, view, () -> {
             view.goToInitialScene();
             return null;
-        }), BorderLayout.SOUTH);
+        });
+        this.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     public JTable getTable() {
