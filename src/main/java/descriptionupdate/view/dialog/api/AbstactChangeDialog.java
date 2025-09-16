@@ -86,7 +86,7 @@ public abstract class AbstactChangeDialog extends JDialog {
         mainPanel.add(groupTextField);
         this.add(mainPanel, BorderLayout.CENTER);
 
-        addButton = GuiFactory.getButtom("Add", Color.GRAY, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
+        addButton = GuiFactory.getButton("Add", Color.GRAY, Color.BLACK, GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -111,7 +111,7 @@ public abstract class AbstactChangeDialog extends JDialog {
 
                     }
                 });
-        cancelButton = GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE,
+        cancelButton = GuiFactory.getButton("Annulla", Color.RED, Color.WHITE,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override

@@ -64,6 +64,8 @@ public class MainTableScene extends JPanel {
             return null;
         });
         this.add(buttonPanel, BorderLayout.SOUTH);
+
+        this.add(new ButtonExtraPannel(this, view),BorderLayout.EAST);
     }
 
     public JTable getTable() {
@@ -78,7 +80,7 @@ public class MainTableScene extends JPanel {
         this.repaint();
     }
 
-    protected void refreshButtonPanel(JPanel newButtonPanel) {
+    protected void refreshButtonPanel(ButtomMainPannel newButtonPanel) {
         this.remove(this.buttonPanel);
         this.buttonPanel = newButtonPanel;
         this.add(this.buttonPanel, BorderLayout.SOUTH);

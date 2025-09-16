@@ -3,15 +3,17 @@ package descriptionupdate.view;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import descriptionupdate.controller.ControllerDAO;
+import descriptionupdate.model.api.Description;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
+import descriptionupdate.view.scenes.MainTableSceneCustom;
 
 /**
  * Main application view.
@@ -101,6 +103,12 @@ public final class View {
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
 
+
+    public void goToTableCustomScene(List<Description> descriptions) {
+        this.mainPanel.add(new MainTableSceneCustom(this, descriptions), "TableCustomScene");
+        this.cardLayout.show(this.mainPanel, "TableCustomScene");
+    }
+
     /**
      * Exits the application.
      */
@@ -111,7 +119,7 @@ public final class View {
     /**
      * Navigates to the second scene of the application.
      */
-    public void goToSecondScene() {
+    public void goToLoginScene() {
         this.mainPanel.add(new LogInScene(this), SN_SECOND);
         this.cardLayout.show(this.mainPanel, SN_SECOND);
     }

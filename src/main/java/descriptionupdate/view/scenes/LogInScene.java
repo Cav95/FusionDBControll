@@ -65,7 +65,7 @@ public class LogInScene extends JPanel {
         passField.setMaximumSize(new Dimension(300, 30));
         passField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        accediButton = GuiFactory.getButtom(
+        accediButton = GuiFactory.getButton(
                 "Accedi",
                 Color.GRAY,
                 Color.BLACK,
@@ -92,7 +92,7 @@ public class LogInScene extends JPanel {
                     }
                 });
 
-        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK,
+        JButton exitButton = GuiFactory.getButton("Exit", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override

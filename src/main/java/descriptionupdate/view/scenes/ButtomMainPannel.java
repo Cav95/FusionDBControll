@@ -63,7 +63,7 @@ public class ButtomMainPannel extends JPanel {
         this.itaTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getItaFilterTemp()));
         this.engTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getEngFilterTemp()));
 
-        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK,
+        addButton = GuiFactory.getButton("Aggiungi", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -81,7 +81,7 @@ public class ButtomMainPannel extends JPanel {
                         }
                     }
                 });
-        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK,
+        deleteButton = GuiFactory.getButton("Elimina", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -97,7 +97,7 @@ public class ButtomMainPannel extends JPanel {
 
                     }
                 });
-        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK,
+        updateButton = GuiFactory.getButton("Aggiorna", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -113,7 +113,7 @@ public class ButtomMainPannel extends JPanel {
 
                     }
                 });
-        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK,
+        saveButton = GuiFactory.getButton("Salva", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -126,7 +126,7 @@ public class ButtomMainPannel extends JPanel {
                         }
                     }
                 });
-        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK,
+        exitButton = GuiFactory.getButton("Exit", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -148,7 +148,7 @@ public class ButtomMainPannel extends JPanel {
                     }
                 });
 
-        filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK,
+        filterButton = GuiFactory.getButton("Filtra", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -162,7 +162,7 @@ public class ButtomMainPannel extends JPanel {
                         ButtomMainPannel.this.refreshAction.get();
                     }
                 });
-        resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK,
+        resetButton = GuiFactory.getButton("Reset Filtro", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override

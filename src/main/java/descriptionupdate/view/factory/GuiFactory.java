@@ -27,7 +27,7 @@ public class GuiFactory {
      * @param action     the action listener to be added to the button
      * @return a JButton with the specified properties
      */
-    public static JButton getButtom(final String name, final Color backgroud, final Color foreGround,
+    public static JButton getButton(final String name, final Color backgroud, final Color foreGround,
             final Font font, final ActionListener action) {
 
         final JButton button = new JButton(name);
