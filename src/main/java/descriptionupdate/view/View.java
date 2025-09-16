@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Supplier;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -104,7 +106,7 @@ public final class View {
     }
 
 
-    public void goToTableCustomScene(List<Description> descriptions) {
+    public void goToTableCustomScene(Supplier<List<Description>> descriptions) {
         this.mainPanel.add(new MainTableSceneCustom(this, descriptions), "TableCustomScene");
         this.cardLayout.show(this.mainPanel, "TableCustomScene");
     }

@@ -34,6 +34,7 @@ public class UpdateDescriptionDialogPreselect extends AbstactChangeDialog {
         this.exEng = description.engDescription();
         this.exGroup = description.group();
         this.action = action;
+        refreshAction = action;
 
         titleLabel.setText("AGGIORNA DESCRIZIONE");
         groupTextField.setEnabled(false);

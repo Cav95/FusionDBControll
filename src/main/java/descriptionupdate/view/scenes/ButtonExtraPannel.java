@@ -24,7 +24,7 @@ public class ButtonExtraPannel extends JPanel {
                 GuiFactory.getFont(GuiFactory.FONT, 10), new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        view.goToTableCustomScene(view.getController().getSimilarItalianDescriptions(view.getController().getFilterDescription()));
+                        view.goToTableCustomScene(() -> view.getController().getSimilarItalianDescriptions(view.getController().getFilterDescription()));
                     }
                 });
         backButton = GuiFactory.getButton("Return", Color.GREEN, Color.BLACK,

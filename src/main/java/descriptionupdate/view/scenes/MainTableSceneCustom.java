@@ -14,14 +14,14 @@ public class MainTableSceneCustom  extends MainTableScene {
      *
      * @param view the main view of the application
      */
-    public MainTableSceneCustom(View view, List<Description> descriptions) {
+    public MainTableSceneCustom(View view, Supplier<List<Description>> descriptions) {
         super(view);
         this.onBack = () -> {
             view.goToTableCustomScene(descriptions);
             return null;
         };
         refreshButtonPanel(new ButtomMainPannel(this,view, onBack));
-        refreshTable(descriptions);
+        refreshTable(descriptions.get());
     }
     
 }

@@ -28,6 +28,7 @@ public class AddDescriptionDialogPreselect extends AbstactChangeDialog {
         engTextField.setText(description.engDescription());
         groupTextField.setSelectedItem(description.group());
         this.action = action;
+        refreshAction = action;
 
         titleLabel.setText("AGGIUNGI DESCRIZIONE");
         addButton.setText("Aggiungi");

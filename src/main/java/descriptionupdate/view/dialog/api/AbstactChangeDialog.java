@@ -22,6 +22,7 @@ import descriptionupdate.view.utils.ControllUtilies;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.function.Supplier;
 
 /**
  * Abstract class representing a dialog for adding or changing descriptions.
@@ -47,6 +48,8 @@ public abstract class AbstactChangeDialog extends JDialog {
     protected JButton addButton;
     protected JButton cancelButton;
     protected final View view;
+
+    protected Supplier<Void> refreshAction;
 
     /**
      * Constructor for AbstactChangeDialog.
@@ -116,7 +119,7 @@ public abstract class AbstactChangeDialog extends JDialog {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
-                        view.goToInitialScene();
+                        refreshAction.get();
                         AbstactChangeDialog.this.dispose();
                     }
                 });
