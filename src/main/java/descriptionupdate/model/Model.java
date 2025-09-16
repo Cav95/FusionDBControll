@@ -10,7 +10,8 @@ import descriptionupdate.model.api.Description;
 
 /**
  * The Model class represents the data and business logic of the application.
- * It interacts with the database through the DescriptionDAO to perform CRUD operations
+ * It interacts with the database through the DescriptionDAO to perform CRUD
+ * operations
  * on descriptions.
  */
 public final class Model {
@@ -48,8 +49,8 @@ public final class Model {
      * @return an Optional containing the description if found, or empty if not
      *         found
      */
-    public Optional<Description> getDescription(String itaDescription, String engDescription, String group) {
-        return descriptionDAO.getDescription(itaDescription, engDescription, group); // Placeholder return statement
+    public Optional<Description> getDescription(Description description) {
+        return descriptionDAO.getDescription(description.itaDescripion(), description.engDescription(), description.group());
     }
 
     /**
@@ -60,8 +61,8 @@ public final class Model {
      * @param group          the group type
      * @return a list of descriptions matching the provided parameters
      */
-    public List<Description> getListDescription(String itaDescription, String engDescription, String group) {
-        return descriptionDAO.getListDescription(itaDescription, engDescription, group);
+    public List<Description> getListDescription(Description description) {
+        return descriptionDAO.getListDescription(description.itaDescripion(), description.engDescription(), description.group());
 
     }
 
@@ -124,5 +125,10 @@ public final class Model {
      */
     public List<String> getAllGroupTypeString() {
         return descriptionDAO.getAllGroupTypeString();
+    }
+
+    public List<Description> getSimilarItalianDescriptions(Description description) {
+        return descriptionDAO.getSimilarItalianDescriptions(description.itaDescripion(), description.engDescription(),
+                description.group());
     }
 }

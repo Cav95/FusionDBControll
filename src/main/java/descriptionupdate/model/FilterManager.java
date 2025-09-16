@@ -1,9 +1,12 @@
 package descriptionupdate.model;
 
+import descriptionupdate.model.api.Description;
+
 /**
  * Manages temporary filter values for Italian, English, and group fields.
  */
 public class FilterManager {
+    private static final String ALL = "%";
 
     private String itaFilterTemp = "%";
     private String engFilterTemp = "%";
@@ -83,6 +86,10 @@ public class FilterManager {
         setItaFilterTemp("%");
         setEngFilterTemp("%");
         setGroupFilterTemp("%");
+    }
+
+    public Description getFilterDescription() {
+        return new Description(this.itaFilterTemp + ALL, this.engFilterTemp + ALL, this.groupFilterTemp + ALL);
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * the application.
  */
 public class MainTableScene extends JPanel {
-    private static final String ALL = "%";
+
     private static final int SIZE_FONT = 13;
 
     private static final long serialVersionUID = 1L;
@@ -43,9 +43,7 @@ public class MainTableScene extends JPanel {
         this.setBackground(Color.WHITE);
 
         // Get descriptions based on filters
-        des = view.getController().getListDescription(
-                view.getController().getItaFilterTemp() + ALL,
-                view.getController().getEngFilterTemp() + ALL, view.getController().getGroupFilterTemp() + ALL);
+        des = view.getController().getListDescription(view.getController().getFilterDescription());
 
         // North: Title panel
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
@@ -69,21 +67,21 @@ public class MainTableScene extends JPanel {
     }
 
     public JTable getTable() {
-        return tableScrollPane.getTable();
+        return this.tableScrollPane.getTable();
     }
 
     protected void refreshTable(List<Description> des) {
-        this.remove(tableScrollPane);
+        this.remove(this.tableScrollPane);
         this.tableScrollPane = new TableScrollPane(des);
-        this.add(tableScrollPane, BorderLayout.CENTER);
+        this.add(this.tableScrollPane, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }
 
     protected void refreshButtonPanel(JPanel newButtonPanel) {
-        this.remove(buttonPanel);
+        this.remove(this.buttonPanel);
         this.buttonPanel = newButtonPanel;
-        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(this.buttonPanel, BorderLayout.SOUTH);
         this.revalidate();
         this.repaint();
     }

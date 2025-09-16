@@ -3,6 +3,7 @@ package descriptionupdate.controller;
 import java.sql.Connection;
 import descriptionupdate.model.ConnectionFactory;
 import descriptionupdate.model.FilterManager;
+import descriptionupdate.model.api.Description;
 
 public class Controller {
 
@@ -77,6 +78,10 @@ public class Controller {
      */
     public Connection doConnection(final String username, final String psw) {
         return connectionFactory.doConnection(username, psw);
+    }
+
+    public Description getFilterDescription() {
+        return filterManager.getFilterDescription();
     }
 
 }

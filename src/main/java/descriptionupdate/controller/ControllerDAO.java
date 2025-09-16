@@ -68,9 +68,9 @@ public final class ControllerDAO extends Controller {
      * @throws IllegalArgumentException if no description is found for the provided
      *                                  parameters
      */
-    public Description getDescription(final String itaDescription, final String engDescription, final String group) {
-        LOGGER.info("Getting description for: {}, {}, {}", itaDescription, engDescription, group);
-        return model.getDescription(itaDescription, engDescription, group)
+    public Description getDescription(Description description) {
+        LOGGER.info("Getting description for: {}, {}, {}", description.itaDescripion(), description.engDescription(), description.group());
+        return model.getDescription(description)
                 .orElseThrow(() -> new IllegalArgumentException("No description found for the provided parameters"));
     }
 
@@ -82,10 +82,9 @@ public final class ControllerDAO extends Controller {
      * @param group          the group type
      * @return a list of descriptions matching the provided parameters
      */
-    public List<Description> getListDescription(final String itaDescription, final String engDescription,
-            final String group) {
+    public List<Description> getListDescription(Description description) {
         LOGGER.info("Getting list of descriptions");
-        return model.getListDescription(itaDescription, engDescription, group);
+        return model.getListDescription(description);
 
     }
 
@@ -150,7 +149,7 @@ public final class ControllerDAO extends Controller {
      */
     public boolean checkExistent(final Description des) {
         try {
-            getDescription(des.itaDescripion(), des.engDescription(), des.group());
+            getDescription(des);
             return false;
         } catch (IllegalArgumentException e) {
             return true;
