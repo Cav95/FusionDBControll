@@ -5,11 +5,18 @@ import descriptionupdate.model.ConnectionFactory;
 import descriptionupdate.model.FilterManager;
 import descriptionupdate.model.api.Description;
 
+/**
+ * Controller class that manages interactions between the view and the model.
+ * It handles user actions, updates the model, and refreshes the view as needed.
+ */
 public class Controller {
 
     private final FilterManager filterManager = new FilterManager();
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
 
+    /**
+     * Constructor for Controller.
+     */
     public Controller() {
     }
 
@@ -80,6 +87,12 @@ public class Controller {
         return connectionFactory.doConnection(username, psw);
     }
 
+    /**
+     * Retrieves a list of descriptions based on the provided filter criteria.
+     *
+     * @param filter the filter criteria encapsulated in a Description object
+     * @return a list of descriptions matching the filter criteria
+     */
     public Description getFilterDescription() {
         return filterManager.getFilterDescription();
     }

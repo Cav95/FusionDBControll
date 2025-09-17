@@ -88,6 +88,13 @@ public class FilterManager {
         setGroupFilterTemp("%");
     }
 
+    /**
+     * Retrieves a Description object representing the current filter criteria.
+     * Each field in the Description object is appended with "%" to facilitate
+     * SQL LIKE queries.
+     *
+     * @return a Description object with filter criteria
+     */
     public Description getFilterDescription() {
         return new Description(this.itaFilterTemp + ALL, this.engFilterTemp + ALL, this.groupFilterTemp + ALL);
     }

@@ -32,7 +32,7 @@ public class ControllUtilies {
      * @param description the description to validate
      */
     public static void descriptionValidCaracter(Description description) {
-        if (ControllUtilies.isProhibitedCharacter(description.itaDescripion())
+        if (ControllUtilies.isProhibitedCharacter(description.itaDescription())
                 || ControllUtilies.isProhibitedCharacter(description.engDescription())) {
             throw new IllegalArgumentException();
         }
@@ -44,7 +44,7 @@ public class ControllUtilies {
      * @param description the description to validate
      */
     public static void descriptionNotBlank(Description description) {
-        if (description.itaDescripion().isBlank() || description.engDescription().isBlank()) {
+        if (description.itaDescription().isBlank() || description.engDescription().isBlank()) {
             throw new BlankDescriptionException("Description cannot be blank");
         }
     }

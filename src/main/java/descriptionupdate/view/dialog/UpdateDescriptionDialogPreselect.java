@@ -27,10 +27,10 @@ public class UpdateDescriptionDialogPreselect extends AbstactChangeDialog {
      */
     public UpdateDescriptionDialogPreselect(final View view, final Description description, Supplier<Void> action) {
         super(view);
-        itaTextField.setText(description.itaDescripion());
+        itaTextField.setText(description.itaDescription());
         engTextField.setText(description.engDescription());
         groupTextField.setSelectedItem(description.group());
-        this.exIta = description.itaDescripion();
+        this.exIta = description.itaDescription();
         this.exEng = description.engDescription();
         this.exGroup = description.group();
         this.action = action;

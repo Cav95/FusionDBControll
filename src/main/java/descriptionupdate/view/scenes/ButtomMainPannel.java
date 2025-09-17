@@ -23,6 +23,9 @@ import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.utils.ControllUtilies;
 
+/**
+ * A panel containing buttons for various actions and filters.
+ */
 public class ButtomMainPannel extends JPanel {
 
     private static final int SIZE_FONT = 13;
@@ -48,6 +51,13 @@ public class ButtomMainPannel extends JPanel {
 
     private Supplier<Void> refreshAction;
 
+    /**
+     * Constructor for ButtomMainPannel.
+     *
+     * @param mainTableScene the main table scene
+     * @param view           the main view of the application
+     * @param refreshAction  a Supplier<Void> representing the action to be performed on refresh
+     */
     public ButtomMainPannel(MainTableScene mainTableScene, View view, Supplier<Void> refreshAction) {
 
         this.refreshAction = refreshAction;
@@ -88,7 +98,7 @@ public class ButtomMainPannel extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         var description = ControllUtilies.getDescritionFromTable(mainTableScene.getTable());
                         if (JOptionPaneFactory.askDeleteConfirm(mainTableScene,
-                                description.itaDescripion() + " - " + description.engDescription() + " - "
+                                description.itaDescription() + " - " + description.engDescription() + " - "
                                         + description.group())
                                 .equals(JOptionPane.YES_OPTION)) {
                             view.getController().deleteDescription(description);
@@ -208,6 +218,11 @@ public class ButtomMainPannel extends JPanel {
         this.add(filterPanel);
     }
 
+    /**
+     * Sets the refresh action to be performed when the refresh button is clicked.
+     *
+     * @param refreshAction a Supplier<Void> representing the action to be performed
+     */
     public void setRefreshAction(Supplier<Void> refreshAction) {
         this.refreshAction = refreshAction;
     }

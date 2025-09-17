@@ -7,10 +7,10 @@ package descriptionupdate.model.api;
  * application.
  * It provides a structured way to store and retrieve descriptions
  * in both languages, along with the associated group type.
- * * @param itaDescripion the Italian description
+ * * @param itaDescription the Italian description
  * 
  * @param engDescription the English description
  * @param group          the group type
  */
-public record Description(String itaDescripion, String engDescription, String group) {
+public record Description(String itaDescription, String engDescription, String group) {
 }

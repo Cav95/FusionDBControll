@@ -68,6 +68,11 @@ public class MainTableScene extends JPanel {
         this.add(new ButtonExtraPannel(this, view),BorderLayout.EAST);
     }
 
+    /**
+     * Returns the JTable contained in the TableScrollPane.
+     *
+     * @return the JTable
+     */
     public JTable getTable() {
         return this.tableScrollPane.getTable();
     }
@@ -80,6 +85,10 @@ public class MainTableScene extends JPanel {
         this.repaint();
     }
 
+    /**
+     * Refreshes the button panel with a new button panel.
+     * @param newButtonPanel the new button panel to be set
+     */
     protected void refreshButtonPanel(ButtomMainPannel newButtonPanel) {
         this.remove(this.buttonPanel);
         this.buttonPanel = newButtonPanel;

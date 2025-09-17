@@ -11,11 +11,20 @@ import javax.swing.JPanel;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
 
+/**
+ * A panel containing extra buttons for additional functionalities.
+ */
 public class ButtonExtraPannel extends JPanel {
 
     private JButton backButton;
     private JButton similarItalian;
 
+    /**
+     * Constructor for ButtonExtraPannel.
+     *
+     * @param mainTableScene the main table scene
+     * @param view           the main view of the application
+     */
     public ButtonExtraPannel(MainTableScene mainTableScene, View view) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

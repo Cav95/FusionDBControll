@@ -50,7 +50,7 @@ public final class Model {
      *         found
      */
     public Optional<Description> getDescription(Description description) {
-        return descriptionDAO.getDescription(description.itaDescripion(), description.engDescription(), description.group());
+        return descriptionDAO.getDescription(description.itaDescription(), description.engDescription(), description.group());
     }
 
     /**
@@ -62,7 +62,7 @@ public final class Model {
      * @return a list of descriptions matching the provided parameters
      */
     public List<Description> getListDescription(Description description) {
-        return descriptionDAO.getListDescription(description.itaDescripion(), description.engDescription(), description.group());
+        return descriptionDAO.getListDescription(description.itaDescription(), description.engDescription(), description.group());
 
     }
 
@@ -72,7 +72,7 @@ public final class Model {
      * @param description the description to be added
      */
     public void addDescription(Description description) {
-        descriptionDAO.addDescription(description.itaDescripion(),
+        descriptionDAO.addDescription(description.itaDescription(),
                 description.engDescription(), description.group());
     }
 
@@ -82,7 +82,7 @@ public final class Model {
      * @param description the description to be deleted
      */
     public void deleteDescription(Description description) {
-        descriptionDAO.deleteDescription(description.itaDescripion(),
+        descriptionDAO.deleteDescription(description.itaDescription(),
                 description.engDescription(), description.group());
     }
 
@@ -93,8 +93,8 @@ public final class Model {
      * @param newDescription the new description to replace the old one
      */
     public void updateDescription(Description oldDescription, Description newDescription) {
-        descriptionDAO.updateDescription(oldDescription.itaDescripion(), oldDescription.engDescription(),
-                oldDescription.group(), newDescription.itaDescripion(), newDescription.engDescription());
+        descriptionDAO.updateDescription(oldDescription.itaDescription(), oldDescription.engDescription(),
+                oldDescription.group(), newDescription.itaDescription(), newDescription.engDescription());
     }
 
     /**
@@ -128,7 +128,7 @@ public final class Model {
     }
 
     public List<Description> getSimilarItalianDescriptions(Description description) {
-        return descriptionDAO.getSimilarItalianDescriptions(description.itaDescripion(), description.engDescription(),
+        return descriptionDAO.getSimilarItalianDescriptions(description.itaDescription(), description.engDescription(),
                 description.group());
     }
 }

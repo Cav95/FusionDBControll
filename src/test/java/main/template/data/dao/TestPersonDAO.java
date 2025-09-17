@@ -24,6 +24,11 @@ class TestdescDao {
     private static Connection connection;
     private static Savepoint savepoint;
 
+    /**
+     * Setup method to initialize database connection and savepoint before all tests.
+     *
+     * @throws SQLException if a database access error occurs
+     */
     @BeforeAll
     public static void setup() throws SQLException {
         connection = DAOUtils.localMySQLConnection("DesFusion", "root", "");
@@ -31,6 +36,11 @@ class TestdescDao {
         savepoint = connection.setSavepoint();
     }
 
+    /**
+     * Cleanup method to rollback to savepoint and close the database connection after all tests.
+     *
+     * @throws SQLException if a database access error occurs
+     */
     @AfterAll
     public static void cleanup() throws SQLException {
         if (connection != null) {
@@ -107,6 +117,9 @@ class TestdescDao {
                 new Description("CIAO", "HELLO", "TVB"));
     }
 
+    /**
+     * Test the getAllGroupTypeString method.
+     */
     @Test
     public void getAllGroupTypeString() {
         var descDao = new DescriptionDAOImpl(connection);
@@ -115,6 +128,9 @@ class TestdescDao {
         assertTrue(actual.contains("PROVA"));
     }
 
+    /**
+     * Test the getListDescription method.
+     */
     @Test
     public void getSimilarItalianDescriptions() {
         var descDao = new DescriptionDAOImpl(connection);
@@ -122,6 +138,6 @@ class TestdescDao {
         descDao.addDescription("TEST1", "TEST2-PLUTO", "VTS");
 
         var actual = descDao.getSimilarItalianDescriptions("%", "%", "%");
-        assertEquals(2, actual.stream().filter(d -> d.itaDescripion().equals("TEST1")).count());
+        assertEquals(2, actual.stream().filter(d -> d.itaDescription().equals("TEST1")).count());
     }
 }

@@ -5,6 +5,10 @@ import java.util.function.Supplier;
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 
+/**
+ * MainTableSceneCustom class that extends MainTableScene to create a custom main table scene for
+ * the application.
+ */
 public class MainTableSceneCustom  extends MainTableScene {
 
     private Supplier<Void> onBack;

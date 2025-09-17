@@ -110,7 +110,7 @@ public class JOptionPaneFactory {
      */
     public static void successfullyAddedDescription(final Component dialog, final Description description) {
         JOptionPane.showMessageDialog(dialog,
-                "Descrizione Aggiunta con Successo\n" + description.itaDescripion() + " - "
+                "Descrizione Aggiunta con Successo\n" + description.itaDescription() + " - "
                         + description.engDescription() + " - " + description.group());
     }
 

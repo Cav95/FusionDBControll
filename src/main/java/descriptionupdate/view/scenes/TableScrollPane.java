@@ -20,6 +20,9 @@ import descriptionupdate.view.api.DescrizioneEnum;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.utils.SelectionTable;
 
+/**
+ * A scroll pane that contains a table for displaying descriptions.
+ */
 public class TableScrollPane extends JScrollPane {
     private static final long serialVersionUID = 1L;
     private static final int SIZE_FONT = 13;
@@ -38,7 +41,7 @@ public class TableScrollPane extends JScrollPane {
                 descriptions.stream()
                         .map(desc -> new Object[] {
                                 desc.group(),
-                                desc.itaDescripion(),
+                                desc.itaDescription(),
                                 desc.engDescription()
                         })
                         .toArray(Object[][]::new),
@@ -77,6 +80,11 @@ public class TableScrollPane extends JScrollPane {
         });
     }
 
+    /**
+     * Refreshes the table with new data.
+     * 
+     * @param descriptions the new list of descriptions to display
+     */
     public JTable getTable() {
         return this.table;
     }
