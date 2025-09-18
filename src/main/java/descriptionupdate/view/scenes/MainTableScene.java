@@ -77,6 +77,11 @@ public class MainTableScene extends JPanel {
         return this.tableScrollPane.getTable();
     }
 
+    /**
+     * Refreshes the table with a new list of descriptions.
+     *
+     * @param des the new list of descriptions to be displayed in the table
+     */
     protected void refreshTable(List<Description> des) {
         this.remove(this.tableScrollPane);
         this.tableScrollPane = new TableScrollPane(des);
