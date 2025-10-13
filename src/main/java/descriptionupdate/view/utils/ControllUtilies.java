@@ -49,18 +49,43 @@ public class ControllUtilies {
         }
     }
 
-        public static String controllBlankReturn(final JTextField textField) {
+    /**
+     * Validates that the given text field is not blank.
+     *
+     * @param textField the text field to validate
+     * @return the trimmed text from the text field
+     */
+    public static String controllBlankReturn(final JTextField textField) {
         return textField.getText().isBlank() ? ALL : textField.getText().toUpperCase();
     }
 
+    /**
+     * Removes wildcard characters from the given text.
+     *
+     * @param text the text to process
+     * @return the processed text without wildcard characters
+     */
     public static String reversBlankReturn(final String text) {
         return text.replace(ALL, "").toUpperCase();
     }
 
+    /**
+     * Validates that the given group is not blank.
+     *
+     * @param group the group to validate
+     * @return the validated group or a wildcard if blank
+     */
     public static String controllBlankGroup(final String group) {
         return group.isBlank() ? ALL : group;
     }
 
+    /**
+     * Extracts a Description object from the selected row of the given JTable.
+     *
+     * @param table the JTable to extract the description from
+     * @return the extracted Description object
+     * @throws IllegalStateException if no row is selected in the table
+     */
     public static Description getDescritionFromTable(final JTable table) {
         int selectedRow = table.getSelectedRow();
         if (selectedRow >= 0) {
