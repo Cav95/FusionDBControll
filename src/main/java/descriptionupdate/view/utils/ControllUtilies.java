@@ -54,7 +54,7 @@ public class ControllUtilies {
     }
 
     public static String reversBlankReturn(final String text) {
-        return text.equals(ALL) ? "" : text.toUpperCase();
+        return text.replace(ALL, "").toUpperCase();
     }
 
     public static String controllBlankGroup(final String group) {

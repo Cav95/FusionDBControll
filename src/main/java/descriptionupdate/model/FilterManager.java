@@ -13,15 +13,6 @@ public class FilterManager {
     private String groupFilterTemp = "%";
 
     /**
-     * Gets the temporary Italian filter value.
-     *
-     * @return the Italian filter string
-     */
-    public String getItaFilterTemp() {
-        return itaFilterTemp;
-    }
-
-    /**
      * Sets the temporary Italian filter value.
      *
      * @param itaFilterTemp the Italian filter string
@@ -31,30 +22,12 @@ public class FilterManager {
     }
 
     /**
-     * Gets the temporary English filter value.
-     *
-     * @return the English filter string
-     */
-    public String getEngFilterTemp() {
-        return engFilterTemp;
-    }
-
-    /**
      * Sets the temporary English filter value.
      *
      * @param engFilterTemp the English filter string
      */
     private void setEngFilterTemp(String engFilterTemp) {
         this.engFilterTemp = engFilterTemp;
-    }
-
-    /**
-     * Gets the temporary group filter value.
-     *
-     * @return the group filter string
-     */
-    public String getGroupFilterTemp() {
-        return groupFilterTemp;
     }
 
     /**

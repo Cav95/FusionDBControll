@@ -68,10 +68,10 @@ public class ButtomMainPannel extends JPanel {
         listGroup.add(0, "");
         this.groupTextField = GuiFactory.getComboBox(listGroup);
         this.groupTextField
-                .setSelectedItem(ControllUtilies.reversBlankReturn(view.getController().getGroupFilterTemp()));
+                .setSelectedItem(ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().group()));
 
-        this.itaTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getItaFilterTemp()));
-        this.engTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getEngFilterTemp()));
+        this.itaTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().itaDescription()));
+        this.engTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().engDescription()));
 
         addButton = GuiFactory.getButton("Aggiungi", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
