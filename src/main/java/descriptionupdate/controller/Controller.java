@@ -2,8 +2,9 @@ package descriptionupdate.controller;
 
 import java.sql.Connection;
 import descriptionupdate.model.ConnectionFactory;
-import descriptionupdate.model.FilterManager;
+import descriptionupdate.model.FilterDesImpl;
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.Filter;
 
 /**
  * Controller class that manages interactions between the view and the model.
@@ -11,8 +12,8 @@ import descriptionupdate.model.api.Description;
  */
 public class Controller {
 
-    private final FilterManager filterManager = new FilterManager();
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
+    private final Filter<Description> filter = new FilterDesImpl();
 
     /**
      * Constructor for Controller.
@@ -25,27 +26,33 @@ public class Controller {
      *
      * @return the Italian filter string
      */
-   /* public String getItaFilterTemp() {
-        return filterManager.getItaFilterTemp();
-    }*/
+    /*
+     * public String getItaFilterTemp() {
+     * return filterManager.getItaFilterTemp();
+     * }
+     */
 
     /**
      * Returns the temporary English filter value.
      *
      * @return the English filter string
      */
-   /* public String getEngFilterTemp() {
-        return filterManager.getEngFilterTemp();
-    }*/
+    /*
+     * public String getEngFilterTemp() {
+     * return filterManager.getEngFilterTemp();
+     * }
+     */
 
     /**
      * Returns the temporary group filter value.
      *
      * @return the group filter string
      */
-   /* public String getGroupFilterTemp() {
-        return filterManager.getGroupFilterTemp();
-    }*/
+    /*
+     * public String getGroupFilterTemp() {
+     * return filterManager.getGroupFilterTemp();
+     * }
+     */
 
     /**
      * Sets all temporary filter values for Italian, English, and group.
@@ -55,14 +62,14 @@ public class Controller {
      * @param group the group filter string
      */
     public void setAllFilterTemp(final String ita, final String eng, final String group) {
-        filterManager.setAllFilterTemp(ita, eng, group);
+        filter.setFilter(new Description(ita, eng, group));
     }
 
     /**
      * Resets all temporary filter values to their default state.
      */
     public void resetFilterTemp() {
-        filterManager.resetFilterTemp();
+        filter.resetFilter();
     }
 
     /**
@@ -94,7 +101,7 @@ public class Controller {
      * @return a list of descriptions matching the filter criteria
      */
     public Description getFilterDescription() {
-        return filterManager.getFilterDescription();
+        return filter.getFilter();
     }
 
 }
