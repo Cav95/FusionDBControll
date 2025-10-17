@@ -15,11 +15,7 @@ where (ps.codCodice ,ps.cpNome , ps.propvalore) not in (select ph1.codCodice ,ph
 from printhistory ph1
 where ph1.ENDVALUE <> '2099-12-31');
 
-/*Test Cambio valore*/
-update printstate
-set propValore ='SI'
-where codCodice = 'AFF06520'
-AND cpNome = 'Officina';
+
 
 /*Select different value*/
 select ph1.*
@@ -28,12 +24,23 @@ where Id not in ( select ph.Id
 					from printstate ps , printhistory ph
 					where ps.codCodice = ph.codCodice
 					and ps.cpNome = ph.cpNome
-					and ps.propValore = ph.propValore
+					and TRIM(ps.propValore) = TRIM(ph.propValore)
 					and ph.ENDVALUE = '2099-12-31')
                     and ph1.ENDVALUE = '2099-12-31';
                     
-
+/*Add to printhistory differt old value table end value*/
 UPDATE printhistory ph
 LEFT JOIN differentvalue dv ON ph.Id = dv.Id
 SET ph.endvalue = NOW()
 WHERE dv.Id IS NULL;
+
+/*Test Cambio valore*/
+update printstate
+set propValore ='SI'
+where codCodice = 'AFF06520'
+AND cpNome = 'Officina';
+
+select *
+FROM printhistory
+WHERE codCodice = 'AFF06520'
+AND cpNome = 'Officina';

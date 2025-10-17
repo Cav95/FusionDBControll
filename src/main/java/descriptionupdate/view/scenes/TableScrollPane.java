@@ -59,10 +59,23 @@ public class TableScrollPane extends JScrollPane {
         table.getColumnModel().getColumn(1).setPreferredWidth(150);
         table.getColumnModel().getColumn(2).setPreferredWidth(150);
 
+        sortColumns(table);
+    }
+
+    /**
+     * Refreshes the table with new data.
+     * 
+     * @param descriptions the new list of descriptions to display
+     */
+    public JTable getTable() {
+        return this.table;
+    }
+
+    
+    private void sortColumns(JTable table) {
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(sorter);
         this.setPreferredSize(new Dimension(400, 200));
-
         table.getTableHeader().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int colIndex = table.columnAtPoint(e.getPoint());
@@ -78,15 +91,7 @@ public class TableScrollPane extends JScrollPane {
                 }
             }
         });
-    }
 
-    /**
-     * Refreshes the table with new data.
-     * 
-     * @param descriptions the new list of descriptions to display
-     */
-    public JTable getTable() {
-        return this.table;
     }
 
 }
