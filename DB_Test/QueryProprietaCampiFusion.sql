@@ -7,7 +7,7 @@ where cam.cpID = prop.cpID
 and cod.codID = prop.codID
 and cam.cpNome in ('Officina','Preassemblaggio','Sartoria','Prodotto Finito','Spedizioni','Montatori','Ufficio Acquisti');
 
-/*Create and add new value time history table*/
+/*Create first time and update with new value time history table*/
 INSERT into PRINTHISTORY(cpNome,propValore,codCodice,STARTVALUE, ENDVALUE)
 SELECT ps.cpNome ,ps.propValore ,ps.codCodice, now(),'2099/12/31'
 from printstate as ps
@@ -15,9 +15,7 @@ where (ps.codCodice ,ps.cpNome , ps.propvalore) not in (select ph1.codCodice ,ph
 from printhistory ph1
 where ph1.ENDVALUE <> '2099-12-31');
 
-
-
-/*Select different value*/
+/*Select value with different value from printstate*/
 select ph1.*
 from printhistory ph1
 where Id not in ( select ph.Id
@@ -33,6 +31,12 @@ UPDATE printhistory ph
 LEFT JOIN differentvalue dv ON ph.Id = dv.Id
 SET ph.endvalue = NOW()
 WHERE dv.Id IS NULL;
+
+/*Select ultimate code from hystory*/
+SELECT ph.*
+from printhistory ph
+where ph.ENDVALUE = '2099-12-31'
+and ph.codCodice like '%';
 
 /*Test Cambio valore*/
 update printstate

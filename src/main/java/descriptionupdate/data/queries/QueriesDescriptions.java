@@ -3,7 +3,7 @@ package descriptionupdate.data.queries;
 /**
  * A utility class that contains SQL query strings used for database operations.
  */
-public final class Queries {
+public final class QueriesDescriptions {
 
         /**
          * SQL query to retrieve all records from the DescrizioniGruppi table.
