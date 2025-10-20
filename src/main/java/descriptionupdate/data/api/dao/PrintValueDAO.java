@@ -1,10 +1,8 @@
 package descriptionupdate.data.api.dao;
 
 import java.util.List;
-import java.util.Optional;
-
 import descriptionupdate.data.utils.DAOException;
-import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.SinglePrintvalue;
 
 
 public interface PrintValueDAO {
@@ -19,7 +17,7 @@ public interface PrintValueDAO {
          *         found
          * @throws DAOException if an error occurs while accessing the data
          */
-        List<Description> getPrintValue(String itaDescription, String engDescription, String group)
+        List<SinglePrintvalue> getPrintValue(String code, String endValue)
                         throws DAOException;
 
        

@@ -11,7 +11,8 @@ public final class QueriesHistoryPrintFiles {
         public static final String GET_CODE_VALUE = """
                         select *
                         from printhistory
-                        where codCodice like ?;
+                        where codCodice like ?
+                        and endValue like ?;
                                     """;
 
 }
