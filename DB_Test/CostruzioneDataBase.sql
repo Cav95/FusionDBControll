@@ -22,15 +22,15 @@ CREATE TABLE DESCRIZIONIGRUPPI (
      
 CREATE TABLE PRINTHISTORY(
 	Id INT NOT NULL AUTO_INCREMENT,
-	 codCodice VARCHAR(80) NOT NULL, 
+	codCodice VARCHAR(80) NOT NULL, 
      cpNome VARCHAR(80) NOT NULL,
      propValore VARCHAR(80) NOT NULL,
-     STARTVALUE DATE NOT NULL,
-     ENDVALUE DATE,
+     startValue DATE NOT NULL,
+     endValue DATE NOT NULL,
      PRIMARY KEY (Id)
      );
      
-CREATE TABLE PRINTSTATE(
+CREATE TABLE PrintPropValue(
 	Id INT NOT NULL AUTO_INCREMENT,
 	 codCodice VARCHAR(80) NOT NULL, 
      cpNome VARCHAR(80) NOT NULL,
@@ -1052,7 +1052,7 @@ INSERT INTO DESCRIZIONIGRUPPI (Gruppo , DESCRIZIONE, INGLESE) VALUES
 ('CDS_COCLEE DISTRIBUTRICI E ACCESSORI', 'FIANCATA LATERALE COCLEA DISTRIBUTRICE DOPPIA LATO FOLLE', 'FREE SIDE FOR DOUBLE DISTRIBUTOR SCREW'),
 ('CDS_COCLEE DISTRIBUTRICI E ACCESSORI', 'FIANCATA LATERALE COCLEA DISTRIBUTRICE DOPPIA LATO MOTORE', 'MOTION SIDE FOR DOUBLE DISTRIBUTOR SCREW');
 
-INSERT INTO printstate(codCodice ,cpNome,propValore) VALUE
+INSERT INTO PrintPropValue(codCodice ,cpNome,propValore) VALUE
 ('AFF06520','Officina','          NO'),
 ('AFF06520','Prodotto Finito','          NO'),
 ('AFF06520','Sartoria','          NO'),
@@ -1945,7 +1945,7 @@ INSERT INTO printstate(codCodice ,cpNome,propValore) VALUE
 /*Create and add new value time history table*/
 INSERT into PRINTHISTORY(cpNome,propValore,codCodice,STARTVALUE, ENDVALUE)
 SELECT ps.cpNome ,ps.propValore ,ps.codCodice, now(),'2099/12/31'
-from printstate as ps
+from PrintPropValue as ps
 where (ps.codCodice ,ps.cpNome , ps.propvalore) not in (select ph1.codCodice ,ph1.cpNome , ph1.propvalore
 from printhistory ph1
 where ph1.ENDVALUE <> '2099-12-31');
@@ -1953,11 +1953,8 @@ where ph1.ENDVALUE <> '2099-12-31');
 /*Crea view*/
 create view differentValue as
 select ph.Id
-from printstate ps , printhistory ph
+from PrintPropValue ps , printhistory ph
 where ps.codCodice = ph.codCodice
 and ps.cpNome = ph.cpNome
 and ps.propValore = ph.propValore
 and ph.ENDVALUE = '2099-12-31';
-
-
-

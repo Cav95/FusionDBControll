@@ -10,16 +10,16 @@ and cam.cpNome in ('Officina','Preassemblaggio','Sartoria','Prodotto Finito','Sp
 /*Create first time and update with new value time history table*/
 INSERT into PRINTHISTORY(cpNome,propValore,codCodice,STARTVALUE, ENDVALUE)
 SELECT ps.cpNome ,ps.propValore ,ps.codCodice, now(),'2099/12/31'
-from printstate as ps
+from PrintPropValue as ps
 where (ps.codCodice ,ps.cpNome , ps.propvalore) not in (select ph1.codCodice ,ph1.cpNome , ph1.propvalore
 from printhistory ph1
 where ph1.ENDVALUE <> '2099-12-31');
 
-/*Select value with different value from printstate*/
+/*Select value with different value from PrintPropValue*/
 select ph1.*
 from printhistory ph1
 where Id not in ( select ph.Id
-					from printstate ps , printhistory ph
+					from PrintPropValue ps , printhistory ph
 					where ps.codCodice = ph.codCodice
 					and ps.cpNome = ph.cpNome
 					and TRIM(ps.propValore) = TRIM(ph.propValore)
@@ -39,7 +39,7 @@ where ph.ENDVALUE = '2099-12-31'
 and ph.codCodice like '%';
 
 /*Test Cambio valore*/
-update printstate
+update PrintPropValue
 set propValore ='SI'
 where codCodice = 'AFF06520'
 AND cpNome = 'Officina';
