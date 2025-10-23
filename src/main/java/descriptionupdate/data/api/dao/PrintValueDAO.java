@@ -24,5 +24,7 @@ public interface PrintValueDAO {
 
         String getOneCodeValue(String code, String endValue , String propValue) throws DAOException;
 
+        List<String> getAllEndValues(String code) throws DAOException;
+
        
 }

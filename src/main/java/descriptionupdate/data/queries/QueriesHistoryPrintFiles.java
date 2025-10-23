@@ -20,6 +20,11 @@ public final class QueriesHistoryPrintFiles {
                         select distinct codCodice
                         from printhistory;
                                     """;
+        public static final String GET_ALL_END_DATE_STRING= """
+                        select distinct endValue
+                        from printhistory
+                        where codCodice like ?;
+                                    """;
 
         public static final String GET_ONE_CODE_VALUE = """
                         select propValore

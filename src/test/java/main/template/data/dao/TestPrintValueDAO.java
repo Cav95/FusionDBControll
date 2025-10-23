@@ -83,4 +83,11 @@ class TestPrintValueDAO {
         assertTrue(actual.contains("NO"));
     }
 
+    @Test
+    public void getAllEndValues() {
+        var valDao = new PrintValueDAOImpl(connection);
+        var actual = valDao.getAllEndValues("AFF06520");
+        assertTrue(actual.size() > 0);
+    }
+
 }

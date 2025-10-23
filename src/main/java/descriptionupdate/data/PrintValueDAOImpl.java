@@ -68,4 +68,19 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return null;
     }
 
+    @Override
+    public List<String> getAllEndValues(String code) throws DAOException {
+        List<String> endValues = new ArrayList<>();
+        try (
+                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_END_DATE_STRING, code);
+                var resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
+                endValues.add(resultSet.getString("endValue"));
+            }
+        } catch (Exception e) {
+             throw new DAOException(e);
+        }
+        return endValues;
+    }
+
 }
