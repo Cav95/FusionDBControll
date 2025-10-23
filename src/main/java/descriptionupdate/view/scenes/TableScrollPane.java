@@ -16,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.api.DescrizioneEnum;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.utils.SelectionTable;
@@ -61,6 +62,51 @@ public class TableScrollPane extends JScrollPane {
 
         sortColumns(table);
     }
+
+    public TableScrollPane(List<PrintCodeValues> printCodeValues,Boolean isFromPrintValues) {
+        isAcending = true;
+        this.table = new SelectionTable(
+                printCodeValues.stream()
+                        .map(desc -> new Object[] {
+                                desc.codice(),
+                                desc.officina(),
+                                desc.preassemblaggio(),
+                                desc.sartoria(),
+                                desc.prodottoFinito(),
+                                desc.spedizione(),
+                                desc.montatori(),
+                                desc.ufficioAcquisti(),
+                                desc.dataValidita()
+                        })
+                        .toArray(Object[][]::new),
+                new String[] {
+                        "Code",
+                        "Officina",
+                        "Preassemblaggio",
+                        "Sartoria",
+                        "Prodotto Finito",
+                        "Spedizione",
+                        "Montatori",
+                        "Ufficio Acquisti",
+                        "End Value"
+                });
+        this.setViewportView(table);
+        this.setBorder(BorderFactory.createEmptyBorder());
+        this.getVerticalScrollBar().setUnitIncrement(16);
+
+        table.setFont(GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT));
+        table.getColumnModel().getColumn(0).setPreferredWidth(150);
+        table.getColumnModel().getColumn(1).setPreferredWidth(150);
+        table.getColumnModel().getColumn(2).setPreferredWidth(150);
+        table.getColumnModel().getColumn(3).setPreferredWidth(150);
+        table.getColumnModel().getColumn(4).setPreferredWidth(150);
+        table.getColumnModel().getColumn(5).setPreferredWidth(150);
+        table.getColumnModel().getColumn(6).setPreferredWidth(150);
+        table.getColumnModel().getColumn(7).setPreferredWidth(150);
+        table.getColumnModel().getColumn(8).setPreferredWidth(150);
+
+        sortColumns(table);
+    };
 
     /**
      * Refreshes the table with new data.

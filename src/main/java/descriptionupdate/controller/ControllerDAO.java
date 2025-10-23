@@ -5,7 +5,9 @@ import java.util.Objects;
 import org.slf4j.Logger;
 
 import descriptionupdate.model.ModelDescription;
+import descriptionupdate.model.ModelHistoryPrint;
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.View;
 import descriptionupdate.view.exception.ExistentDescriptionException;
 
@@ -24,6 +26,7 @@ public final class ControllerDAO extends Controller {
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ControllerDAO.class);
 
     private final ModelDescription model;
+    private final ModelHistoryPrint modelHistoryPrint;
     private boolean isSaved;
 
     /**
@@ -51,10 +54,12 @@ public final class ControllerDAO extends Controller {
      * @param view  the view to be managed by the controller
      * @throws NullPointerException if model or view is null
      */
-    public ControllerDAO(final ModelDescription model, final View view) {
+    public ControllerDAO(final ModelDescription model, final View view, final ModelHistoryPrint modelHistoryPrint) {
         Objects.requireNonNull(model, "Controller created with null model");
         Objects.requireNonNull(view, "Controller created with null view");
+        Objects.requireNonNull(modelHistoryPrint, "Controller created with null modelHistoryPrint");
         this.model = model;
+        this.modelHistoryPrint = modelHistoryPrint;
         this.isSaved = true;
     }
 
@@ -165,5 +170,9 @@ public final class ControllerDAO extends Controller {
      */
     public List<Description> getSimilarItalianDescriptions(Description description) {
         return model.getSimilarItalianDescriptions(description);
+    }
+
+    public List<PrintCodeValues> getPrintHistory() {
+        return modelHistoryPrint.getAllPrintCodeValues();
     }
 }

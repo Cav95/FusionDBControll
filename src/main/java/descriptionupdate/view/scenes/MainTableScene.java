@@ -2,6 +2,7 @@ package descriptionupdate.view.scenes;
 
 import javax.swing.*;
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
 import java.awt.*;
@@ -95,9 +96,17 @@ public class MainTableScene extends JPanel {
      * @param newButtonPanel the new button panel to be set
      */
     protected void refreshButtonPanel(ButtomMainPannel newButtonPanel) {
-        this.remove(this.buttonPanel);
-        this.buttonPanel = newButtonPanel;
-        this.add(this.buttonPanel, BorderLayout.SOUTH);
+            this.remove(this.buttonPanel);
+            this.buttonPanel = newButtonPanel;
+            this.add(this.buttonPanel, BorderLayout.SOUTH);
+            this.revalidate();
+            this.repaint();
+    }
+
+    protected void refreshTablePrint(List<PrintCodeValues> list) {
+        this.remove(this.tableScrollPane);
+        this.tableScrollPane = new TableScrollPane(list, true);
+        this.add(this.tableScrollPane, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }

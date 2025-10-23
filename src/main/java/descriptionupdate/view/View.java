@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import descriptionupdate.controller.ControllerDAO;
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 import descriptionupdate.view.scenes.MainTableSceneCustom;
@@ -108,6 +109,11 @@ public final class View {
 
     public void goToTableCustomScene(Supplier<List<Description>> descriptions) {
         this.mainPanel.add(new MainTableSceneCustom(this, descriptions), "TableCustomScene");
+        this.cardLayout.show(this.mainPanel, "TableCustomScene");
+    }
+
+    public void goToTableCustomScenePrint(Supplier<List<PrintCodeValues>> printCode) {
+        this.mainPanel.add(new MainTableSceneCustom(this, printCode, true), "TableCustomScene");
         this.cardLayout.show(this.mainPanel, "TableCustomScene");
     }
 
