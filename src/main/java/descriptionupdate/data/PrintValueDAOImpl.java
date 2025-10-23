@@ -38,4 +38,34 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         }
         return printValues;
     }
+
+    @Override
+    public List<String> getAllCodes() throws DAOException {
+        List<String> codes = new ArrayList<>();
+        try (
+                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE);
+                var resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
+                codes.add(resultSet.getString(PrintValueColumn.CODICE.getColumnName()));
+            }
+        } catch (Exception e) {
+             throw new DAOException(e);
+        }
+        return codes;
+    }
+
+    @Override
+    public String getOneCodeValue(String code, String endValue, String propValue) throws DAOException {
+        try (
+                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ONE_CODE_VALUE, code, endValue, propValue);
+                var resultSet = statement.executeQuery();) {
+            if (resultSet.next()) {
+                return resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName());
+            }
+        } catch (Exception e) {
+            throw new DAOException(e);
+        }
+        return null;
+    }
+
 }

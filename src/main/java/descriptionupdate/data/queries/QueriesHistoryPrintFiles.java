@@ -15,4 +15,20 @@ public final class QueriesHistoryPrintFiles {
                         and endValue like ?;
                                     """;
 
+
+        public static final String GET_CODE = """
+                        select distinct codCodice
+                        from printhistory;
+                                    """;
+
+        public static final String GET_ONE_CODE_VALUE = """
+                        select propValore
+                        from printhistory
+                        where codCodice like ?
+                        and endValue >= ?
+                        and cpNome like ?
+                        order by endValue asc
+                        limit 1;
+                                    """;
+
 }

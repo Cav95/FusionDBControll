@@ -18,11 +18,12 @@ import descriptionupdate.data.utils.DAOUtils;
  */
 class TestPrintValueDAO {
 
-        private static Connection connection;
-        private static Savepoint savepoint;
+    private static Connection connection;
+    private static Savepoint savepoint;
 
     /**
-     * Setup method to initialize database connection and savepoint before all tests.
+     * Setup method to initialize database connection and savepoint before all
+     * tests.
      *
      * @throws SQLException if a database access error occurs
      */
@@ -34,7 +35,8 @@ class TestPrintValueDAO {
     }
 
     /**
-     * Cleanup method to rollback to savepoint and close the database connection after all tests.
+     * Cleanup method to rollback to savepoint and close the database connection
+     * after all tests.
      *
      * @throws SQLException if a database access error occurs
      */
@@ -67,5 +69,18 @@ class TestPrintValueDAO {
         assertTrue(value.isPresent());
     }
 
-   
+    @Test
+    public void getAllCodes() {
+        var valDao = new PrintValueDAOImpl(connection);
+        var actual = valDao.getAllCodes();
+        assertTrue(actual.size() > 0);
+    }
+
+    @Test
+    public void getOneCodeValue() {
+        var valDao = new PrintValueDAOImpl(connection);
+        var actual = valDao.getOneCodeValue("AFF06520", "2099-12-31", "Officina");
+        assertTrue(actual.contains("NO"));
+    }
+
 }
