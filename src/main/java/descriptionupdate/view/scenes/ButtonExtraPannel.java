@@ -37,6 +37,7 @@ public class ButtonExtraPannel extends JPanel {
                         view.goToTableCustomScene(() -> view.getController().getSimilarItalianDescriptions(view.getController().getFilterDescription()));
                     }
                 });
+                
         backButton = GuiFactory.getButton("Return", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, 10), new ActionListener() {
                     @Override
@@ -45,7 +46,7 @@ public class ButtonExtraPannel extends JPanel {
                     }
                 });
 
-                printHistory = GuiFactory.getButton("Print History", Color.GREEN, Color.BLACK,
+         printHistory = GuiFactory.getButton("Print History", Color.GREEN, Color.BLACK,
                         GuiFactory.getFont(GuiFactory.FONT, 10), new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {

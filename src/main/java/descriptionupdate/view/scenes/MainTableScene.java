@@ -22,7 +22,8 @@ public class MainTableScene extends JPanel {
 
     // private List<String> listGroup;
 
-    private TableScrollPane tableScrollPane;
+    private TableScrollPaneDes tableScrollPaneDes;
+    private TableScrollPanePrint tableScrollPanePrint;
     private JPanel buttonPanel;
     private List<Description> des;
 
@@ -56,8 +57,8 @@ public class MainTableScene extends JPanel {
         this.add(northPanel, BorderLayout.NORTH);
 
         // Center: JTable in JScrollPane
-        this.tableScrollPane = new TableScrollPane(des);
-        this.add(tableScrollPane, BorderLayout.CENTER);
+        this.tableScrollPaneDes = new TableScrollPaneDes(des);
+        this.add(tableScrollPaneDes, BorderLayout.CENTER);
 
         // South: Button panel
         buttonPanel = new ButtomMainPannel(this, view, () -> {
@@ -75,7 +76,7 @@ public class MainTableScene extends JPanel {
      * @return the JTable
      */
     public JTable getTable() {
-        return this.tableScrollPane.getTable();
+        return this.tableScrollPaneDes.getTable();
     }
 
     /**
@@ -84,9 +85,9 @@ public class MainTableScene extends JPanel {
      * @param des the new list of descriptions to be displayed in the table
      */
     protected void refreshTable(List<Description> des) {
-        this.remove(this.tableScrollPane);
-        this.tableScrollPane = new TableScrollPane(des);
-        this.add(this.tableScrollPane, BorderLayout.CENTER);
+        this.remove(this.tableScrollPaneDes);
+        this.tableScrollPaneDes = new TableScrollPaneDes(des);
+        this.add(this.tableScrollPaneDes, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }
@@ -104,9 +105,9 @@ public class MainTableScene extends JPanel {
     }
 
     protected void refreshTablePrint(List<PrintCodeValues> list) {
-        this.remove(this.tableScrollPane);
-        this.tableScrollPane = new TableScrollPane(list, true);
-        this.add(this.tableScrollPane, BorderLayout.CENTER);
+        this.remove(this.tableScrollPaneDes);
+        this.tableScrollPanePrint = new TableScrollPanePrint(list);
+        this.add(this.tableScrollPanePrint, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }

@@ -22,39 +22,6 @@ public class Controller {
     }
 
     /**
-     * Returns the temporary Italian filter value.
-     *
-     * @return the Italian filter string
-     */
-    /*
-     * public String getItaFilterTemp() {
-     * return filterManager.getItaFilterTemp();
-     * }
-     */
-
-    /**
-     * Returns the temporary English filter value.
-     *
-     * @return the English filter string
-     */
-    /*
-     * public String getEngFilterTemp() {
-     * return filterManager.getEngFilterTemp();
-     * }
-     */
-
-    /**
-     * Returns the temporary group filter value.
-     *
-     * @return the group filter string
-     */
-    /*
-     * public String getGroupFilterTemp() {
-     * return filterManager.getGroupFilterTemp();
-     * }
-     */
-
-    /**
      * Sets all temporary filter values for Italian, English, and group.
      *
      * @param ita   the Italian filter string
