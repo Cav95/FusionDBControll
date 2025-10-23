@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import org.slf4j.Logger;
 
-import descriptionupdate.model.Model;
+import descriptionupdate.model.ModelDescription;
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 import descriptionupdate.view.exception.ExistentDescriptionException;
@@ -23,7 +23,7 @@ public final class ControllerDAO extends Controller {
 
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ControllerDAO.class);
 
-    private final Model model;
+    private final ModelDescription model;
     private boolean isSaved;
 
     /**
@@ -51,7 +51,7 @@ public final class ControllerDAO extends Controller {
      * @param view  the view to be managed by the controller
      * @throws NullPointerException if model or view is null
      */
-    public ControllerDAO(final Model model, final View view) {
+    public ControllerDAO(final ModelDescription model, final View view) {
         Objects.requireNonNull(model, "Controller created with null model");
         Objects.requireNonNull(view, "Controller created with null view");
         this.model = model;

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import descriptionupdate.controller.Controller;
 import descriptionupdate.controller.ControllerDAO;
-import descriptionupdate.model.Model;
+import descriptionupdate.model.ModelDescription;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
@@ -78,7 +78,7 @@ public class LogInScene extends JPanel {
                             try {
                                 var connection = controller.doConnection(userField.getText(),
                                         new String(passField.getPassword()));
-                                view.setController(new ControllerDAO(new Model(connection), view));
+                                view.setController(new ControllerDAO(new ModelDescription(connection), view));
                             } catch (Exception el) {
                                 JOptionPaneFactory.connectionFailed(LogInScene.this);
                             }

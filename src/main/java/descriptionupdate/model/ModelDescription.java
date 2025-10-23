@@ -14,7 +14,7 @@ import descriptionupdate.model.api.Description;
  * operations
  * on descriptions.
  */
-public final class Model {
+public final class ModelDescription {
 
     private final Connection connection;
     private final DescriptionDAO descriptionDAO;
@@ -26,7 +26,7 @@ public final class Model {
      *
      * @param connection the database connection
      */
-    public Model(Connection connection) {
+    public ModelDescription(Connection connection) {
         this.connection = connection;
         this.descriptionDAO = new DescriptionDAOImpl(connection);
     }
