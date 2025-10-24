@@ -175,4 +175,8 @@ public final class ControllerDAO extends Controller {
     public List<PrintCodeValues> getPrintHistory() {
         return modelHistoryPrint.getAllPrintCodeValues();
     }
+
+    public List<String> getAvailableDates(String code) {
+        return modelHistoryPrint.getAvailableDates(code);
+    }
 }

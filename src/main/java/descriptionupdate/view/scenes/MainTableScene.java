@@ -108,6 +108,8 @@ public class MainTableScene extends JPanel {
         this.remove(this.tableScrollPaneDes);
         this.tableScrollPanePrint = new TableScrollPanePrint(list);
         this.add(this.tableScrollPanePrint, BorderLayout.CENTER);
+        this.remove(this.buttonPanel);
+        this.add(new FilterPrintValuesPannel(this, view), BorderLayout.SOUTH);
         this.revalidate();
         this.repaint();
     }

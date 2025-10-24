@@ -54,4 +54,8 @@ public class ModelHistoryPrint {
                 .flatMap(this::getAllOneCodeValues)
                 .toList();
     }
+
+    public List<String> getAvailableDates(String code) {
+        return printValueDAO.getAllEndValues(code);
+    }
 }
