@@ -35,14 +35,14 @@ public class MainTableSceneCustom  extends MainTableScene {
      *
      * @param view the main view of the application
      */
-    public MainTableSceneCustom(View view, Supplier<FilterPrintImpl> descriptions, Boolean isPrint) {
+    public MainTableSceneCustom(View view, FilterPrintImpl descriptions) {
         super(view);
         this.onBack = () -> {
-            view.goToTableCustomScenePrint(descriptions);
+            view.goToTableCustomScenePrint();
             return null;
         };
         refreshButtonPanel(new ButtomMainPannel(this,view, onBack));
-        refreshTablePrint(descriptions.get());
+        refreshTablePrint(descriptions);
     }
 
 

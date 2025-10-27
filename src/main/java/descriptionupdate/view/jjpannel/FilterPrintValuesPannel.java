@@ -64,7 +64,9 @@ public class FilterPrintValuesPannel extends JPanel {
                         view.getController().setCurrentPrintCodeValues(new FilterPrintValues(
                                 codeTextField.getText(),
                                 dateFilter.getSelectedItem().toString()));
-                        FilterPrintValuesPannel.this.refreshAction.get();
+                        view.goToTableCustomScenePrint();
+                                
+                      //  FilterPrintValuesPannel.this.refreshAction.get();
                     }
                 });
         // Initialize buttons
@@ -73,9 +75,11 @@ public class FilterPrintValuesPannel extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        view.getController().setCurrentPrintCodeValues(new FilterPrintValues(ALL, ALL));
+                        view.getController().setCurrentPrintCodeValues(new FilterPrintValues());
                         resetFilters();
-                        FilterPrintValuesPannel.this.refreshAction.get();
+                        view.goToTableCustomScenePrint();
+
+                       // FilterPrintValuesPannel.this.refreshAction.get();
                     }
                 });
 

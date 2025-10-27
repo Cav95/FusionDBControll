@@ -182,7 +182,7 @@ public final class ControllerDAO extends Controller {
         return modelHistoryPrint.getAvailableDates(code);
     }
 
-    public FilterPrintImpl getPrintByCodeAndDate() {
+    public FilterPrintImpl getFilterPrint() {
         return modelHistoryPrint.getCurrentPrintCodeValues();
     }
     public void setCurrentPrintCodeValues(FilterPrintValues print) {

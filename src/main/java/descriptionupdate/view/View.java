@@ -112,8 +112,8 @@ public final class View {
         this.cardLayout.show(this.mainPanel, "TableCustomScene");
     }
 
-    public void goToTableCustomScenePrint(Supplier<FilterPrintImpl> printCode) {
-        this.mainPanel.add(new MainTableSceneCustom(this, printCode, true), "TableCustomScene");
+    public void goToTableCustomScenePrint() {
+        this.mainPanel.add(new MainTableSceneCustom(this, getController().getFilterPrint()), "TableCustomScene");
         this.cardLayout.show(this.mainPanel, "TableCustomScene");
     }
 
