@@ -50,7 +50,7 @@ public class ButtonExtraPannel extends JPanel {
                         GuiFactory.getFont(GuiFactory.FONT, 10), new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                view.goToTableCustomScenePrint(() -> view.getController().getPrintHistory());
+                                view.goToTableCustomScenePrint(() -> view.getController().getPrintByCodeAndDate());
                             }
                         });
 

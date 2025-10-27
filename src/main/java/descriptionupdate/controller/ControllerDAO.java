@@ -1,12 +1,15 @@
 package descriptionupdate.controller;
 
+import java.nio.file.DirectoryStream.Filter;
 import java.util.List;
 import java.util.Objects;
 import org.slf4j.Logger;
 
+import descriptionupdate.model.FilterPrintImpl;
 import descriptionupdate.model.ModelDescription;
 import descriptionupdate.model.ModelHistoryPrint;
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.FilterPrintValues;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.View;
 import descriptionupdate.view.exception.ExistentDescriptionException;
@@ -178,5 +181,12 @@ public final class ControllerDAO extends Controller {
 
     public List<String> getAvailableDates(String code) {
         return modelHistoryPrint.getAvailableDates(code);
+    }
+
+    public FilterPrintImpl getPrintByCodeAndDate() {
+        return modelHistoryPrint.getCurrentPrintCodeValues();
+    }
+    public void setCurrentPrintCodeValues(FilterPrintValues print) {
+        modelHistoryPrint.setCurrentPrintCodeValues(print);
     }
 }

@@ -5,7 +5,7 @@ import descriptionupdate.model.api.FilterPrintValues;
 
 public class FilterPrintImpl implements Filter<FilterPrintValues> {
 
-    private static final String ALL = "%";
+    private static final String ALL = "";
     private FilterPrintValues filter;
 
 

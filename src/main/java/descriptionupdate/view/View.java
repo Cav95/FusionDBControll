@@ -12,7 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import descriptionupdate.controller.ControllerDAO;
+import descriptionupdate.model.FilterPrintImpl;
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.FilterPrintValues;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
@@ -112,7 +114,7 @@ public final class View {
         this.cardLayout.show(this.mainPanel, "TableCustomScene");
     }
 
-    public void goToTableCustomScenePrint(Supplier<List<PrintCodeValues>> printCode) {
+    public void goToTableCustomScenePrint(Supplier<FilterPrintImpl> printCode) {
         this.mainPanel.add(new MainTableSceneCustom(this, printCode, true), "TableCustomScene");
         this.cardLayout.show(this.mainPanel, "TableCustomScene");
     }

@@ -2,7 +2,9 @@ package descriptionupdate.view.scenes;
 import java.util.List;
 import java.util.function.Supplier;
 
+import descriptionupdate.model.FilterPrintImpl;
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.FilterPrintValues;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.View;
 
@@ -34,7 +36,7 @@ public class MainTableSceneCustom  extends MainTableScene {
      *
      * @param view the main view of the application
      */
-    public MainTableSceneCustom(View view, Supplier<List<PrintCodeValues>> descriptions, Boolean isPrint) {
+    public MainTableSceneCustom(View view, Supplier<FilterPrintImpl> descriptions, Boolean isPrint) {
         super(view);
         this.onBack = () -> {
             view.goToTableCustomScenePrint(descriptions);

@@ -6,12 +6,14 @@ import java.util.stream.Stream;
 
 import descriptionupdate.data.PrintValueDAOImpl;
 import descriptionupdate.data.api.dao.PrintValueDAO;
+import descriptionupdate.model.api.FilterPrintValues;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.model.api.Reparti;
 
 public class ModelHistoryPrint {
     private final Connection connection;
     private final PrintValueDAO printValueDAO;
+    private FilterPrintImpl currentPrint;
 
     /**
      * Constructor for Model.
@@ -23,6 +25,7 @@ public class ModelHistoryPrint {
     public ModelHistoryPrint(Connection connection) {
         this.connection = connection;
         this.printValueDAO = new PrintValueDAOImpl(connection);
+        this.currentPrint = new FilterPrintImpl();
     }
 
     /**
@@ -57,5 +60,13 @@ public class ModelHistoryPrint {
 
     public List<String> getAvailableDates(String code) {
         return printValueDAO.getAllEndValues(code);
+    }
+
+    public FilterPrintImpl getCurrentPrintCodeValues() {
+        return currentPrint;
+    }
+
+    public void setCurrentPrintCodeValues(FilterPrintValues print) {
+        this.currentPrint.setFilter(print);
     }
 }

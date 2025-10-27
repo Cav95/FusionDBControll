@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import descriptionupdate.model.api.FilterPrintValues;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
 
@@ -59,6 +60,9 @@ public class FilterPrintValuesPannel extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        view.getController().setCurrentPrintCodeValues(new FilterPrintValues(
+                                codeTextField.getText(),
+                                dateFilter.getSelectedItem().toString()));
                         FilterPrintValuesPannel.this.refreshAction.get();
                     }
                 });
@@ -68,6 +72,7 @@ public class FilterPrintValuesPannel extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        view.getController().setCurrentPrintCodeValues(new FilterPrintValues(ALL, ALL));
                         resetFilters();
                         FilterPrintValuesPannel.this.refreshAction.get();
                     }
@@ -105,6 +110,8 @@ public class FilterPrintValuesPannel extends JPanel {
      * Resets all filter selections to their default values.
      */
     private void resetFilters() {
+
+        codeTextField.setText("");
         dateTextField.setText("");
         dateFilter.setSelectedIndex(0);
     }

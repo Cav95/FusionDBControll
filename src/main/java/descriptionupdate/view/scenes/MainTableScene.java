@@ -1,7 +1,10 @@
 package descriptionupdate.view.scenes;
 
 import javax.swing.*;
+
+import descriptionupdate.model.FilterPrintImpl;
 import descriptionupdate.model.api.Description;
+import descriptionupdate.model.api.FilterPrintValues;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
@@ -67,7 +70,7 @@ public class MainTableScene extends JPanel {
         });
         this.add(buttonPanel, BorderLayout.SOUTH);
 
-        this.add(new ButtonExtraPannel(this, view),BorderLayout.EAST);
+        this.add(new ButtonExtraPannel(this, view), BorderLayout.EAST);
     }
 
     /**
@@ -94,19 +97,22 @@ public class MainTableScene extends JPanel {
 
     /**
      * Refreshes the button panel with a new button panel.
+     * 
      * @param newButtonPanel the new button panel to be set
      */
     protected void refreshButtonPanel(ButtomMainPannel newButtonPanel) {
-            this.remove(this.buttonPanel);
-            this.buttonPanel = newButtonPanel;
-            this.add(this.buttonPanel, BorderLayout.SOUTH);
-            this.revalidate();
-            this.repaint();
+        this.remove(this.buttonPanel);
+        this.buttonPanel = newButtonPanel;
+        this.add(this.buttonPanel, BorderLayout.SOUTH);
+        this.revalidate();
+        this.repaint();
     }
 
-    protected void refreshTablePrint(List<PrintCodeValues> list) {
+    protected void refreshTablePrint(FilterPrintImpl filter) {
         this.remove(this.tableScrollPaneDes);
-        this.tableScrollPanePrint = new TableScrollPanePrint(list);
+        this.tableScrollPanePrint = new TableScrollPanePrint(
+                view.getController().getPrintHistory().stream().filter(t -> t.codice().contains(filter.getFilter().code()) ||
+                        t.dataValidita().contains(filter.getFilter().dateValue())).toList());
         this.add(this.tableScrollPanePrint, BorderLayout.CENTER);
         this.remove(this.buttonPanel);
         this.add(new FilterPrintValuesPannel(this, view), BorderLayout.SOUTH);
