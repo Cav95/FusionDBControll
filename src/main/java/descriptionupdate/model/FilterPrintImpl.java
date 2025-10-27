@@ -1,25 +1,27 @@
 package descriptionupdate.model;
 
 import descriptionupdate.model.api.Filter;
-import descriptionupdate.model.api.PrintCodeValues;
+import descriptionupdate.model.api.FilterPrintValues;
 
-public class FilterPrintImpl implements Filter<PrintCodeValues> {
+public class FilterPrintImpl implements Filter<FilterPrintValues> {
 
     private static final String ALL = "%";
-    private PrintCodeValues filter;
+    private FilterPrintValues filter;
+
+
 
     /**
      * Constructor initializes the filter with default values.
      */
     public FilterPrintImpl() {
-        this.filter = new PrintCodeValues(ALL, ALL, ALL, ALL, ALL, ALL, ALL, ALL, ALL);
+        this.filter = new FilterPrintValues(ALL, ALL);
     }
 
     /*
      * {@inheritDoc}
      */
     @Override
-    public PrintCodeValues getFilter() {
+    public FilterPrintValues getFilter() {
         return filter;
     }
 
@@ -27,7 +29,7 @@ public class FilterPrintImpl implements Filter<PrintCodeValues> {
      * {@inheritDoc}
      */
     @Override
-    public void setFilter(PrintCodeValues filter) {
+    public void setFilter(FilterPrintValues filter) {
         this.filter = filter;
     }
 
@@ -36,7 +38,7 @@ public class FilterPrintImpl implements Filter<PrintCodeValues> {
      */
     @Override
     public void resetFilter() {
-        this.filter = new PrintCodeValues(ALL, ALL, ALL, ALL, ALL, ALL, ALL, ALL, ALL);
+        this.filter = new FilterPrintValues(ALL, ALL);
     }
     
 }
