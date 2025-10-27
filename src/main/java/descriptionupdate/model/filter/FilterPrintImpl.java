@@ -1,7 +1,7 @@
-package descriptionupdate.model;
+package descriptionupdate.model.filter;
 
-import descriptionupdate.model.api.Filter;
-import descriptionupdate.model.api.FilterPrintValues;
+import descriptionupdate.model.filter.api.Filter;
+import descriptionupdate.model.filter.api.FilterPrintValues;
 
 public class FilterPrintImpl implements Filter<FilterPrintValues> {
 

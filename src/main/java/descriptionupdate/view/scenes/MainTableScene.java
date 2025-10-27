@@ -2,12 +2,16 @@ package descriptionupdate.view.scenes;
 
 import javax.swing.*;
 
-import descriptionupdate.model.FilterPrintImpl;
 import descriptionupdate.model.api.Description;
-import descriptionupdate.model.api.FilterPrintValues;
-import descriptionupdate.model.api.PrintCodeValues;
+import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
+import descriptionupdate.view.jjpannel.ButtomMainPannel;
+import descriptionupdate.view.jjpannel.ButtonExtraPannel;
+import descriptionupdate.view.jjpannel.FilterPrintValuesPannel;
+import descriptionupdate.view.jjpannel.TableScrollPaneDes;
+import descriptionupdate.view.jjpannel.TableScrollPanePrint;
+
 import java.awt.*;
 import java.util.List;
 

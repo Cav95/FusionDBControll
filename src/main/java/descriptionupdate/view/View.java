@@ -12,10 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import descriptionupdate.controller.ControllerDAO;
-import descriptionupdate.model.FilterPrintImpl;
 import descriptionupdate.model.api.Description;
-import descriptionupdate.model.api.FilterPrintValues;
-import descriptionupdate.model.api.PrintCodeValues;
+import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 import descriptionupdate.view.scenes.MainTableSceneCustom;

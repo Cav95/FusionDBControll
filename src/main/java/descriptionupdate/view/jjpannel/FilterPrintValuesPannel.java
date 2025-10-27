@@ -1,4 +1,4 @@
-package descriptionupdate.view.scenes;
+package descriptionupdate.view.jjpannel;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -15,9 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import descriptionupdate.model.api.FilterPrintValues;
+import descriptionupdate.model.filter.api.FilterPrintValues;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
+import descriptionupdate.view.scenes.MainTableScene;
 
 public class FilterPrintValuesPannel extends JPanel {
     private static final String ALL = "%";

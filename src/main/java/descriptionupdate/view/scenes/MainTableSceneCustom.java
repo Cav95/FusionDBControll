@@ -2,11 +2,10 @@ package descriptionupdate.view.scenes;
 import java.util.List;
 import java.util.function.Supplier;
 
-import descriptionupdate.model.FilterPrintImpl;
 import descriptionupdate.model.api.Description;
-import descriptionupdate.model.api.FilterPrintValues;
-import descriptionupdate.model.api.PrintCodeValues;
+import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.view.View;
+import descriptionupdate.view.jjpannel.ButtomMainPannel;
 
 /**
  * MainTableSceneCustom class that extends MainTableScene to create a custom main table scene for

@@ -1,4 +1,4 @@
-package descriptionupdate.model.api;
+package descriptionupdate.model.filter.api;
 
 /**
  * Generic Filter interface for managing filter criteria.

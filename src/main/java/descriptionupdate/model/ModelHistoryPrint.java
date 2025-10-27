@@ -6,9 +6,10 @@ import java.util.stream.Stream;
 
 import descriptionupdate.data.PrintValueDAOImpl;
 import descriptionupdate.data.api.dao.PrintValueDAO;
-import descriptionupdate.model.api.FilterPrintValues;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.model.api.Reparti;
+import descriptionupdate.model.filter.FilterPrintImpl;
+import descriptionupdate.model.filter.api.FilterPrintValues;
 
 public class ModelHistoryPrint {
     private final Connection connection;

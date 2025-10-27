@@ -1,7 +1,7 @@
-package descriptionupdate.model;
+package descriptionupdate.model.filter;
 
 import descriptionupdate.model.api.Description;
-import descriptionupdate.model.api.Filter;
+import descriptionupdate.model.filter.api.Filter;
 
 /**
  * Implementation of the Filter interface for Description objects.

@@ -1,4 +1,4 @@
-package descriptionupdate.view.scenes;
+package descriptionupdate.view.jjpannel;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -21,6 +21,7 @@ import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
 import descriptionupdate.view.dialog.UpdateDescriptionDialogPreselect;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
+import descriptionupdate.view.scenes.MainTableScene;
 import descriptionupdate.view.utils.ControllUtilies;
 
 /**

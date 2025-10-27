@@ -2,9 +2,9 @@ package descriptionupdate.controller;
 
 import java.sql.Connection;
 import descriptionupdate.model.ConnectionFactory;
-import descriptionupdate.model.FilterDesImpl;
 import descriptionupdate.model.api.Description;
-import descriptionupdate.model.api.Filter;
+import descriptionupdate.model.filter.FilterDesImpl;
+import descriptionupdate.model.filter.api.Filter;
 
 /**
  * Controller class that manages interactions between the view and the model.

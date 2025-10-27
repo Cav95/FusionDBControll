@@ -1,4 +1,4 @@
-package descriptionupdate.view.scenes;
+package descriptionupdate.view.jjpannel;
 
 import javax.swing.JTable;
 

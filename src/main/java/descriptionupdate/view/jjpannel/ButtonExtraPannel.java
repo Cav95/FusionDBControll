@@ -1,4 +1,4 @@
-package descriptionupdate.view.scenes;
+package descriptionupdate.view.jjpannel;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
+import descriptionupdate.view.scenes.MainTableScene;
 
 /**
  * A panel containing extra buttons for additional functionalities.
