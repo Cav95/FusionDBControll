@@ -9,7 +9,7 @@ and cam.cpNome in ('Officina','Preassemblaggio','Sartoria','Prodotto Finito','Sp
 
 /*Create first time and update with new value time history table*/
 INSERT into PRINTHISTORY(cpNome,propValore,codCodice,STARTVALUE, ENDVALUE)
-SELECT ps.cpNome ,ps.propValore ,ps.codCodice, now(),'2099/12/31'
+SELECT ps.cpNome ,ps.propValore ,ps.codCodice, now(),'2099-12-31'
 from PrintPropValue as ps
 where (ps.codCodice ,ps.cpNome , ps.propvalore) not in (select ph1.codCodice ,ph1.cpNome , ph1.propvalore
 from printhistory ph1
