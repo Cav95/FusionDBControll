@@ -69,13 +69,19 @@ class TestPrintValueDAO {
         assertTrue(value.isPresent());
     }
 
+    /**
+     * Test the getAllCodes method.
+     */
     @Test
     public void getAllCodes() {
         var valDao = new PrintValueDAOImpl(connection);
-        var actual = valDao.getAllCodes();
+        var actual = valDao.getAllCodes("%");
         assertTrue(actual.size() > 0);
     }
 
+    /**
+     * Test the getOneCodeValue method.
+     */
     @Test
     public void getOneCodeValue() {
         var valDao = new PrintValueDAOImpl(connection);
@@ -83,10 +89,13 @@ class TestPrintValueDAO {
         assertTrue(actual.contains("NO"));
     }
 
+    /**
+     * Test the getAllEndValues method.
+     */
     @Test
     public void getAllEndValues() {
         var valDao = new PrintValueDAOImpl(connection);
-        var actual = valDao.getAllEndValues("AFF06520");
+        var actual = valDao.getAllEndValues("AFF06520" , "2099-12-31");
         assertTrue(actual.size() > 0);
     }
 

@@ -2,6 +2,6 @@
     public record FilterPrintValues(String code, String dateValue) {
 
         public FilterPrintValues() {
-            this("%", "%");
+            this("%", "2099-12-31");
         }
     }

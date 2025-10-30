@@ -5,7 +5,8 @@ import descriptionupdate.model.filter.api.FilterPrintValues;
 
 public class FilterPrintImpl implements Filter<FilterPrintValues> {
 
-    private static final String ALL = "";
+    private static final String DEFAULT_DATE = "2099-12-31";
+    private static final String ALL = "%";
     private FilterPrintValues filter;
 
 
@@ -14,7 +15,7 @@ public class FilterPrintImpl implements Filter<FilterPrintValues> {
      * Constructor initializes the filter with default values.
      */
     public FilterPrintImpl() {
-        this.filter = new FilterPrintValues(ALL, ALL);
+        this.filter = new FilterPrintValues(ALL, DEFAULT_DATE);
     }
 
     /*
@@ -22,7 +23,7 @@ public class FilterPrintImpl implements Filter<FilterPrintValues> {
      */
     @Override
     public FilterPrintValues getFilter() {
-        return filter;
+        return new FilterPrintValues(filter.code() + ALL, filter.dateValue());
     }
 
         /*
@@ -38,7 +39,7 @@ public class FilterPrintImpl implements Filter<FilterPrintValues> {
      */
     @Override
     public void resetFilter() {
-        this.filter = new FilterPrintValues(ALL, ALL);
+        this.filter = new FilterPrintValues(ALL, DEFAULT_DATE);
     }
     
 }

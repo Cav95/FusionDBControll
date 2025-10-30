@@ -40,10 +40,10 @@ public class PrintValueDAOImpl implements PrintValueDAO {
     }
 
     @Override
-    public List<String> getAllCodes() throws DAOException {
+    public List<String> getAllCodes(String code) throws DAOException {
         List<String> codes = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE);
+                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE, code);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 codes.add(resultSet.getString(PrintValueColumn.CODICE.getColumnName()));
@@ -69,10 +69,10 @@ public class PrintValueDAOImpl implements PrintValueDAO {
     }
 
     @Override
-    public List<String> getAllEndValues(String code) throws DAOException {
+    public List<String> getAllEndValues(String code , String startDate) throws DAOException {
         List<String> endValues = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_END_DATE_STRING, code);
+                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_END_DATE_STRING, code, startDate);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 endValues.add(resultSet.getString("endValue"));
@@ -83,4 +83,19 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return endValues;
     }
 
+    @Override
+    public List<String> getAllDate() throws DAOException {
+        List<String> dates = new ArrayList<>();
+        try (
+                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_DATE);
+                var resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
+                dates.add(resultSet.getString("endValue"));
+            }
+        } catch (Exception e) {
+             throw new DAOException(e);
+        }
+        return dates;
+
+}
 }

@@ -188,4 +188,8 @@ public final class ControllerDAO extends Controller {
     public void setCurrentPrintCodeValues(FilterPrintValues print) {
         modelHistoryPrint.setCurrentPrintCodeValues(print);
     }
+
+    public List<String> getAllDate() {
+        return modelHistoryPrint.getAllDate();
+    }
 }

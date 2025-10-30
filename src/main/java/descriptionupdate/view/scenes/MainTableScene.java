@@ -114,7 +114,7 @@ public class MainTableScene extends JPanel {
 
     protected void refreshTablePrint(FilterPrintImpl filter) {
         this.remove(this.tableScrollPaneDes);
- this.tableScrollPanePrint = new TableScrollPanePrint(view.getController().getPrintHistory());
+        this.tableScrollPanePrint = new TableScrollPanePrint(view.getController().getPrintHistory());
         this.add(this.tableScrollPanePrint, BorderLayout.CENTER);
         this.remove(this.buttonPanel);
         this.add(new FilterPrintValuesPannel(this, view), BorderLayout.SOUTH);

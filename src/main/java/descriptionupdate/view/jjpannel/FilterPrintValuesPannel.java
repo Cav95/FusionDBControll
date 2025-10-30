@@ -56,7 +56,7 @@ public class FilterPrintValuesPannel extends JPanel {
         // dateTextField.setText(view.getController().getCurrentPrintCodeValues().dateValue());
 
         // Create date filter with sample dates (you may want to modify this)
-        List<String> dates = view.getController().getAvailableDates(ALL);
+        List<String> dates = view.getController().getAllDate();
         this.dateFilter = GuiFactory.getComboBox(dates);
         this.dateFilter.setSelectedItem(getDefaultDate(view.getController().getFilterPrint().getFilter().dateValue()));
 

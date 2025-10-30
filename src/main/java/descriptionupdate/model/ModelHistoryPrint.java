@@ -38,8 +38,8 @@ public class ModelHistoryPrint {
         return connection;
     }
 
-    private Stream<PrintCodeValues> getAllOneCodeValues(String code) {
-        var endValues = printValueDAO.getAllEndValues(code);
+    private Stream<PrintCodeValues> builtPrinCodesValues(String code) {
+        var endValues = printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
         return endValues.stream()
                 .map(t -> new PrintCodeValues(code,
                         printValueDAO.getOneCodeValue(code, t, Reparti.OFFICINA.getRepartoName()),
@@ -53,14 +53,14 @@ public class ModelHistoryPrint {
     }
 
     public List<PrintCodeValues> getAllPrintCodeValues() {
-        var codes = printValueDAO.getAllCodes();
+        var codes = printValueDAO.getAllCodes(currentPrint.getFilter().code());
         return codes.stream()
-                .flatMap(this::getAllOneCodeValues)
+                .flatMap(this::builtPrinCodesValues)
                 .toList();
     }
 
     public List<String> getAvailableDates(String code) {
-        return printValueDAO.getAllEndValues(code);
+        return printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
     }
 
     public FilterPrintImpl getCurrentPrintCodeValues() {
@@ -69,5 +69,9 @@ public class ModelHistoryPrint {
 
     public void setCurrentPrintCodeValues(FilterPrintValues print) {
         this.currentPrint.setFilter(print);
+    }
+
+    public List<String> getAllDate() {
+        return printValueDAO.getAllDate();
     }
 }
