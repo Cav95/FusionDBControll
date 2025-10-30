@@ -28,7 +28,7 @@ public class FilterPrintValuesPannel extends JPanel {
     private JLabel codeFilterJLabel = new JLabel("Codice");
     private JTextField codeTextField = GuiFactory.getTextField(20);
     private JLabel dateLabel = new JLabel("Data:");
-    private JTextField dateTextField = GuiFactory.getTextField(20);
+    // private JTextField dateTextField = GuiFactory.getTextField(20);
 
     private JComboBox<String> dateFilter;
 
@@ -52,9 +52,13 @@ public class FilterPrintValuesPannel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 
+        codeTextField.setText(view.getController().getFilterPrint().getFilter().code());
+        // dateTextField.setText(view.getController().getCurrentPrintCodeValues().dateValue());
+
         // Create date filter with sample dates (you may want to modify this)
         List<String> dates = view.getController().getAvailableDates(ALL);
         this.dateFilter = GuiFactory.getComboBox(dates);
+        this.dateFilter.setSelectedItem(getDefaultDate(view.getController().getFilterPrint().getFilter().dateValue()));
 
         filterButton = GuiFactory.getButton("Filtra", Color.ORANGE, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
@@ -65,8 +69,8 @@ public class FilterPrintValuesPannel extends JPanel {
                                 codeTextField.getText(),
                                 dateFilter.getSelectedItem().toString()));
                         view.goToTableCustomScenePrint();
-                                
-                      //  FilterPrintValuesPannel.this.refreshAction.get();
+
+                        // FilterPrintValuesPannel.this.refreshAction.get();
                     }
                 });
         // Initialize buttons
@@ -79,7 +83,7 @@ public class FilterPrintValuesPannel extends JPanel {
                         resetFilters();
                         view.goToTableCustomScenePrint();
 
-                       // FilterPrintValuesPannel.this.refreshAction.get();
+                        // FilterPrintValuesPannel.this.refreshAction.get();
                     }
                 });
 
@@ -117,8 +121,14 @@ public class FilterPrintValuesPannel extends JPanel {
     private void resetFilters() {
 
         codeTextField.setText("");
-        dateTextField.setText("");
         dateFilter.setSelectedIndex(0);
+    }
+
+    private String getDefaultDate(String date) {
+        if (date.isEmpty()) {
+            return "2099-12-31";
+        }
+        return date;
     }
 
 }

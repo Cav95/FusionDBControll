@@ -114,9 +114,17 @@ public class MainTableScene extends JPanel {
 
     protected void refreshTablePrint(FilterPrintImpl filter) {
         this.remove(this.tableScrollPaneDes);
+        try {
+
         this.tableScrollPanePrint = new TableScrollPanePrint(
-                view.getController().getPrintHistory().stream().filter(t -> t.codice().contains(filter.getFilter().code()) ||
-                        t.dataValidita().contains(filter.getFilter().dateValue())).toList());
+                view.getController().getPrintHistory().stream()
+                        .filter(t -> t.codice().contains(filter.getFilter().code()))
+                        .toList());
+
+this.tableScrollPanePrint.removeAll();
+        } catch (Exception e) {
+            this.tableScrollPanePrint = new TableScrollPanePrint(view.getController().getPrintHistory());
+        }
         this.add(this.tableScrollPanePrint, BorderLayout.CENTER);
         this.remove(this.buttonPanel);
         this.add(new FilterPrintValuesPannel(this, view), BorderLayout.SOUTH);
