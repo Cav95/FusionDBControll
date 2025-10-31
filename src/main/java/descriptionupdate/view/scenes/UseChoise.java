@@ -63,8 +63,10 @@ public class UseChoise extends JPanel {
                         try {
                             var connection = controller.doConnectionDescription(username,
                                     password);
+                            var connectionprint = controller.doConnectionHistory(username,
+                                    password);
                             view.setController(new ControllerDAO(new ModelDescription(connection), view,
-                                    new ModelHistoryPrint(connection)));
+                                    new ModelHistoryPrint(connectionprint)));
                         } catch (Exception el) {
                             JOptionPaneFactory.connectionFailed(UseChoise.this);
                         }
