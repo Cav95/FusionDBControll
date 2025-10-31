@@ -16,6 +16,10 @@ import descriptionupdate.view.utils.ConnectionFailureViewIni;
  */
 public class ConnectionFactory {
 
+    private static final String BOMB_CONFINE = "bomb_Confine";
+    private static final String CEPIUT = "CEPIUT";
+    private static final String EDM_DB_2008_001 = "EdmDb_2008_001";
+    private static final String ADHOC = "adhoc";
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ConnectionFactory.class);
     private Connection connection;
     private static final String PDM_USER = "PDMUser";
@@ -39,11 +43,10 @@ public class ConnectionFactory {
      * @param psw      the password for the connection
      * @return the established SQL Connection object
      */
-    public Connection sqlProductionConnection(final String username, final String psw) {
+    public Connection sqlProductionConnection(final String dbName, final String username, final String psw) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
-                    PDM_USER, PDM_USER);
+            connection = DAOUtils.localSqlServerConnection(dbName, username, psw);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -71,15 +74,15 @@ public class ConnectionFactory {
      * @param psw      the password for the connection
      * @return the established SQL Connection object
      */
-    public Connection doConnection(final String username, final String psw) {
-        LOGGER.info("Attempting connection for user: {}", username);
+    public Connection doConnectionDescription(final String username, final String psw) {
+        LOGGER.info("Attempting connection Description for user: {}", username);
         try {
             if (username.equals("TEST")) {
                 connection = sqlTestConnection(username, psw);
                 LOGGER.info("Connection established for user: {}", username);
-            } else if (username.equals("CEPIUT")) {
-                connection = sqlProductionConnection(username, psw);
-
+            } else if (username.equals(CEPIUT)) {
+                connection = sqlProductionConnection(EDM_DB_2008_001, PDM_USER, PDM_USER);
+                LOGGER.info("Connection established for user in edm: {}", username);
             } else {
                 throw new DAOException("Invalid username");
             }
@@ -95,6 +98,32 @@ public class ConnectionFactory {
         }
         return connection;
 
+    }
+
+    public Connection doConnectionHistory(String username, String psw) {
+        LOGGER.info("Attempting connection History for user: {}", username);
+        try {
+            if (username.equals("TEST")) {
+                connection = sqlTestConnection(username, psw);
+                LOGGER.info("Connection established for user: {}", username);
+            } else if (username.equals(CEPIUT)) {
+                connection = sqlProductionConnection(BOMB_CONFINE, ADHOC, ADHOC);
+                LOGGER.info("Connection established for user in bomb_confine: {}", username);
+
+            } else {
+                throw new DAOException("Invalid username");
+            }
+            try {
+                LOGGER.info("Connection established in database: {}", connection.getCatalog());
+                connection.setAutoCommit(false);
+                LOGGER.info("Auto-commit disabled for the connection");
+            } catch (SQLException e) {
+                LOGGER.error("Failed to retrieve database catalog", e);
+            }
+        } catch (DAOException ex) {
+            new ConnectionFailureViewIni();
+        }
+        return connection;
     }
 
 }

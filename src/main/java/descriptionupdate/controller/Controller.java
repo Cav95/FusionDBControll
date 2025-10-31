@@ -57,8 +57,11 @@ public class Controller {
      * @param psw      the password for the connection
      * @return the established SQL Connection object
      */
-    public Connection doConnection(final String username, final String psw) {
-        return connectionFactory.doConnection(username, psw);
+    public Connection doConnectionDescription(final String username, final String psw) {
+        return connectionFactory.doConnectionDescription(username, psw);
+    }
+        public Connection doConnectionHistory(final String username, final String psw) {
+        return connectionFactory.doConnectionHistory(username, psw);
     }
 
     /**

@@ -112,6 +112,10 @@ public class MainTableScene extends JPanel {
         this.repaint();
     }
 
+    /*
+     *  Refreshes the table to display print history based on the provided filter.
+     *  @param filter the filter to apply for displaying print history
+     */
     protected void refreshTablePrint(FilterPrintImpl filter) {
         this.remove(this.tableScrollPaneDes);
         this.tableScrollPanePrint = new TableScrollPanePrint(view.getController().getPrintHistory());

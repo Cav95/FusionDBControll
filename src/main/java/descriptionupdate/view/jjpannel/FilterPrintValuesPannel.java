@@ -86,6 +86,14 @@ public class FilterPrintValuesPannel extends JPanel {
                         // FilterPrintValuesPannel.this.refreshAction.get();
                     }
                 });
+                JButton exitButton = GuiFactory.getButton("Exit", Color.ORANGE, Color.BLACK,
+                GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.exit(0);
+                    }
+                });
 
         // BoxLayout for filter components
         filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.X_AXIS));
@@ -100,6 +108,8 @@ public class FilterPrintValuesPannel extends JPanel {
         filterPanel.add(filterButton);
         filterPanel.add(Box.createHorizontalStrut(5));
         filterPanel.add(resetButton);
+        filterPanel.add(Box.createHorizontalStrut(5));
+        filterPanel.add(exitButton);
         filterPanel.add(Box.createHorizontalGlue());
 
         this.add(Box.createVerticalStrut(10));

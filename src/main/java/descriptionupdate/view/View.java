@@ -17,6 +17,7 @@ import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 import descriptionupdate.view.scenes.MainTableSceneCustom;
+import descriptionupdate.view.scenes.UseChoise;
 
 /**
  * Main application view.
@@ -130,6 +131,11 @@ public final class View {
     public void goToLoginScene() {
         this.mainPanel.add(new LogInScene(this), SN_SECOND);
         this.cardLayout.show(this.mainPanel, SN_SECOND);
+    }
+
+    public void goToChoiseScene(String username, String password) {
+        this.mainPanel.add(new UseChoise(this, username, password), "UseChoiseScene");
+        this.cardLayout.show(this.mainPanel, "UseChoiseScene");
     }
 
 }
