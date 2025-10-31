@@ -16,6 +16,7 @@ import descriptionupdate.view.utils.ConnectionFailureViewIni;
  */
 public class ConnectionFactory {
 
+    private static final String TEST = "TEST";
     private static final String BOMB_CONFINE = "bomb_Confine";
     private static final String CEPIUT = "CEPIUT";
     private static final String EDM_DB_2008_001 = "EdmDb_2008_001";
@@ -60,7 +61,7 @@ public class ConnectionFactory {
      * @param psw      the password for the connection
      * @return the established SQL Connection object
      */
-    public Connection sqlTestConnection(final String username, final String psw) {
+    public Connection sqlTestConnection() {
 
         return DAOUtils.localMySQLConnection("DesFusion",
                 "root", "");
@@ -77,9 +78,9 @@ public class ConnectionFactory {
     public Connection doConnectionDescription(final String username, final String psw) {
         LOGGER.info("Attempting connection Description for user: {}", username);
         try {
-            if (username.equals("TEST")) {
-                connection = sqlTestConnection(username, psw);
-                LOGGER.info("Connection established for user: {}", username);
+            if (username.equals(TEST)) {
+                connection = sqlTestConnection();
+                LOGGER.info("Connection established for user TEST: {}", username);
             } else if (username.equals(CEPIUT)) {
                 connection = sqlProductionConnection(EDM_DB_2008_001, PDM_USER, PDM_USER);
                 LOGGER.info("Connection established for user in edm: {}", username);
@@ -103,9 +104,9 @@ public class ConnectionFactory {
     public Connection doConnectionHistory(String username, String psw) {
         LOGGER.info("Attempting connection History for user: {}", username);
         try {
-            if (username.equals("TEST")) {
-                connection = sqlTestConnection(username, psw);
-                LOGGER.info("Connection established for user: {}", username);
+            if (username.equals(TEST)) {
+                connection = sqlTestConnection();
+                LOGGER.info("Connection established for user TEST: {}", username);
             } else if (username.equals(CEPIUT)) {
                 connection = sqlProductionConnection(BOMB_CONFINE, ADHOC, ADHOC);
                 LOGGER.info("Connection established for user in bomb_confine: {}", username);

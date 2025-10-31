@@ -19,7 +19,6 @@ public class ButtonExtraPannel extends JPanel {
 
     private JButton backButton;
     private JButton similarItalian;
-    private JButton printHistory;
 
     /**
      * Constructor for ButtonExtraPannel.
@@ -35,10 +34,11 @@ public class ButtonExtraPannel extends JPanel {
                 GuiFactory.getFont(GuiFactory.FONT, 10), new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        view.goToTableCustomScene(() -> view.getController().getSimilarItalianDescriptions(view.getController().getFilterDescription()));
+                        view.goToTableCustomScene(() -> view.getController()
+                                .getSimilarItalianDescriptions(view.getController().getFilterDescription()));
                     }
                 });
-                
+
         backButton = GuiFactory.getButton("Return", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, 10), new ActionListener() {
                     @Override
@@ -49,7 +49,6 @@ public class ButtonExtraPannel extends JPanel {
 
         this.add(similarItalian);
         this.add(backButton);
-        this.add(printHistory);
     }
 
 }
