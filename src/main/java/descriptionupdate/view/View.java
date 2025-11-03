@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import descriptionupdate.controller.ControllerDAO;
 import descriptionupdate.model.api.Description;
 import descriptionupdate.model.filter.FilterPrintImpl;
+import descriptionupdate.view.scenes.HistoryTableScene;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 import descriptionupdate.view.scenes.MainTableSceneCustom;
@@ -114,8 +115,8 @@ public final class View {
     }
 
     public void goToTableCustomScenePrint() {
-        this.mainPanel.add(new MainTableSceneCustom(this, getController().getFilterPrint()), "TableCustomScene");
-        this.cardLayout.show(this.mainPanel, "TableCustomScene");
+        this.mainPanel.add(new HistoryTableScene(this), "historyTableScene");
+        this.cardLayout.show(this.mainPanel, "historyTableScene");
     }
 
     /**
