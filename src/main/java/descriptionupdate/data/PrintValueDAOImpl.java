@@ -32,7 +32,9 @@ public class PrintValueDAOImpl implements PrintValueDAO {
             while (resultSet.next()) {
                 printValues.add(new SinglePrintvalue(resultSet.getString(PrintValueColumn.CODICE.getColumnName()),
                         resultSet.getString(PrintValueColumn.NOME_CAMPO.getColumnName()),
-                        resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName())));
+                        resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName()),
+                        resultSet.getString(PrintValueColumn.DATA_VALIDITA.getColumnName())
+                        ));
             }
         } catch (Exception e) {
             throw new DAOException(e);
@@ -111,7 +113,9 @@ public class PrintValueDAOImpl implements PrintValueDAO {
             while (resultSet.next()) {
                 printValues.add(new SinglePrintvalue(resultSet.getString(PrintValueColumn.CODICE.getColumnName()),
                         resultSet.getString(PrintValueColumn.NOME_CAMPO.getColumnName()),
-                        resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName())));
+                        resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName()),
+                        resultSet.getString(PrintValueColumn.DATA_VALIDITA.getColumnName())
+                        ));
             }
         } catch (Exception e) {
             throw new DAOException(e);

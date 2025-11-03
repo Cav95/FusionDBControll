@@ -45,24 +45,65 @@ public class ModelHistoryPrint {
         return connection;
     }
 
-    private Stream<PrintCodeValues> builtPrinCodesValues(String code) {
-        var dates = printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
-        return dates.stream()
-                .map(t -> new PrintCodeValues(code,
-                        printValueDAO.getOneCodeValue(code, t, Reparti.OFFICINA.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.PREASSEMBLAGGIO.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.SARTORIA.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.PRODOTTO_FINITO.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.SPEDIZIONE.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.MONTATORI.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.UFFICIO_ACQUISTI.getRepartoName()),
-                        t)).distinct();
+    private Stream<PrintCodeValues> buildPrintCodeValues(String code) {
+        var codeItems = allValues.stream()
+                .filter(c -> c.codice().equals(code));
+        var date= allValues.stream()
+                .filter(d -> d.codice().equals(code))
+                .map(SinglePrintvalue::dataRilevazione)
+                .distinct();
+        return date
+                .map(t -> {
+                    try {
+                        return new PrintCodeValues(code,
+                                codeItems.parallel()
+                                        .filter(v -> v.codice().equals(code)
+                                                && getIntegerDate(v.dataRilevazione()) >= getIntegerDate(t)
+                                                && v.nomeCampo().equals(Reparti.OFFICINA.getRepartoName())).map(k-> k.valoreCampo())
+                                        .findFirst().orElse(""),
+                                codeItems.parallel()
+                                        .filter(v -> v.codice().equals(code)
+                                                && getIntegerDate(v.dataRilevazione()) >= getIntegerDate(t)
+                                                && v.nomeCampo().equals(Reparti.PREASSEMBLAGGIO.getRepartoName())).map(k-> k.valoreCampo())
+                                        .findFirst().orElse(""),
+                                codeItems.parallel()
+                                        .filter(v -> v.codice().equals(code)
+                                                && getIntegerDate(v.dataRilevazione()) >= getIntegerDate(t)
+                                                && v.nomeCampo().equals(Reparti.SARTORIA.getRepartoName())).map(k-> k.valoreCampo())
+                                        .findFirst().orElse(""),
+                                codeItems.parallel()
+                                        .filter(v -> v.codice().equals(code)
+                                                && getIntegerDate(v.dataRilevazione()) >= getIntegerDate(t)
+                                                && v.nomeCampo().equals(Reparti.PRODOTTO_FINITO.getRepartoName())).map(k-> k.valoreCampo())
+                                        .findFirst().orElse(""),
+                                codeItems.parallel()
+                                        .filter(v -> v.codice().equals(code)
+                                                && getIntegerDate(v.dataRilevazione()) >= getIntegerDate(t)
+                                                && v.nomeCampo().equals(Reparti.SPEDIZIONE.getRepartoName())).map(k-> k.valoreCampo())
+                                        .findFirst().orElse(""),
+                                codeItems.parallel()
+                                        .filter(v -> v.codice().equals(code)
+                                                && getIntegerDate(v.dataRilevazione()) >= getIntegerDate(t)
+                                                && v.nomeCampo().equals(Reparti.MONTATORI.getRepartoName())).map(k-> k.valoreCampo())
+                                        .findFirst().orElse(""),
+                                codeItems.parallel()
+                                        .filter(v -> v.codice().equals(code)
+                                                && getIntegerDate(v.dataRilevazione()) >= getIntegerDate(t)
+                                                && v.nomeCampo().equals(Reparti.UFFICIO_ACQUISTI.getRepartoName())).map(k-> k.valoreCampo())
+                                        .findFirst().orElse(""),
+                                t);
+                    } catch (Exception e) {
+                        // In case of missing data, return a PrintCodeValues with empty strings;
+                        return new PrintCodeValues(code, "", "", "", "", "", "", "", t);
+                    }
+                })
+                .distinct();
     }
 
     public List<PrintCodeValues> getAllPrintCodeValues() {
         var codes = printValueDAO.getAllCodes(currentPrint.getFilter().code());
         return codes.stream()
-                .flatMap(this::builtPrinCodesValues)
+                .flatMap(this::buildPrintCodeValues)
                 .toList();
     }
 
@@ -84,5 +125,13 @@ public class ModelHistoryPrint {
 
     private String getOneCodeValue(String code, String endValue, String propValue) {
         return printValueDAO.getOneCodeValue(code, endValue, propValue);
+    }
+
+    private Integer getIntegerDate(String date) {
+        return Integer.parseInt(date.replaceAll("-", ""));
+    }
+
+    private Boolean isComponentValid(SinglePrintvalue value, String code, String reparto) {
+        return value != null && value.valoreCampo() != null && !value.valoreCampo().isBlank();
     }
 }

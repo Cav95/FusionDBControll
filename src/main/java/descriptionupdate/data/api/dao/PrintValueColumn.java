@@ -8,7 +8,8 @@ public enum PrintValueColumn {
     ID("id"),
     CODICE("codCodice"),
     NOME_CAMPO("cpNome"),
-    VALORE_CAMPO("propValore");
+    VALORE_CAMPO("propValore"),
+    DATA_VALIDITA("endValue");
 
     private final String columnName;
 
