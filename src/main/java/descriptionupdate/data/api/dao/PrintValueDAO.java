@@ -54,4 +54,6 @@ public interface PrintValueDAO {
 
     List<String> getAllDate() throws DAOException;
 
+    List<SinglePrintvalue> getAllValues() throws DAOException;
+
 }

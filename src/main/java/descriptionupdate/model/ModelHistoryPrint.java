@@ -8,6 +8,7 @@ import descriptionupdate.data.PrintValueDAOImpl;
 import descriptionupdate.data.api.dao.PrintValueDAO;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.model.api.Reparti;
+import descriptionupdate.model.api.SinglePrintvalue;
 import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.model.filter.api.FilterPrintValues;
 
@@ -15,6 +16,9 @@ public class ModelHistoryPrint {
     private final Connection connection;
     private final PrintValueDAO printValueDAO;
     private FilterPrintImpl currentPrint;
+    private List<SinglePrintvalue> allValues;
+    private List<String> allDates;
+    private List<String> allCodes;
 
     /**
      * Constructor for Model.
@@ -27,6 +31,9 @@ public class ModelHistoryPrint {
         this.connection = connection;
         this.printValueDAO = new PrintValueDAOImpl(connection);
         this.currentPrint = new FilterPrintImpl();
+        this.allValues = printValueDAO.getAllValues();
+        this.allDates = printValueDAO.getAllDate();
+        this.allCodes = printValueDAO.getAllCodes("%");
     }
 
     /**
@@ -39,8 +46,7 @@ public class ModelHistoryPrint {
     }
 
     private Stream<PrintCodeValues> builtPrinCodesValues(String code) {
-        var endValues = printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
-        return endValues.stream()
+        return this.allDates.stream()
                 .map(t -> new PrintCodeValues(code,
                         printValueDAO.getOneCodeValue(code, t, Reparti.OFFICINA.getRepartoName()),
                         printValueDAO.getOneCodeValue(code, t, Reparti.PREASSEMBLAGGIO.getRepartoName()),
@@ -73,5 +79,9 @@ public class ModelHistoryPrint {
 
     public List<String> getAllDate() {
         return printValueDAO.getAllDate();
+    }
+
+    private String getOneCodeValue(String code, String endValue, String propValue) {
+        return printValueDAO.getOneCodeValue(code, endValue, propValue);
     }
 }
