@@ -46,7 +46,8 @@ public class ModelHistoryPrint {
     }
 
     private Stream<PrintCodeValues> builtPrinCodesValues(String code) {
-        return this.allDates.stream()
+        var dates = printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
+        return dates.stream()
                 .map(t -> new PrintCodeValues(code,
                         printValueDAO.getOneCodeValue(code, t, Reparti.OFFICINA.getRepartoName()),
                         printValueDAO.getOneCodeValue(code, t, Reparti.PREASSEMBLAGGIO.getRepartoName()),
