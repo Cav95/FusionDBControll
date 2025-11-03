@@ -1,7 +1,15 @@
 package descriptionupdate.model;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import descriptionupdate.data.PrintValueDAOImpl;
@@ -16,7 +24,7 @@ public class ModelHistoryPrint {
     private final Connection connection;
     private final PrintValueDAO printValueDAO;
     private FilterPrintImpl currentPrint;
-    private List<SinglePrintvalue> allValues;
+    private HashMap<String ,List<SinglePrintvalue>> allValues = new HashMap<>();
     private List<String> allDates;
     private List<String> allCodes;
 
@@ -31,8 +39,6 @@ public class ModelHistoryPrint {
         this.connection = connection;
         this.printValueDAO = new PrintValueDAOImpl(connection);
         this.currentPrint = new FilterPrintImpl();
-        this.allValues = printValueDAO.getAllValues();
-        this.allDates = printValueDAO.getAllDate();
         this.allCodes = printValueDAO.getAllCodes("%");
     }
 
@@ -47,6 +53,7 @@ public class ModelHistoryPrint {
 
     private Stream<PrintCodeValues> builtPrinCodesValues(String code) {
         var dates = printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
+
         return dates.stream()
                 .map(t -> new PrintCodeValues(code,
                         printValueDAO.getOneCodeValue(code, t, Reparti.OFFICINA.getRepartoName()),
@@ -60,8 +67,7 @@ public class ModelHistoryPrint {
     }
 
     public List<PrintCodeValues> getAllPrintCodeValues() {
-        var codes = printValueDAO.getAllCodes(currentPrint.getFilter().code());
-        return codes.stream()
+        return allCodes.stream().parallel()
                 .flatMap(this::builtPrinCodesValues)
                 .toList();
     }
@@ -84,5 +90,13 @@ public class ModelHistoryPrint {
 
     private String getOneCodeValue(String code, String endValue, String propValue) {
         return printValueDAO.getOneCodeValue(code, endValue, propValue);
+    }
+    private String getOneValue(String code, String endValue, String propValue) {
+        return allValues.get(code).stream()
+                .filter(t -> t.endValue().equals(endValue) && t.nomeCampo().equals(propValue))
+                .sorted(Comparator.comparing(h -> h.endValue()))
+                .map(t -> t.valoreCampo())
+                .findFirst()
+                .orElse("");
     }
 }

@@ -1,5 +1,5 @@
 package descriptionupdate.model.api;
 
-public record SinglePrintvalue(String codice, String nomeCampo, String valoreCampo) {
+public record SinglePrintvalue(String codice, String nomeCampo, String valoreCampo , String endValue) {
 
 }

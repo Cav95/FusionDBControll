@@ -32,7 +32,8 @@ public class PrintValueDAOImpl implements PrintValueDAO {
             while (resultSet.next()) {
                 printValues.add(new SinglePrintvalue(resultSet.getString(PrintValueColumn.CODICE.getColumnName()),
                         resultSet.getString(PrintValueColumn.NOME_CAMPO.getColumnName()),
-                        resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName())));
+                        resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName()),
+                        resultSet.getString(PrintValueColumn.END_VALUE.getColumnName())));
             }
         } catch (Exception e) {
             throw new DAOException(e);
@@ -78,7 +79,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
                         startDate);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
-                endValues.add(resultSet.getString("endValue"));
+                endValues.add(resultSet.getString(PrintValueColumn.END_VALUE.getColumnName()));
             }
         } catch (Exception e) {
             throw new DAOException(e);
@@ -93,7 +94,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
                 var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_DATE);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
-                dates.add(resultSet.getString("endValue"));
+                dates.add(resultSet.getString(PrintValueColumn.END_VALUE.getColumnName()));
             }
         } catch (Exception e) {
             throw new DAOException(e);
@@ -111,7 +112,8 @@ public class PrintValueDAOImpl implements PrintValueDAO {
             while (resultSet.next()) {
                 printValues.add(new SinglePrintvalue(resultSet.getString(PrintValueColumn.CODICE.getColumnName()),
                         resultSet.getString(PrintValueColumn.NOME_CAMPO.getColumnName()),
-                        resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName())));
+                        resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName()),
+                        resultSet.getString(PrintValueColumn.END_VALUE.getColumnName())));
             }
         } catch (Exception e) {
             throw new DAOException(e);
