@@ -39,7 +39,7 @@ public class ModelHistoryPrint {
         this.connection = connection;
         this.printValueDAO = new PrintValueDAOImpl(connection);
         this.currentPrint = new FilterPrintImpl();
-        this.allCodes = printValueDAO.getAllCodes("%");
+        this.allCodes = printValueDAO.getAllCodes("%");//List.of("AFF06520","AFF06529","AFF06529P1");//printValueDAO.getAllCodes("%");
     }
 
     /**

@@ -32,13 +32,12 @@ public final class QueriesHistoryPrintFiles {
                                     """;
 
         public static final String GET_ONE_CODE_VALUE = """
-                        select propValore
+                        select top 1propValore
                         from printhistory
                         where codCodice like ?
                         and endValue >= ?
                         and cpNome like ?
-                        order by endValue asc
-                        limit 1;
+                        order by endValue asc;
                                     """;
         public static final String GET_VALUES = """
                         select *
