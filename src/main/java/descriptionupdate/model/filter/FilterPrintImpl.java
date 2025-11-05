@@ -6,7 +6,7 @@ import descriptionupdate.model.filter.api.FilterPrintValues;
 public class FilterPrintImpl implements Filter<FilterPrintValues> {
 
     private static final String DEFAULT_DATE = "2099-12-31";
-    private static final String ALL = "%";
+    private static final String ALL = "";
     private FilterPrintValues filter;
 
 

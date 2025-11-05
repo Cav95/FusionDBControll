@@ -18,13 +18,15 @@ public final class QueriesHistoryPrintFiles {
         public static final String GET_CODE = """
                         select distinct codCodice
                         from printhistory
-                        where codCodice like ?;
+                        where codCodice like ?
+                        ORDER BY codCodice asc;
                                     """;
         public static final String GET_ALL_END_DATE_STRING = """
                         select distinct endValue
                         from printhistory
                         where codCodice like ?
-                        and endValue >= ?;
+                        and endValue >= ?
+                        ORDER BY endValue asc;
                                     """;
         public static final String GET_ALL_DATE = """
                         select distinct endValue
