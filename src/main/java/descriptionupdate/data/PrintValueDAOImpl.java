@@ -59,7 +59,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
     @Override
     public String getOneCodeValue(String code, String endValue, String propValue) throws DAOException {
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ONE_CODE_VALUE, code,
+                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ONE_CODE_VALUE, code + "%",
                         endValue, propValue);
                 var resultSet = statement.executeQuery();) {
             if (resultSet.next()) {

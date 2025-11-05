@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import descriptionupdate.model.api.Description;
-import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.view.View;
 import descriptionupdate.view.jjpannel.ButtomMainPannel;
 
@@ -29,22 +28,6 @@ public class MainTableSceneCustom  extends MainTableScene {
         refreshButtonPanel(new ButtomMainPannel(this,view, onBack));
         refreshTable(descriptions.get());
     }
-
-        /**
-     * Constructor for MainTableSceneCustom.
-     *
-     * @param view the main view of the application
-     */
-    public MainTableSceneCustom(View view, FilterPrintImpl descriptions) {
-        super(view);
-        this.onBack = () -> {
-            view.goToTableCustomScenePrint();
-            return null;
-        };
-        refreshButtonPanel(new ButtomMainPannel(this,view, onBack));
-        refreshTablePrint(descriptions);
-    }
-
 
     
 }

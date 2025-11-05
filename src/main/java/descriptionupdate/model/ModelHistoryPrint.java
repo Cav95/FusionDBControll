@@ -1,15 +1,9 @@
 package descriptionupdate.model;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import descriptionupdate.data.PrintValueDAOImpl;
@@ -25,9 +19,6 @@ public class ModelHistoryPrint {
     private final PrintValueDAO printValueDAO;
     private FilterPrintImpl currentPrint;
     private HashMap<String ,List<SinglePrintvalue>> allValues = new HashMap<>();
-    private List<String> allDates;
-    private List<String> allCodes;
-
     /**
      * Constructor for Model.
      * Initializes the model with a database connection and sets up the
@@ -39,7 +30,7 @@ public class ModelHistoryPrint {
         this.connection = connection;
         this.printValueDAO = new PrintValueDAOImpl(connection);
         this.currentPrint = new FilterPrintImpl();
-        this.allCodes = printValueDAO.getAllCodes("%");//List.of("AFF06520","AFF06529","AFF06529P1");//printValueDAO.getAllCodes("%");
+       // this.allCodes = printValueDAO.getAllCodes("%");//List.of("AFF06520","AFF06529","AFF06529P1");//printValueDAO.getAllCodes("%");
     }
 
     /**
@@ -67,7 +58,7 @@ public class ModelHistoryPrint {
     }
 
     public List<PrintCodeValues> getAllPrintCodeValues() {
-        return allCodes.stream().parallel()
+        return printValueDAO.getAllCodes(currentPrint.getFilter().code()).stream().parallel()
                 .flatMap(this::builtPrinCodesValues)
                 .toList();
     }
@@ -88,9 +79,11 @@ public class ModelHistoryPrint {
         return printValueDAO.getAllDate();
     }
 
+    @SuppressWarnings("unused")
     private String getOneCodeValue(String code, String endValue, String propValue) {
         return printValueDAO.getOneCodeValue(code, endValue, propValue);
     }
+    @SuppressWarnings("unused")
     private String getOneValue(String code, String endValue, String propValue) {
         return allValues.get(code).stream()
                 .filter(t -> t.endValue().equals(endValue) && t.nomeCampo().equals(propValue))

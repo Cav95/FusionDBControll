@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import descriptionupdate.controller.ControllerDAO;
 import descriptionupdate.model.api.Description;
-import descriptionupdate.model.filter.FilterPrintImpl;
+import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.view.scenes.HistoryTableScene;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
@@ -116,6 +116,12 @@ public final class View {
 
     public void goToTableCustomScenePrint() {
         this.mainPanel.add(new HistoryTableScene(this), "historyTableScene");
+        this.cardLayout.show(this.mainPanel, "historyTableScene");
+    }
+
+
+    public void goToTableCustomScenePrint(List<PrintCodeValues> printCodeValues) {
+        this.mainPanel.add(new HistoryTableScene(this, printCodeValues), "historyTableScene");
         this.cardLayout.show(this.mainPanel, "historyTableScene");
     }
 

@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import descriptionupdate.model.filter.api.FilterPrintValues;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
+import descriptionupdate.view.scenes.HistoryTableScene;
 
 public class FilterPrintValuesPannel extends JPanel {
     private static final int SIZE_FONT = 13;
@@ -42,7 +43,7 @@ public class FilterPrintValuesPannel extends JPanel {
      * @param refreshAction  a Supplier<Void> representing the action to be
      *                       performed on refresh
      */
-    public FilterPrintValuesPannel(JPanel mainTableScene, View view) {
+    public FilterPrintValuesPannel(HistoryTableScene mainTableScene, View view) {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
@@ -63,7 +64,8 @@ public class FilterPrintValuesPannel extends JPanel {
                         view.getController().setCurrentPrintCodeValues(new FilterPrintValues(
                                 codeTextField.getText(),
                                 dateFilter.getSelectedItem().toString()));
-                        view.goToTableCustomScenePrint();
+                                view.goToTableCustomScenePrint(view.getController().getPrintHistory());
+                        
 
                         // FilterPrintValuesPannel.this.refreshAction.get();
                     }

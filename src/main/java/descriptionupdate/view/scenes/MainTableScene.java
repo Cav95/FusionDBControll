@@ -3,15 +3,11 @@ package descriptionupdate.view.scenes;
 import javax.swing.*;
 
 import descriptionupdate.model.api.Description;
-import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.jjpannel.ButtomMainPannel;
 import descriptionupdate.view.jjpannel.ButtonExtraPannel;
-import descriptionupdate.view.jjpannel.FilterPrintValuesPannel;
 import descriptionupdate.view.jjpannel.TableScrollPaneDes;
-import descriptionupdate.view.jjpannel.TableScrollPanePrint;
-
 import java.awt.*;
 import java.util.List;
 
@@ -30,7 +26,6 @@ public class MainTableScene extends JPanel {
     // private List<String> listGroup;
 
     private TableScrollPaneDes tableScrollPaneDes;
-    private TableScrollPanePrint tableScrollPanePrint;
     private JPanel buttonPanel;
     private List<Description> des;
 
@@ -108,20 +103,6 @@ public class MainTableScene extends JPanel {
         this.remove(this.buttonPanel);
         this.buttonPanel = newButtonPanel;
         this.add(this.buttonPanel, BorderLayout.SOUTH);
-        this.revalidate();
-        this.repaint();
-    }
-
-    /*
-     *  Refreshes the table to display print history based on the provided filter.
-     *  @param filter the filter to apply for displaying print history
-     */
-    protected void refreshTablePrint(FilterPrintImpl filter) {
-        this.remove(this.tableScrollPaneDes);
-        this.tableScrollPanePrint = new TableScrollPanePrint(view.getController().getPrintHistory());
-        this.add(this.tableScrollPanePrint, BorderLayout.CENTER);
-        this.remove(this.buttonPanel);
-        this.add(new FilterPrintValuesPannel(this, view), BorderLayout.SOUTH);
         this.revalidate();
         this.repaint();
     }

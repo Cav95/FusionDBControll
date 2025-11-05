@@ -26,7 +26,7 @@ public class FilterPrintImpl implements Filter<FilterPrintValues> {
         return new FilterPrintValues(filter.code() + ALL, filter.dateValue());
     }
 
-        /*
+    /*
      * {@inheritDoc}
      */
     @Override
