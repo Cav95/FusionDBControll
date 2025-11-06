@@ -1,8 +1,6 @@
 package descriptionupdate.model;
 
 import java.sql.Connection;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -10,7 +8,6 @@ import descriptionupdate.data.PrintValueDAOImpl;
 import descriptionupdate.data.api.dao.PrintValueDAO;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.model.api.Reparti;
-import descriptionupdate.model.api.SinglePrintvalue;
 import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.model.filter.api.FilterPrintValues;
 
@@ -18,7 +15,6 @@ public class ModelHistoryPrint {
     private final Connection connection;
     private final PrintValueDAO printValueDAO;
     private FilterPrintImpl currentPrint;
-    private HashMap<String ,List<SinglePrintvalue>> allValues = new HashMap<>();
     /**
      * Constructor for Model.
      * Initializes the model with a database connection and sets up the
@@ -57,12 +53,23 @@ public class ModelHistoryPrint {
                         t)).distinct();
     }
 
+    /**
+     * Retrieves all print code values based on the current filter.
+     *
+     * @return a list of PrintCodeValues
+     */
     public List<PrintCodeValues> getAllPrintCodeValues() {
         return printValueDAO.getAllCodes(currentPrint.getFilter().code()).stream().parallel()
                 .flatMap(this::builtPrinCodesValues)
                 .toList();
     }
 
+    /**
+     * Retrieves available end dates for a given code based on the current filter.
+     *
+     * @param code the code to retrieve end dates for
+     * @return a list of available end dates
+     */
     public List<String> getAvailableDates(String code) {
         return printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
     }
@@ -71,25 +78,21 @@ public class ModelHistoryPrint {
         return currentPrint;
     }
 
+    /**
+     * Sets the current print code values filter.
+     *
+     * @param print the new filter to set
+     */
     public void setCurrentPrintCodeValues(FilterPrintValues print) {
         this.currentPrint.setFilter(print);
     }
 
+    /**
+     * Retrieves all available end dates from the print value DAO.
+     *
+     * @return a list of all end dates
+     */
     public List<String> getAllDate() {
         return printValueDAO.getAllDate();
-    }
-
-    @SuppressWarnings("unused")
-    private String getOneCodeValue(String code, String endValue, String propValue) {
-        return printValueDAO.getOneCodeValue(code, endValue, propValue);
-    }
-    @SuppressWarnings("unused")
-    private String getOneValue(String code, String endValue, String propValue) {
-        return allValues.get(code).stream()
-                .filter(t -> t.endValue().equals(endValue) && t.nomeCampo().equals(propValue))
-                .sorted(Comparator.comparing(h -> h.endValue()))
-                .map(t -> t.valoreCampo())
-                .findFirst()
-                .orElse("");
     }
 }

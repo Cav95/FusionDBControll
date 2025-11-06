@@ -52,8 +52,18 @@ public interface PrintValueDAO {
      */
     List<String> getAllEndValues(String code, String startDate) throws DAOException;
 
+    /**
+     * Retrieves all available end dates from the data source.
+     * @return a list of all available end dates
+     * @throws DAOException if an error occurs while accessing the data
+     */
     List<String> getAllDate() throws DAOException;
 
+    /**
+     * Retrieves all print values from the data source.
+     * @return a list of all SinglePrintvalue records
+     * @throws DAOException if an error occurs while accessing the data
+     */
     List<SinglePrintvalue> getAllValues() throws DAOException;
 
 }

@@ -20,7 +20,7 @@ public class LogInScene extends JPanel {
     private JPanel northPanel = new JPanel();
     private JPanel centerPanel = new JPanel();
     private JPanel buttonPanel = new JPanel();
-    private JLabel titleLabel = new JLabel("Description Database");
+    private JLabel titleLabel = new JLabel("Fusion database Utilities");
     private JLabel userLabel = new JLabel("Username:");
     private JLabel passLabel = new JLabel("Password:");
     private JTextField userField = new JTextField(20);

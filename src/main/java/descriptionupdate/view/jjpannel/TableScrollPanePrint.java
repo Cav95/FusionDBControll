@@ -20,7 +20,8 @@ import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.utils.SelectionTable;
 
 /**
- * A scroll pane that contains a table for displaying descriptions.
+ * TableScrollPanePrint class that extends JScrollPane to create a scrollable table for
+ * displaying print code values.
  */
 public class TableScrollPanePrint extends JScrollPane implements TableScrollPane {
     private static final long serialVersionUID = 1L;
@@ -55,7 +56,7 @@ public class TableScrollPanePrint extends JScrollPane implements TableScrollPane
                         "Spedizione",
                         "Montatori",
                         "Ufficio Acquisti",
-                        "End Value"
+                        "Data Fine Validita"
                 });
         this.setViewportView(table);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -76,9 +77,9 @@ public class TableScrollPanePrint extends JScrollPane implements TableScrollPane
     };
 
     /**
-     * Refreshes the table with new data.
-     * 
-     * @param descriptions the new list of descriptions to display
+     * Returns the JTable contained in this scroll pane.
+     *
+     * @return the JTable
      */
     public JTable getTable() {
         return this.table;

@@ -17,7 +17,9 @@ import javax.swing.JTextField;
 
 import descriptionupdate.model.filter.api.FilterPrintValues;
 import descriptionupdate.view.View;
+import descriptionupdate.view.exception.BlankDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
+import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.scenes.HistoryTableScene;
 
 public class FilterPrintValuesPannel extends JPanel {
@@ -61,11 +63,17 @@ public class FilterPrintValuesPannel extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        try{
+                            if(codeTextField.getText().isBlank()){
+                                throw new BlankDescriptionException("Il campo codice non può esere vuoto");
+                            }
                         view.getController().setCurrentPrintCodeValues(new FilterPrintValues(
                                 codeTextField.getText(),
                                 dateFilter.getSelectedItem().toString()));
                                 view.goToTableCustomScenePrint(view.getController().getPrintHistory());
-                        
+                    } catch (BlankDescriptionException ex) {
+                        JOptionPaneFactory.errorNoCodeSelection(FilterPrintValuesPannel.this);
+                    }
 
                         // FilterPrintValuesPannel.this.refreshAction.get();
                     }
@@ -83,6 +91,7 @@ public class FilterPrintValuesPannel extends JPanel {
                         // FilterPrintValuesPannel.this.refreshAction.get();
                     }
                 });
+                
                 JButton exitButton = GuiFactory.getButton("Exit", Color.ORANGE, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {

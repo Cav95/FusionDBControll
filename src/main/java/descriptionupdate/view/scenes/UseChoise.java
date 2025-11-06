@@ -93,7 +93,7 @@ public class UseChoise extends JPanel {
                     }
                 });
 
-                        JButton exitButton = GuiFactory.getButton("Exit", Color.GRAY, Color.BLACK,
+        JButton exitButton = GuiFactory.getButton("Exit", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override

@@ -1,5 +1,8 @@
 package descriptionupdate.model.api;
 
+/**
+ * Enum representing different departments (Reparti) in the system.
+ */
 public enum Reparti {
     OFFICINA("Officina"),
     PREASSEMBLAGGIO("Preassemblaggio"),

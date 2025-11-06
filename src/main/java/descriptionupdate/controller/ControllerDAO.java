@@ -174,21 +174,45 @@ public final class ControllerDAO extends Controller {
         return model.getSimilarItalianDescriptions(description);
     }
 
+    /*
+     * Retrieves the print history as a list of PrintCodeValues.
+     * @return a list of PrintCodeValues representing the print history
+     */
     public List<PrintCodeValues> getPrintHistory() {
         return modelHistoryPrint.getAllPrintCodeValues();
     }
 
+    /**
+     * Retrieves available end dates for a given code.
+     *
+     * @param code the code to retrieve end dates for
+     * @return a list of available end dates
+     */
     public List<String> getAvailableDates(String code) {
         return modelHistoryPrint.getAvailableDates(code);
     }
 
+    /*
+     * Retrieves the current filter for print code values.
+     * @return the current FilterPrintImpl
+     */
     public FilterPrintImpl getFilterPrint() {
         return modelHistoryPrint.getCurrentPrintCodeValues();
     }
+    /*
+     * Sets the current filter for print code values.
+     * @param print the new FilterPrintValues to set
+     * 
+     */
     public void setCurrentPrintCodeValues(FilterPrintValues print) {
         modelHistoryPrint.setCurrentPrintCodeValues(print);
     }
 
+    /**
+     * Retrieves all available end dates from the model history print.
+     *
+     * @return a list of all end dates
+     */
     public List<String> getAllDate() {
         return modelHistoryPrint.getAllDate();
     }

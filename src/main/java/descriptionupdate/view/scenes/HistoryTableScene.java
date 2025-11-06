@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * MainTableScene class that extends JPanel to create the main table scene for
+ * HistoryTableScene class that extends JPanel to create the history table scene for
  * the application.
  */
 public class HistoryTableScene extends JPanel {
@@ -29,14 +29,14 @@ public class HistoryTableScene extends JPanel {
     private JPanel buttonPanel;
     private List<PrintCodeValues> des;
 
-    private JLabel titleLabel = GuiFactory.getLabel("Tabella Descrizioni",
+    private JLabel titleLabel = GuiFactory.getLabel("Tabella Storico Stampe",
             GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
             Color.BLACK);
 
     private final View view;
 
     /**
-     * Constructor for MainTableScene.
+     * Constructor for HistoryTableScene.
      *
      * @param view the main view of the application
      */

@@ -5,7 +5,6 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 
 import descriptionupdate.model.api.Description;
-import descriptionupdate.view.scenes.MainTableScene;
 
 /**
  * Utility class for displaying various optional dialog panes.
@@ -156,9 +155,20 @@ public class JOptionPaneFactory {
      * 
      * @param mainTableScene the main table scene
      */
-    public static void errorNoSelection(MainTableScene mainTableScene) {
+    public static void errorNoSelection(Component mainTableScene) {
         JOptionPane.showMessageDialog(mainTableScene,
                 "Nessuna descrizione selezionata", "Errore",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Shows an error message when no code is selected.
+     * 
+     * @param dialog the parent component for the dialog
+     */
+    public static void errorNoCodeSelection(Component dialog) {
+        JOptionPane.showMessageDialog(dialog,
+                "Nessun codice selezionato\nSelezionare un codice per continuare.", "Errore",
                 JOptionPane.ERROR_MESSAGE);
     }
 
