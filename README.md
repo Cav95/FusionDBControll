@@ -14,5 +14,6 @@ Inside it input parametre of connection string like immage below.
 If you don't need user password can write all in one-line like:
 
 *key1=jdbc:mysql://localhost:3306/DesFusion?user=root&password=*
+
 Key1 need Edm_2008 connection string.
 Key2 need BombConfine connection string.
