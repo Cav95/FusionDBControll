@@ -17,13 +17,10 @@ import descriptionupdate.view.utils.ConnectionFailureViewIni;
 public class ConnectionFactory {
 
     private static final String TEST = "TEST";
-    private static final String BOMB_CONFINE = "bomb_Confine";
     private static final String CEPIUT = "CEPIUT";
-    private static final String EDM_DB_2008_001 = "EdmDb_2008_001";
-    private static final String ADHOC = "adhoc";
+
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ConnectionFactory.class);
     private Connection connection;
-    private static final String PDM_USER = "PDMUser";
 
     /**
      * Checks if the user is admitted based on username and password.
@@ -92,8 +89,8 @@ public class ConnectionFactory {
                 connection = sqlTestConnection();
                 LOGGER.info("Connection established for user TEST: {}", username);
             } else if (username.equals(CEPIUT)) {
-                connection = sqlProductionConnection(EDM_DB_2008_001, PDM_USER, PDM_USER);
-                //connection = sqlProductionConnectionIni("key1");
+                // connection = sqlProductionConnection(EDM_DB_2008_001, PDM_USER, PDM_USER);
+                connection = sqlProductionConnectionIni("key1");
                 LOGGER.info("Connection established for user in edm: {}", username);
             } else {
                 throw new DAOException("Invalid username");
@@ -119,8 +116,8 @@ public class ConnectionFactory {
                 connection = sqlTestConnection();
                 LOGGER.info("Connection established for user TEST: {}", username);
             } else if (username.equals(CEPIUT)) {
-                connection = sqlProductionConnection(BOMB_CONFINE, ADHOC, ADHOC);
-                //connection = sqlProductionConnectionIni("key2");
+                // connection = sqlProductionConnection(BOMB_CONFINE, ADHOC, ADHOC);
+                connection = sqlProductionConnectionIni("key2");
                 LOGGER.info("Connection established for user in bomb_confine: {}", username);
 
             } else {

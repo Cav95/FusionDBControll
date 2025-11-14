@@ -33,3 +33,5 @@ bin/
 
 # Ignora VSCode workspace configs
 .vscode/
+
+*.ini
