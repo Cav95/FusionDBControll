@@ -66,28 +66,10 @@ public final class DAOUtils {
         }
     }
 
-    /*
-     * Establishes a connection to a database using an INI file.
-     * The INI file should be located in the current working directory
-     * and named "configDBConnection.ini".
-     * It should contain the following properties:
-     * key1=jdbc:mysql://localhost:3306/DesFusion
-     * user=root
-     * psw=password
-     * This method reads the INI file, retrieves the connection string, username,
-     * and password,
-     * and establishes a connection to the database.
-     * 
-     * If the connection string does not include a username and password,
-     * it attempts to connect without them.
-     * If the connection fails, it throws a DAOException with an error message.
-     * 
-     * @return a Connection object to the database
-     * 
-     * @throws DAOException if there is an error reading the INI file or
-     * establishing the
-     */
-    public static Connection localIniStringConnection() {
+/*
+ * Establishes a connection to a database using connection details from an INI file.
+ */
+    public static Connection localIniStringConnection(String key) {
         Properties properties = new Properties();
         String iniFilePath = System.getProperty("user.dir") + System.getProperty("file.separator")
                 + CONFIG_DB_CONNECTION_INI;
@@ -97,8 +79,8 @@ public final class DAOUtils {
         } catch (IOException e) {
         }
 
-        // Leggi una singola chiave
-        String connectionString = properties.getProperty("key1");
+        // Leggi una singola chiave dal file INI
+        String connectionString = properties.getProperty(key);
         String username = properties.getProperty("user");
         String password = properties.getProperty("psw");
         try {

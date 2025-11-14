@@ -54,6 +54,16 @@ public class ConnectionFactory {
         return connection;
     }
 
+    public Connection sqlProductionConnectionIni(final String key) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DAOUtils.localIniStringConnection(key);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
     /**
      * Establishes a test MySQL database connection.
      *
@@ -83,6 +93,7 @@ public class ConnectionFactory {
                 LOGGER.info("Connection established for user TEST: {}", username);
             } else if (username.equals(CEPIUT)) {
                 connection = sqlProductionConnection(EDM_DB_2008_001, PDM_USER, PDM_USER);
+                //connection = sqlProductionConnectionIni("key1");
                 LOGGER.info("Connection established for user in edm: {}", username);
             } else {
                 throw new DAOException("Invalid username");
@@ -109,6 +120,7 @@ public class ConnectionFactory {
                 LOGGER.info("Connection established for user TEST: {}", username);
             } else if (username.equals(CEPIUT)) {
                 connection = sqlProductionConnection(BOMB_CONFINE, ADHOC, ADHOC);
+                //connection = sqlProductionConnectionIni("key2");
                 LOGGER.info("Connection established for user in bomb_confine: {}", username);
 
             } else {
