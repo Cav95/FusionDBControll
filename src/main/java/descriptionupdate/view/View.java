@@ -114,7 +114,7 @@ public final class View {
         this.cardLayout.show(this.mainPanel, "TableCustomScene");
     }
 
-    public void goToTableCustomScenePrint() {
+    public void goToTableCustomScenePrintClean() {
         this.mainPanel.add(new HistoryTableScene(this), "historyTableScene");
         this.cardLayout.show(this.mainPanel, "historyTableScene");
     }

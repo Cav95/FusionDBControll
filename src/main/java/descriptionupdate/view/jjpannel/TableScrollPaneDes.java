@@ -33,7 +33,7 @@ public class TableScrollPaneDes extends JScrollPane implements TableScrollPane {
     /**
      * Constructor for TableScrollPane.
      * 
-     * @param table the JTable to be placed inside the scroll pane
+     * @param descriptions the list of descriptions to display in the table
      */
     public TableScrollPaneDes(List<Description> descriptions) {
         isAcending = true;

@@ -88,7 +88,7 @@ public class UseChoise extends JPanel {
                         } catch (Exception el) {
                             JOptionPaneFactory.connectionFailed(UseChoise.this);
                         }
-                        view.goToTableCustomScenePrint();
+                        view.goToTableCustomScenePrintClean();
 
                     }
                 });

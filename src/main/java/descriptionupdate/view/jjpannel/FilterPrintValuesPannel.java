@@ -3,14 +3,13 @@ package descriptionupdate.view.jjpannel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.sql.Date;
 import java.util.function.Supplier;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -21,6 +20,9 @@ import descriptionupdate.view.exception.BlankDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.scenes.HistoryTableScene;
+import descriptionupdate.view.utils.ControllUtilies;
+
+import com.toedter.calendar.JCalendar;
 
 public class FilterPrintValuesPannel extends JPanel {
     private static final int SIZE_FONT = 13;
@@ -28,9 +30,6 @@ public class FilterPrintValuesPannel extends JPanel {
     private JLabel codeFilterJLabel = new JLabel("Codice");
     private JTextField codeTextField = GuiFactory.getTextField(20);
     private JLabel dateLabel = new JLabel("Data:");
-    // private JTextField dateTextField = GuiFactory.getTextField(20);
-
-    private JComboBox<String> dateFilter;
 
     private final JButton filterButton;
     private final JButton resetButton;
@@ -50,32 +49,34 @@ public class FilterPrintValuesPannel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 
-        codeTextField.setText(view.getController().getFilterPrint().getFilter().code());
-        // dateTextField.setText(view.getController().getCurrentPrintCodeValues().dateValue());
+        codeTextField
+                .setText(ControllUtilies.reversBlankReturn(view.getController().getFilterPrint().getFilter().code()));
 
-        // Create date filter with sample dates (you may want to modify this)
-        List<String> dates = view.getController().getAllDate();
-        this.dateFilter = GuiFactory.getComboBox(dates);
-        this.dateFilter.setSelectedItem(getDefaultDate(view.getController().getFilterPrint().getFilter().dateValue()));
+        JCalendar calendar = new JCalendar();
+
+        if (view.getController().getFilterPrint().getFilter().dateValue() != "2099-12-31") {
+            calendar.setDate(Date.valueOf(view.getController().getFilterPrint().getFilter().dateValue()));
+        }
 
         filterButton = GuiFactory.getButton("Filtra", Color.ORANGE, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        try{
-                            if(codeTextField.getText().isBlank()){
+                        var date = String.format("%1$tY-%1$tm-%1$td", calendar.getDate());
+                        System.out.println(date);
+                        try {
+                            if (codeTextField.getText().isBlank()) {
                                 throw new BlankDescriptionException("Il campo codice non può esere vuoto");
                             }
-                        view.getController().setCurrentPrintCodeValues(new FilterPrintValues(
-                                codeTextField.getText(),
-                                dateFilter.getSelectedItem().toString()));
-                                view.goToTableCustomScenePrint(view.getController().getPrintHistory());
-                    } catch (BlankDescriptionException ex) {
-                        JOptionPaneFactory.errorNoCodeSelection(FilterPrintValuesPannel.this);
-                    }
+                            view.getController().setCurrentPrintCodeValues(new FilterPrintValues(
+                                    codeTextField.getText(),
+                                    date));
+                            view.goToTableCustomScenePrint(view.getController().getPrintHistory());
+                        } catch (BlankDescriptionException ex) {
+                            JOptionPaneFactory.errorNoCodeSelection(FilterPrintValuesPannel.this);
+                        }
 
-                        // FilterPrintValuesPannel.this.refreshAction.get();
                     }
                 });
         // Initialize buttons
@@ -85,14 +86,11 @@ public class FilterPrintValuesPannel extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         view.getController().setCurrentPrintCodeValues(new FilterPrintValues());
-                        resetFilters();
-                        view.goToTableCustomScenePrint();
-
-                        // FilterPrintValuesPannel.this.refreshAction.get();
+                        view.goToTableCustomScenePrintClean();
                     }
                 });
-                
-                JButton exitButton = GuiFactory.getButton("Exit", Color.ORANGE, Color.BLACK,
+
+        JButton exitButton = GuiFactory.getButton("Exit", Color.ORANGE, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -109,7 +107,7 @@ public class FilterPrintValuesPannel extends JPanel {
         filterPanel.add(codeTextField);
         filterPanel.add(Box.createHorizontalStrut(5));
         filterPanel.add(dateLabel);
-        filterPanel.add(dateFilter);
+        filterPanel.add(calendar);
         filterPanel.add(Box.createHorizontalStrut(10));
         filterPanel.add(filterButton);
         filterPanel.add(Box.createHorizontalStrut(5));
@@ -128,22 +126,6 @@ public class FilterPrintValuesPannel extends JPanel {
      * @param refreshAction a Supplier<Void> representing the action to be performed
      */
     public void setRefreshAction(Supplier<Void> refreshAction) {
-    }
-
-    /**
-     * Resets all filter selections to their default values.
-     */
-    private void resetFilters() {
-
-        codeTextField.setText("");
-        dateFilter.setSelectedIndex(0);
-    }
-
-    private String getDefaultDate(String date) {
-        if (date.isEmpty()) {
-            return "2099-12-31";
-        }
-        return date;
     }
 
 }

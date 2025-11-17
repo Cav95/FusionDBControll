@@ -35,6 +35,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-text
      implementation("org.apache.commons:commons-text:1.14.0")
+
+     // https://mvnrepository.com/artifact/com.toedter/jcalendar
+        implementation("com.toedter:jcalendar:1.4")
 }
 
 java {

@@ -45,9 +45,6 @@ public class HistoryTableScene extends JPanel {
         this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
 
-        // Get descriptions based on filters
-       // des = view.getController().getPrintHistory();
-
         // North: Title panel
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
@@ -57,15 +54,9 @@ public class HistoryTableScene extends JPanel {
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
 
-        // Center: JTable in JScrollPane
-        //this.tableScrollPanePrint = new TableScrollPanePrint(des);
-        //this.add(tableScrollPanePrint, BorderLayout.CENTER);
-
         // South: Button panel
         buttonPanel = new FilterPrintValuesPannel(this, view);
         this.add(buttonPanel, BorderLayout.SOUTH);
-
-        // this.add(new ButtonExtraPannel(this, view), BorderLayout.EAST);
     }
 
     public HistoryTableScene(View view, List<PrintCodeValues> printCodeValues) {
