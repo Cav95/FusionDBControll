@@ -12,7 +12,7 @@ import javax.swing.table.TableModel;
  * selection of rows but does not allow editing.
  * This table is used for selection purposes only,
  * with specific styling and selection behavior.
- * */
+ */
 public class SelectionTable extends JTable {
 
     /**
@@ -24,13 +24,12 @@ public class SelectionTable extends JTable {
      */
     public SelectionTable(Object[][] data, Object[] columnNames) {
         super(
-            new DefaultTableModel(data, columnNames) {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return false;
-                }
-            }
-        );
+                new DefaultTableModel(data, columnNames) {
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false;
+                    }
+                });
         this.setFont(new Font("Roboto", Font.PLAIN, 16));
         this.setRowHeight(30);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

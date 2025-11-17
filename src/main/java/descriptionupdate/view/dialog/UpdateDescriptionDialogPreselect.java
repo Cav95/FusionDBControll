@@ -52,7 +52,7 @@ public class UpdateDescriptionDialogPreselect extends AbstactChangeDialog {
         JOptionPaneFactory.successfullyAddedDescription(UpdateDescriptionDialogPreselect.this,
                 newDescription);
         this.view.getController().setSaved(false);
-        //this.view.goToInitialSceneFiltered();
+        // this.view.goToInitialSceneFiltered();
         action.get();
         UpdateDescriptionDialogPreselect.this.dispose();
     }

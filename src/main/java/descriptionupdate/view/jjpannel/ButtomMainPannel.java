@@ -57,7 +57,8 @@ public class ButtomMainPannel extends JPanel {
      *
      * @param mainTableScene the main table scene
      * @param view           the main view of the application
-     * @param refreshAction  a Supplier<Void> representing the action to be performed on refresh
+     * @param refreshAction  a Supplier<Void> representing the action to be
+     *                       performed on refresh
      */
     public ButtomMainPannel(MainTableScene mainTableScene, View view, Supplier<Void> refreshAction) {
 
@@ -69,10 +70,13 @@ public class ButtomMainPannel extends JPanel {
         listGroup.add(0, "");
         this.groupTextField = GuiFactory.getComboBox(listGroup);
         this.groupTextField
-                .setSelectedItem(ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().group()));
+                .setSelectedItem(
+                        ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().group()));
 
-        this.itaTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().itaDescription()));
-        this.engTextField.setText(ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().engDescription()));
+        this.itaTextField.setText(
+                ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().itaDescription()));
+        this.engTextField.setText(
+                ControllUtilies.reversBlankReturn(view.getController().getFilterDescription().engDescription()));
 
         addButton = GuiFactory.getButton("Aggiungi", Color.GREEN, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),

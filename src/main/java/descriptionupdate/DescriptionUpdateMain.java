@@ -10,9 +10,9 @@ import descriptionupdate.view.View;
 public final class DescriptionUpdateMain {
 
     /**
-     * Main method for the Description Update application.
-     *
-     * @param args command-line arguments
+     * Main method to launch the application.
+     * 
+     * @param args command line arguments
      * @throws SQLException if a database access error occurs
      */
     public static void main(String[] args) throws SQLException {

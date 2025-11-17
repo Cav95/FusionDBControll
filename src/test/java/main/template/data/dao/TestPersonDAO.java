@@ -25,7 +25,8 @@ class TestdescDao {
     private static Savepoint savepoint;
 
     /**
-     * Setup method to initialize database connection and savepoint before all tests.
+     * Setup method to initialize database connection and savepoint before all
+     * tests.
      *
      * @throws SQLException if a database access error occurs
      */
@@ -37,7 +38,8 @@ class TestdescDao {
     }
 
     /**
-     * Cleanup method to rollback to savepoint and close the database connection after all tests.
+     * Cleanup method to rollback to savepoint and close the database connection
+     * after all tests.
      *
      * @throws SQLException if a database access error occurs
      */

@@ -15,6 +15,7 @@ public class ModelHistoryPrint {
     private final Connection connection;
     private final PrintValueDAO printValueDAO;
     private FilterPrintImpl currentPrint;
+
     /**
      * Constructor for Model.
      * Initializes the model with a database connection and sets up the
@@ -49,7 +50,8 @@ public class ModelHistoryPrint {
                         printValueDAO.getOneCodeValue(code, t, Reparti.SPEDIZIONE.getRepartoName()),
                         printValueDAO.getOneCodeValue(code, t, Reparti.MONTATORI.getRepartoName()),
                         printValueDAO.getOneCodeValue(code, t, Reparti.UFFICIO_ACQUISTI.getRepartoName()),
-                        t)).distinct();
+                        t))
+                .distinct();
     }
 
     /**

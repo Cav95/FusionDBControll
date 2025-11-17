@@ -66,9 +66,10 @@ public final class DAOUtils {
         }
     }
 
-/*
- * Establishes a connection to a database using connection details from an INI file.
- */
+    /*
+     * Establishes a connection to a database using connection details from an INI
+     * file.
+     */
     public static Connection localIniStringConnection(String key) {
         Properties properties = new Properties();
         String iniFilePath = System.getProperty("user.dir") + System.getProperty("file.separator")

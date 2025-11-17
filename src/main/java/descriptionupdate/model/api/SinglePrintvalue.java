@@ -8,6 +8,6 @@ package descriptionupdate.model.api;
  * @param valoreCampo the value of the field
  * @param endValue    the end value associated with the print value
  */
-public record SinglePrintvalue(String codice, String nomeCampo, String valoreCampo , String endValue) {
+public record SinglePrintvalue(String codice, String nomeCampo, String valoreCampo, String endValue) {
 
 }

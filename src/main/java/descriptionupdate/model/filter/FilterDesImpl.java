@@ -5,7 +5,8 @@ import descriptionupdate.model.filter.api.Filter;
 
 /**
  * Implementation of the Filter interface for Description objects.
- * Manages filter criteria for Italian description, English description, and group.
+ * Manages filter criteria for Italian description, English description, and
+ * group.
  */
 public class FilterDesImpl implements Filter<Description> {
 
@@ -27,7 +28,7 @@ public class FilterDesImpl implements Filter<Description> {
         return filter;
     }
 
-        /*
+    /*
      * {@inheritDoc}
      */
     @Override
@@ -36,7 +37,7 @@ public class FilterDesImpl implements Filter<Description> {
                 filter.group() + ALL);
     }
 
-        /*
+    /*
      * {@inheritDoc}
      */
     @Override

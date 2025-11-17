@@ -116,7 +116,8 @@ public class ConnectionFactory {
     }
 
     /**
-     * Establishes a database connection for history using the provided username and password.
+     * Establishes a database connection for history using the provided username and
+     * password.
      * Selects the connection type based on the username.
      *
      * @param username the username for the connection

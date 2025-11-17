@@ -50,7 +50,8 @@ public final class ModelDescription {
      *         found
      */
     public Optional<Description> getDescription(Description description) {
-        return descriptionDAO.getDescription(description.itaDescription(), description.engDescription(), description.group());
+        return descriptionDAO.getDescription(description.itaDescription(), description.engDescription(),
+                description.group());
     }
 
     /**
@@ -62,7 +63,8 @@ public final class ModelDescription {
      * @return a list of descriptions matching the provided parameters
      */
     public List<Description> getListDescription(Description description) {
-        return descriptionDAO.getListDescription(description.itaDescription(), description.engDescription(), description.group());
+        return descriptionDAO.getListDescription(description.itaDescription(), description.engDescription(),
+                description.group());
 
     }
 
@@ -130,7 +132,8 @@ public final class ModelDescription {
     /**
      * Retrieves a list of descriptions with similar Italian descriptions.
      *
-     * @param description the description containing the Italian description to match
+     * @param description the description containing the Italian description to
+     *                    match
      * @return a list of descriptions with similar Italian descriptions
      */
     public List<Description> getSimilarItalianDescriptions(Description description) {

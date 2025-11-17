@@ -95,7 +95,7 @@ class TestPrintValueDAO {
     @Test
     public void getAllEndValues() {
         var valDao = new PrintValueDAOImpl(connection);
-        var actual = valDao.getAllEndValues("AFF06520" , "2099-12-31");
+        var actual = valDao.getAllEndValues("AFF06520", "2099-12-31");
         assertTrue(actual.size() > 0);
     }
 

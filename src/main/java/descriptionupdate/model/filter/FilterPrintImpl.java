@@ -9,8 +9,6 @@ public class FilterPrintImpl implements Filter<FilterPrintValues> {
     private static final String ALL = "";
     private FilterPrintValues filter;
 
-
-
     /**
      * Constructor initializes the filter with default values.
      */
@@ -34,12 +32,12 @@ public class FilterPrintImpl implements Filter<FilterPrintValues> {
         this.filter = filter;
     }
 
-        /*
+    /*
      * {@inheritDoc}
      */
     @Override
     public void resetFilter() {
         this.filter = new FilterPrintValues(ALL, DEFAULT_DATE);
     }
-    
+
 }

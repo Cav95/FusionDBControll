@@ -12,7 +12,8 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * HistoryTableScene class that extends JPanel to create the history table scene for
+ * HistoryTableScene class that extends JPanel to create the history table scene
+ * for
  * the application.
  */
 public class HistoryTableScene extends JPanel {
@@ -75,7 +76,7 @@ public class HistoryTableScene extends JPanel {
         return this.tableScrollPanePrint.getTable();
     }
 
-        /**
+    /**
      * Refreshes the button panel with a new button panel.
      * 
      * @param newButtonPanel the new button panel to be set
@@ -89,11 +90,10 @@ public class HistoryTableScene extends JPanel {
     }
 
     /*
-     *  Refreshes the table to display print history based on the provided filter.
-     *  @param filter the filter to apply for displaying print history
+     * Refreshes the table to display print history based on the provided filter.
      */
     public void refreshTablePrint() {
-        //this.remove(this.tableScrollPanePrint);
+        // this.remove(this.tableScrollPanePrint);
         this.tableScrollPanePrint = new TableScrollPanePrint(view.getController().getPrintHistory());
         this.add(this.tableScrollPanePrint, BorderLayout.CENTER);
         this.remove(this.buttonPanel);

@@ -9,12 +9,14 @@ public interface Filter<X> {
 
     /**
      * Returns the current filter criteria.
+     * 
      * @return the filter criteria
      */
     X getFilter();
 
     /**
      * Sets the filter criteria.
+     * 
      * @param filter the new filter criteria
      */
     void setFilter(X filter);

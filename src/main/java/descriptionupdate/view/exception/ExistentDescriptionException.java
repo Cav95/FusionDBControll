@@ -6,7 +6,8 @@ package descriptionupdate.view.exception;
 public class ExistentDescriptionException extends RuntimeException {
 
     /**
-     * Constructs a new ExistentDescriptionException with the specified detail message.
+     * Constructs a new ExistentDescriptionException with the specified detail
+     * message.
      *
      * @param message the detail message
      */

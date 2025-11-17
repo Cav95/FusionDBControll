@@ -26,5 +26,5 @@ public enum Reparti {
     public String getRepartoName() {
         return repartoName;
     }
-    
+
 }

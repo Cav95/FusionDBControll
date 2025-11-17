@@ -20,7 +20,8 @@ import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.utils.SelectionTable;
 
 /**
- * TableScrollPanePrint class that extends JScrollPane to create a scrollable table for
+ * TableScrollPanePrint class that extends JScrollPane to create a scrollable
+ * table for
  * displaying print code values.
  */
 public class TableScrollPanePrint extends JScrollPane implements TableScrollPane {
@@ -30,7 +31,11 @@ public class TableScrollPanePrint extends JScrollPane implements TableScrollPane
     private Boolean isAcending;
     private JTable table;
 
-
+    /**
+     * Constructor for TableScrollPanePrint.
+     *
+     * @param printCodeValues the list of print code values to display in the table
+     */
     public TableScrollPanePrint(List<PrintCodeValues> printCodeValues) {
         isAcending = true;
         this.table = new SelectionTable(
@@ -85,7 +90,6 @@ public class TableScrollPanePrint extends JScrollPane implements TableScrollPane
         return this.table;
     }
 
-    
     private void sortColumns(JTable table) {
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(sorter);

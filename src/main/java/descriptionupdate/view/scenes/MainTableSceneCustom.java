@@ -1,4 +1,5 @@
 package descriptionupdate.view.scenes;
+
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -7,10 +8,11 @@ import descriptionupdate.view.View;
 import descriptionupdate.view.jjpannel.ButtomMainPannel;
 
 /**
- * MainTableSceneCustom class that extends MainTableScene to create a custom main table scene for
+ * MainTableSceneCustom class that extends MainTableScene to create a custom
+ * main table scene for
  * the application.
  */
-public class MainTableSceneCustom  extends MainTableScene {
+public class MainTableSceneCustom extends MainTableScene {
 
     private Supplier<Void> onBack;
 
@@ -25,9 +27,8 @@ public class MainTableSceneCustom  extends MainTableScene {
             view.goToTableCustomScene(descriptions);
             return null;
         };
-        refreshButtonPanel(new ButtomMainPannel(this,view, onBack));
+        refreshButtonPanel(new ButtomMainPannel(this, view, onBack));
         refreshTable(descriptions.get());
     }
 
-    
 }

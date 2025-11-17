@@ -71,7 +71,6 @@ public class TableScrollPaneDes extends JScrollPane implements TableScrollPane {
         return this.table;
     }
 
-    
     private void sortColumns(JTable table) {
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(sorter);

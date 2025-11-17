@@ -37,7 +37,8 @@ public class DescriptionDAOImpl implements DescriptionDAO {
             final String group)
             throws DAOException {
         try (
-                var statement = DAOUtils.prepare(connection, QueriesDescriptions.GET_ONE_DES, itaDescription, engDescription,
+                var statement = DAOUtils.prepare(connection, QueriesDescriptions.GET_ONE_DES, itaDescription,
+                        engDescription,
                         group);
                 var resultSet = statement.executeQuery();) {
             if (resultSet.next()) {
@@ -62,7 +63,8 @@ public class DescriptionDAOImpl implements DescriptionDAO {
             final String group) {
         List<Description> descriptions = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesDescriptions.GET_ALL_TABLE, itaDescription, engDescription,
+                var statement = DAOUtils.prepare(connection, QueriesDescriptions.GET_ALL_TABLE, itaDescription,
+                        engDescription,
                         group);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
@@ -84,7 +86,8 @@ public class DescriptionDAOImpl implements DescriptionDAO {
     public void addDescription(final String itaDescription, final String engDescription, final String group) {
         {
             try (
-                    var statement = DAOUtils.prepare(connection, QueriesDescriptions.INSERT_ONE_DES, itaDescription, engDescription,
+                    var statement = DAOUtils.prepare(connection, QueriesDescriptions.INSERT_ONE_DES, itaDescription,
+                            engDescription,
                             group);) {
                 statement.executeUpdate();
             } catch (Exception e) {
@@ -100,7 +103,8 @@ public class DescriptionDAOImpl implements DescriptionDAO {
     public void deleteDescription(final String itaDescription, final String engDescription, final String group) {
 
         try (
-                var statement = DAOUtils.prepare(connection, QueriesDescriptions.DELETE_ONE_DES, itaDescription, engDescription,
+                var statement = DAOUtils.prepare(connection, QueriesDescriptions.DELETE_ONE_DES, itaDescription,
+                        engDescription,
                         group);) {
             statement.executeUpdate();
         } catch (Exception e) {
@@ -147,10 +151,12 @@ public class DescriptionDAOImpl implements DescriptionDAO {
      * {@inheritDoc}
      */
     @Override
-    public List<Description> getSimilarItalianDescriptions(String itaDescription, String engDescription, String group) throws DAOException {
+    public List<Description> getSimilarItalianDescriptions(String itaDescription, String engDescription, String group)
+            throws DAOException {
         List<Description> descriptions = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesDescriptions.SIMILAR_ITA_DES, itaDescription, engDescription, group);
+                var statement = DAOUtils.prepare(connection, QueriesDescriptions.SIMILAR_ITA_DES, itaDescription,
+                        engDescription, group);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 descriptions.add(new Description(resultSet.getString(DescriptionColumnName.ITA_DES.getColumnName()),

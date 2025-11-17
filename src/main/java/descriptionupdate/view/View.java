@@ -108,18 +108,29 @@ public final class View {
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
 
-
+    /**
+     * Navigates to the custom table scene of the application.
+     * 
+     * @param descriptions a Supplier that provides a List of Description objects
+     */
     public void goToTableCustomScene(Supplier<List<Description>> descriptions) {
         this.mainPanel.add(new MainTableSceneCustom(this, descriptions), "TableCustomScene");
         this.cardLayout.show(this.mainPanel, "TableCustomScene");
     }
 
+    /**
+     * Navigates to the print clean history table scene of the application.
+     */
     public void goToTableCustomScenePrintClean() {
         this.mainPanel.add(new HistoryTableScene(this), "historyTableScene");
         this.cardLayout.show(this.mainPanel, "historyTableScene");
     }
 
-
+    /**
+     * Navigates to the print code values history table scene of the application.
+     * 
+     * @param printCodeValues List of PrintCodeValues to display
+     */
     public void goToTableCustomScenePrint(List<PrintCodeValues> printCodeValues) {
         this.mainPanel.add(new HistoryTableScene(this, printCodeValues), "historyTableScene");
         this.cardLayout.show(this.mainPanel, "historyTableScene");
@@ -140,6 +151,12 @@ public final class View {
         this.cardLayout.show(this.mainPanel, SN_SECOND);
     }
 
+    /**
+     * Navigates to the user choice scene of the application.
+     * 
+     * @param username the username of the user
+     * @param password the password of the user
+     */
     public void goToChoiseScene(String username, String password) {
         this.mainPanel.add(new UseChoise(this, username, password), "UseChoiseScene");
         this.cardLayout.show(this.mainPanel, "UseChoiseScene");
