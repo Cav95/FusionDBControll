@@ -51,6 +51,12 @@ public class ConnectionFactory {
         return connection;
     }
 
+    /**
+     * Establishes a production SQL Server database connection using an ini file.
+     *
+     * @param key the key to identify the connection settings in the ini file
+     * @return the established SQL Connection object
+     */
     public Connection sqlProductionConnectionIni(final String key) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -109,6 +115,14 @@ public class ConnectionFactory {
 
     }
 
+    /**
+     * Establishes a database connection for history using the provided username and password.
+     * Selects the connection type based on the username.
+     *
+     * @param username the username for the connection
+     * @param psw      the password for the connection
+     * @return the established SQL Connection object
+     */
     public Connection doConnectionHistory(String username, String psw) {
         LOGGER.info("Attempting connection History for user: {}", username);
         try {

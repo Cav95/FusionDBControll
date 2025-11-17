@@ -60,7 +60,8 @@ public class Controller {
     public Connection doConnectionDescription(final String username, final String psw) {
         return connectionFactory.doConnectionDescription(username, psw);
     }
-        public Connection doConnectionHistory(final String username, final String psw) {
+
+    public Connection doConnectionHistory(final String username, final String psw) {
         return connectionFactory.doConnectionHistory(username, psw);
     }
 

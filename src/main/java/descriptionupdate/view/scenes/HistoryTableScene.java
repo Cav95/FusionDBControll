@@ -21,7 +21,7 @@ public class HistoryTableScene extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    private JPanel northPanel = new JPanel();
+    private final JPanel northPanel = new JPanel();
 
     // private List<String> listGroup;
 

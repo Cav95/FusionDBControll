@@ -24,6 +24,9 @@ import descriptionupdate.view.utils.ControllUtilies;
 
 import com.toedter.calendar.JCalendar;
 
+/*
+    * A panel for filtering print values.
+ */
 public class FilterPrintValuesPannel extends JPanel {
     private static final int SIZE_FONT = 13;
 
@@ -64,7 +67,6 @@ public class FilterPrintValuesPannel extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         var date = String.format("%1$tY-%1$tm-%1$td", calendar.getDate());
-                        System.out.println(date);
                         try {
                             if (codeTextField.getText().isBlank()) {
                                 throw new BlankDescriptionException("Il campo codice non può esere vuoto");

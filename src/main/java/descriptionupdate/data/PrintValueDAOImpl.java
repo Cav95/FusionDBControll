@@ -23,6 +23,9 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         this.connection = connection;
     }
 
+    /*
+     * {@inheritDoc}
+     */
     @Override
     public List<SinglePrintvalue> getPrintValue(String code, String endValue) throws DAOException {
         List<SinglePrintvalue> printValues = new ArrayList<>();
@@ -41,6 +44,9 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return printValues;
     }
 
+    /*
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getAllCodes(String code) throws DAOException {
         List<String> codes = new ArrayList<>();
@@ -56,6 +62,9 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return codes;
     }
 
+    /*
+     * {@inheritDoc}
+     */
     @Override
     public String getOneCodeValue(String code, String endValue, String propValue) throws DAOException {
         try (
@@ -71,6 +80,9 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return null;
     }
 
+    /*
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getAllEndValues(String code, String startDate) throws DAOException {
         List<String> endValues = new ArrayList<>();
@@ -87,6 +99,9 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return endValues;
     }
 
+    /*
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getAllDate() throws DAOException {
         List<String> dates = new ArrayList<>();
@@ -103,6 +118,9 @@ public class PrintValueDAOImpl implements PrintValueDAO {
 
     }
 
+    /*
+     * {@inheritDoc}
+     */
     @Override
     public List<SinglePrintvalue> getAllValues() throws DAOException {
         List<SinglePrintvalue> printValues = new ArrayList<>();

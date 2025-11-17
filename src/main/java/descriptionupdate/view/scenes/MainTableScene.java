@@ -21,9 +21,7 @@ public class MainTableScene extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    private JPanel northPanel = new JPanel();
-
-    // private List<String> listGroup;
+    private final JPanel northPanel = new JPanel();
 
     private TableScrollPaneDes tableScrollPaneDes;
     private JPanel buttonPanel;

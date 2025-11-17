@@ -167,7 +167,8 @@ public final class ControllerDAO extends Controller {
     /**
      * Retrieves a list of descriptions with similar Italian descriptions.
      *
-     * @param description the description containing the Italian description to match
+     * @param description the description containing the Italian description to
+     *                    match
      * @return a list of descriptions with similar Italian descriptions
      */
     public List<Description> getSimilarItalianDescriptions(Description description) {
@@ -176,6 +177,7 @@ public final class ControllerDAO extends Controller {
 
     /*
      * Retrieves the print history as a list of PrintCodeValues.
+     * 
      * @return a list of PrintCodeValues representing the print history
      */
     public List<PrintCodeValues> getPrintHistory() {
@@ -194,13 +196,16 @@ public final class ControllerDAO extends Controller {
 
     /*
      * Retrieves the current filter for print code values.
+     * 
      * @return the current FilterPrintImpl
      */
     public FilterPrintImpl getFilterPrint() {
         return modelHistoryPrint.getCurrentPrintCodeValues();
     }
+
     /*
      * Sets the current filter for print code values.
+     * 
      * @param print the new FilterPrintValues to set
      * 
      */

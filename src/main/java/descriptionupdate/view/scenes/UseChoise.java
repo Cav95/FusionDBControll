@@ -20,15 +20,15 @@ public class UseChoise extends JPanel {
 
     private static final int SIZE_FONT = 18;
 
-    private JPanel northPanel = new JPanel();
-    private JPanel centerPanel = new JPanel();
-    private JPanel buttonPanel = new JPanel();
-    private JLabel titleLabel = new JLabel("Description Database");
+    private final JPanel northPanel = new JPanel();
+    private final JPanel centerPanel = new JPanel();
+    private final JPanel buttonPanel = new JPanel();
+    private final JLabel titleLabel = new JLabel("Description Database");
 
     private JButton descriptionButton;
     private JButton historyButton;
 
-    private Controller controller;
+    private final Controller controller;
 
     /**
      * Constructor for LogInScene.

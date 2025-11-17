@@ -17,17 +17,17 @@ public class LogInScene extends JPanel {
 
     private static final int SIZE_FONT = 18;
 
-    private JPanel northPanel = new JPanel();
-    private JPanel centerPanel = new JPanel();
-    private JPanel buttonPanel = new JPanel();
-    private JLabel titleLabel = new JLabel("Fusion database Utilities");
-    private JLabel userLabel = new JLabel("Username:");
-    private JLabel passLabel = new JLabel("Password:");
-    private JTextField userField = new JTextField(20);
-    private JPasswordField passField = new JPasswordField(20);
-    private JButton accediButton;
+    private final JPanel northPanel = new JPanel();
+    private final JPanel centerPanel = new JPanel();
+    private final JPanel buttonPanel = new JPanel();
+    private final JLabel titleLabel = new JLabel("Fusion database Utilities");
+    private final JLabel userLabel = new JLabel("Username:");
+    private final JLabel passLabel = new JLabel("Password:");
+    private final JTextField userField = new JTextField(20);
+    private final JPasswordField passField = new JPasswordField(20);
+    private final JButton accediButton;
 
-    private Controller controller;
+    private final Controller controller;
 
     /**
      * Constructor for LogInScene.

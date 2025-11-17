@@ -127,6 +127,12 @@ public final class ModelDescription {
         return descriptionDAO.getAllGroupTypeString();
     }
 
+    /**
+     * Retrieves a list of descriptions with similar Italian descriptions.
+     *
+     * @param description the description containing the Italian description to match
+     * @return a list of descriptions with similar Italian descriptions
+     */
     public List<Description> getSimilarItalianDescriptions(Description description) {
         return descriptionDAO.getSimilarItalianDescriptions(description.itaDescription(), description.engDescription(),
                 description.group());
