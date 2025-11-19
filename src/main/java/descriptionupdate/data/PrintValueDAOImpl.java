@@ -11,6 +11,10 @@ import descriptionupdate.data.utils.DAOException;
 import descriptionupdate.data.utils.DAOUtils;
 import descriptionupdate.model.api.SinglePrintvalue;
 
+/**
+ * Implementation of the PrintValueDAO interface for managing print values in
+ * the database.
+ */
 public class PrintValueDAOImpl implements PrintValueDAO {
     private final Connection connection;
 
@@ -27,11 +31,11 @@ public class PrintValueDAOImpl implements PrintValueDAO {
      * {@inheritDoc}
      */
     @Override
-    public List<SinglePrintvalue> getPrintValue(String code, String endValue) throws DAOException {
+    public List<SinglePrintvalue> getPrintValue(final String code, final String endValue) throws DAOException {
         List<SinglePrintvalue> printValues = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE_VALUE, code, endValue);
-                var resultSet = statement.executeQuery();) {
+                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE_VALUE, code, endValue);
+                final var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 printValues.add(new SinglePrintvalue(resultSet.getString(PrintValueColumn.CODICE.getColumnName()),
                         resultSet.getString(PrintValueColumn.NOME_CAMPO.getColumnName()),
@@ -48,11 +52,11 @@ public class PrintValueDAOImpl implements PrintValueDAO {
      * {@inheritDoc}
      */
     @Override
-    public List<String> getAllCodes(String code) throws DAOException {
+    public List<String> getAllCodes(final String code) throws DAOException {
         List<String> codes = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE, code + "%");
-                var resultSet = statement.executeQuery();) {
+                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE, code + "%");
+                final var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 codes.add(resultSet.getString(PrintValueColumn.CODICE.getColumnName()));
             }
@@ -66,11 +70,11 @@ public class PrintValueDAOImpl implements PrintValueDAO {
      * {@inheritDoc}
      */
     @Override
-    public String getOneCodeValue(String code, String endValue, String propValue) throws DAOException {
+    public String getOneCodeValue(final String code, final String endValue, final String propValue) throws DAOException {
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ONE_CODE_VALUE, code + "%",
+                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ONE_CODE_VALUE, code + "%",
                         endValue, propValue);
-                var resultSet = statement.executeQuery();) {
+                final var resultSet = statement.executeQuery();) {
             if (resultSet.next()) {
                 return resultSet.getString(PrintValueColumn.VALORE_CAMPO.getColumnName());
             }
@@ -84,13 +88,13 @@ public class PrintValueDAOImpl implements PrintValueDAO {
      * {@inheritDoc}
      */
     @Override
-    public List<String> getAllEndValues(String code, String startDate) throws DAOException {
+    public List<String> getAllEndValues(final String code, final String startDate) throws DAOException {
         List<String> endValues = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_END_DATE_STRING,
+                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_END_DATE_STRING,
                         code + "%",
                         startDate);
-                var resultSet = statement.executeQuery();) {
+                final var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 endValues.add(resultSet.getString(PrintValueColumn.END_VALUE.getColumnName()));
             }
@@ -107,8 +111,8 @@ public class PrintValueDAOImpl implements PrintValueDAO {
     public List<String> getAllDate() throws DAOException {
         List<String> dates = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_DATE);
-                var resultSet = statement.executeQuery();) {
+                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ALL_DATE);
+                final var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 dates.add(resultSet.getString(PrintValueColumn.END_VALUE.getColumnName()));
             }
@@ -126,8 +130,8 @@ public class PrintValueDAOImpl implements PrintValueDAO {
     public List<SinglePrintvalue> getAllValues() throws DAOException {
         List<SinglePrintvalue> printValues = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_VALUES);
-                var resultSet = statement.executeQuery();) {
+                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_VALUES);
+                final var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 printValues.add(new SinglePrintvalue(resultSet.getString(PrintValueColumn.CODICE.getColumnName()),
                         resultSet.getString(PrintValueColumn.NOME_CAMPO.getColumnName()),

@@ -17,7 +17,7 @@ public enum Reparti {
     /*
      * Constructor for Reparti enum.
      */
-    Reparti(String repartoName) {
+    Reparti(final String repartoName) {
         this.repartoName = repartoName;
     }
 

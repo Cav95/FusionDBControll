@@ -93,7 +93,6 @@ public final class DAOUtils {
             } catch (SQLException t) {
                 throw new DAOException("Errore durante la connessione al database", t);
             }
-            // throw new DAOException(e);
         }
 
         // System.out.println("Valore di chiave1: " + valore);

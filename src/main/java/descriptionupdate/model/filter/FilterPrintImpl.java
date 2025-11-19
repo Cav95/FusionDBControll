@@ -3,6 +3,10 @@ package descriptionupdate.model.filter;
 import descriptionupdate.model.filter.api.Filter;
 import descriptionupdate.model.filter.api.FilterPrintValues;
 
+/**
+ * Implementation of the Filter interface for FilterPrintValues objects.
+ * Manages filter criteria for code and date value.
+ */
 public class FilterPrintImpl implements Filter<FilterPrintValues> {
 
     private static final String DEFAULT_DATE = "2099-12-31";
@@ -28,7 +32,7 @@ public class FilterPrintImpl implements Filter<FilterPrintValues> {
      * {@inheritDoc}
      */
     @Override
-    public void setFilter(FilterPrintValues filter) {
+    public void setFilter(final FilterPrintValues filter) {
         this.filter = filter;
     }
 

@@ -11,6 +11,12 @@ import descriptionupdate.model.api.Reparti;
 import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.model.filter.api.FilterPrintValues;
 
+/**
+ * The Model class represents the data and business logic of the application.
+ * It interacts with the database through the PrintValueDAO to perform CRUD
+ * operations
+ * on print values.
+ */
 public class ModelHistoryPrint {
     private final Connection connection;
     private final PrintValueDAO printValueDAO;
@@ -38,7 +44,7 @@ public class ModelHistoryPrint {
         return connection;
     }
 
-    private Stream<PrintCodeValues> builtPrinCodesValues(String code) {
+    private Stream<PrintCodeValues> builtPrinCodesValues(final String code) {
         var dates = printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
 
         return dates.stream()
@@ -71,7 +77,7 @@ public class ModelHistoryPrint {
      * @param code the code to retrieve end dates for
      * @return a list of available end dates
      */
-    public List<String> getAvailableDates(String code) {
+    public List<String> getAvailableDates(final String code) {
         return printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
     }
 
@@ -84,7 +90,7 @@ public class ModelHistoryPrint {
      *
      * @param print the new filter to set
      */
-    public void setCurrentPrintCodeValues(FilterPrintValues print) {
+    public void setCurrentPrintCodeValues(final FilterPrintValues print) {
         this.currentPrint.setFilter(print);
     }
 

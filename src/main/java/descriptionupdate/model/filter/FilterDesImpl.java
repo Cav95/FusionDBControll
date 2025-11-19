@@ -32,7 +32,7 @@ public class FilterDesImpl implements Filter<Description> {
      * {@inheritDoc}
      */
     @Override
-    public void setFilter(Description filter) {
+    public void setFilter(final Description filter) {
         this.filter = new Description(filter.itaDescription() + ALL, filter.engDescription() + ALL,
                 filter.group() + ALL);
     }
