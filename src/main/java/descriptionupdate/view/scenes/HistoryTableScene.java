@@ -24,8 +24,6 @@ public class HistoryTableScene extends JPanel {
 
     private final JPanel northPanel = new JPanel();
 
-    // private List<String> listGroup;
-
     private TableScrollPanePrint tableScrollPanePrint;
     private JPanel buttonPanel;
     private List<PrintCodeValues> des;
@@ -60,6 +58,12 @@ public class HistoryTableScene extends JPanel {
         this.add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Constructor for HistoryTableScene with print code values.
+     *
+     * @param view            the main view of the application
+     * @param printCodeValues the list of print code values to display in the table
+     */
     public HistoryTableScene(View view, List<PrintCodeValues> printCodeValues) {
         this(view);
         this.des = printCodeValues;

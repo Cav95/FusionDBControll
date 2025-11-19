@@ -13,6 +13,9 @@ public enum PrintValueColumn {
 
     private final String columnName;
 
+    /**
+     * Constructor for DescriptionColumnName enum.
+     */
     PrintValueColumn(String columnName) {
         this.columnName = columnName;
     }

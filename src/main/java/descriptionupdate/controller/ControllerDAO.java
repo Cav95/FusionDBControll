@@ -45,9 +45,9 @@ public final class ControllerDAO extends Controller {
      *
      * @param isSaved true if the scene is saved, false otherwise
      */
-    public void setSaved(boolean isSaved) {
+    public void setSaved(final boolean isSaved) {
         this.isSaved = isSaved;
-    }
+    } 
 
     /**
      * Constructs a Controller with the specified model and view.
@@ -75,7 +75,7 @@ public final class ControllerDAO extends Controller {
      * @throws IllegalArgumentException if no description is found for the provided
      *                                  parameters
      */
-    public Description getDescription(Description description) {
+    public Description getDescription(final Description description) {
         LOGGER.info("Getting description for: {}, {}, {}", description.itaDescription(), description.engDescription(),
                 description.group());
         return model.getDescription(description)
@@ -90,7 +90,7 @@ public final class ControllerDAO extends Controller {
      * @param group          the group type
      * @return a list of descriptions matching the provided parameters
      */
-    public List<Description> getListDescription(Description description) {
+    public List<Description> getListDescription(final Description description) {
         LOGGER.info("Getting list of descriptions");
         return model.getListDescription(description);
 
@@ -121,8 +121,14 @@ public final class ControllerDAO extends Controller {
         setSaved(false);
     }
 
+    /**
+     * Updates an existing description in the model.
+     *
+     * @param oldDescription the old description to be updated
+     * @param newDescription the new description to replace the old one
+     */
     public void updateDescription(final Description oldDescription, final Description newDescription) {
-        LOGGER.info("Updating description from: {}, {}, {} to: {}, {}, {}", oldDescription, newDescription);
+        LOGGER.info("Updating description from: {} to: {}", oldDescription, newDescription);
         if (checkExistent(newDescription)) {
             model.updateDescription(oldDescription, newDescription);
         } else {
@@ -171,7 +177,7 @@ public final class ControllerDAO extends Controller {
      *                    match
      * @return a list of descriptions with similar Italian descriptions
      */
-    public List<Description> getSimilarItalianDescriptions(Description description) {
+    public List<Description> getSimilarItalianDescriptions(final Description description) {
         return model.getSimilarItalianDescriptions(description);
     }
 
@@ -190,7 +196,7 @@ public final class ControllerDAO extends Controller {
      * @param code the code to retrieve end dates for
      * @return a list of available end dates
      */
-    public List<String> getAvailableDates(String code) {
+    public List<String> getAvailableDates(final String code) {
         return modelHistoryPrint.getAvailableDates(code);
     }
 
@@ -209,7 +215,7 @@ public final class ControllerDAO extends Controller {
      * @param print the new FilterPrintValues to set
      * 
      */
-    public void setCurrentPrintCodeValues(FilterPrintValues print) {
+    public void setCurrentPrintCodeValues(final FilterPrintValues print) {
         modelHistoryPrint.setCurrentPrintCodeValues(print);
     }
 

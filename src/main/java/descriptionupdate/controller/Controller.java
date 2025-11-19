@@ -16,12 +16,6 @@ public class Controller {
     private final Filter<Description> filter = new FilterDesImpl();
 
     /**
-     * Constructor for Controller.
-     */
-    public Controller() {
-    }
-
-    /**
      * Sets all temporary filter values for Italian, English, and group.
      *
      * @param ita   the Italian filter string
