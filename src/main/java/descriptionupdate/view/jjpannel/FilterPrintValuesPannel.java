@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import descriptionupdate.model.filter.api.FilterPrintValues;
 import descriptionupdate.view.View;
+import descriptionupdate.view.dialog.WaitDialog;
 import descriptionupdate.view.exception.BlankDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
@@ -145,11 +146,28 @@ public class FilterPrintValuesPannel extends JPanel {
             }
 
         });
+        Thread wait = new Thread(() -> {
+            var waitDialog = new WaitDialog(view);
+
+            waitDialog.setVisible(true);
+
+            while (process.isAlive()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            waitDialog.dispose();
+            Thread.currentThread().interrupt();
+            
+        });
 
         process.start();
+        wait.start();
 
-        JOptionPaneFactory.waitMessagge(this);
-        
+        //JOptionPaneFactory.waitMessagge(this);
+
         try {
             process.join();
 
