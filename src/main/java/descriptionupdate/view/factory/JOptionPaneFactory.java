@@ -172,4 +172,10 @@ public class JOptionPaneFactory {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    public static void waitMessagge(Component dialog) {
+        JOptionPane.showMessageDialog(dialog,
+                "Operazione in corso, attendere prego...", "Info",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
 }

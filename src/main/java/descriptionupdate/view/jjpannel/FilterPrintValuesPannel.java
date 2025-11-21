@@ -39,6 +39,8 @@ public class FilterPrintValuesPannel extends JPanel {
 
     private final JPanel filterPanel = new JPanel();
 
+    View view;
+
     /**
      * Constructor for FilterPrintValuesPannel.
      *
@@ -51,6 +53,8 @@ public class FilterPrintValuesPannel extends JPanel {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
+
+        this.view = view;
 
         codeTextField
                 .setText(ControllUtilies.reversBlankReturn(view.getController().getFilterPrint().getFilter().code()));
@@ -74,7 +78,8 @@ public class FilterPrintValuesPannel extends JPanel {
                             view.getController().setCurrentPrintCodeValues(new FilterPrintValues(
                                     codeTextField.getText(),
                                     date));
-                            view.goToTableCustomScenePrint(view.getController().getPrintHistory());
+                            goToNewFilteredScene();
+
                         } catch (BlankDescriptionException ex) {
                             JOptionPaneFactory.errorNoCodeSelection(FilterPrintValuesPannel.this);
                         }
@@ -128,6 +133,27 @@ public class FilterPrintValuesPannel extends JPanel {
      * @param refreshAction a Supplier<Void> representing the action to be performed
      */
     public void setRefreshAction(Supplier<Void> refreshAction) {
+    }
+
+    private void goToNewFilteredScene() {
+
+        Thread process = new Thread(() -> {
+            try {
+                view.goToTableCustomScenePrint(view.getController().getPrintHistory());
+            } catch (Exception e) {
+                Thread.currentThread().interrupt();
+            }
+
+        });
+
+        process.start();
+        
+        try {
+            process.join();
+
+        } catch (Exception e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
 }
