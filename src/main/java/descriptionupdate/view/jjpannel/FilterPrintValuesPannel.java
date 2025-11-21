@@ -147,6 +147,8 @@ public class FilterPrintValuesPannel extends JPanel {
         });
 
         process.start();
+
+        JOptionPaneFactory.waitMessagge(this);
         
         try {
             process.join();
