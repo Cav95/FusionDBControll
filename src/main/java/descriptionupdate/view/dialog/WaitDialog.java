@@ -34,7 +34,7 @@ public class WaitDialog  extends JDialog {
         //this.view = view;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(50, 50);
+        this.setSize(300, 300);
         this.setMaximumSize(this.getSize());
         this.setLocationRelativeTo(view.getMainFrame());
         this.setResizable(true);

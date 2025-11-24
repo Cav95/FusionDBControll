@@ -146,6 +146,7 @@ public class FilterPrintValuesPannel extends JPanel {
             }
 
         });
+        
         Thread wait = new Thread(() -> {
             var waitDialog = new WaitDialog(view);
 
@@ -158,15 +159,14 @@ public class FilterPrintValuesPannel extends JPanel {
                     Thread.currentThread().interrupt();
                 }
             }
-            waitDialog.dispose();
-            Thread.currentThread().interrupt();
             
+            Thread.currentThread().interrupt();
+
         });
-
-        process.start();
         wait.start();
+        process.start();
 
-        //JOptionPaneFactory.waitMessagge(this);
+        // JOptionPaneFactory.waitMessagge(this);
 
         try {
             process.join();
