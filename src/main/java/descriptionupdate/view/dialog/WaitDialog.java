@@ -6,14 +6,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
 

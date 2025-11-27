@@ -146,41 +146,17 @@ public class FilterPrintValuesPannel extends JPanel {
             }
 
         });
-        
-        Thread wait = new Thread(() -> {
-            var waitDialog = new WaitDialog(view);
 
-            waitDialog.setVisible(true);
+        var waitDialog = new WaitDialog(view);
+        waitDialog.setVisible(true);
 
-            while (process.isAlive()) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-            }
-            
-            Thread.currentThread().interrupt();
-
-        });
-       // wait.start();
-       var waitDialog = new WaitDialog(view);
-       waitDialog.setVisible(true);
         process.start();
-        
-            while (process.isAlive()) {   
-                                
-            }
-waitDialog.dispose();
 
-        // JOptionPaneFactory.waitMessagge(this);
+        while (process.isAlive()) {
 
-        try {
-            process.join();
-
-        } catch (Exception e) {
-            Thread.currentThread().interrupt();
         }
+        waitDialog.dispose();
+
     }
 
 }
