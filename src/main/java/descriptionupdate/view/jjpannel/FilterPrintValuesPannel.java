@@ -150,12 +150,15 @@ public class FilterPrintValuesPannel extends JPanel {
         var waitDialog = new WaitDialog(view);
         waitDialog.setVisible(true);
 
-        process.start();
+        process.run();
 
-        while (process.isAlive()) {
-
+        try {
+            process.join();
+            waitDialog.dispose();
+        } catch (Exception e) {
+            // TODO: handle exception
         }
-        waitDialog.dispose();
+        
 
     }
 
