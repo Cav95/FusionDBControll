@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import descriptionupdate.model.filter.api.FilterPrintValues;
 import descriptionupdate.view.View;
@@ -147,18 +148,25 @@ public class FilterPrintValuesPannel extends JPanel {
 
         });
 
-        var waitDialog = new WaitDialog(view);
+        WaitDialog waitDialog = new WaitDialog(view);
+
         waitDialog.setVisible(true);
 
-        process.run();
+        SwingUtilities.invokeLater(new Runnable() {
 
-        try {
-            process.join();
-            waitDialog.dispose();
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        
+            @Override
+            public void run() {
+                process.run();
+                try {
+                    process.join();
+                    waitDialog.dispose();
+                } catch (Exception e) {
+                    Thread.currentThread().interrupt();
+                }
+
+            }
+
+        });
 
     }
 
