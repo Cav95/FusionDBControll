@@ -33,7 +33,7 @@ public class WaitDialog extends JDialog {
         this.setAlwaysOnTop(true);
         this.setMaximumSize(this.getSize());
         this.setLocationRelativeTo(view.getMainFrame());
-        this.setResizable(true);
+        this.setResizable(false);
 
         this.setLayout(new BorderLayout());
 
