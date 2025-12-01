@@ -27,7 +27,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         this.connection = connection;
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -49,7 +49,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return printValues;
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -67,7 +67,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return codes;
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -87,7 +87,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return null;
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -107,7 +107,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
         return endValues;
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -126,7 +126,7 @@ public class PrintValueDAOImpl implements PrintValueDAO {
 
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override
