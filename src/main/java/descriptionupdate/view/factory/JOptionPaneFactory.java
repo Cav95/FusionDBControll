@@ -172,6 +172,11 @@ public class JOptionPaneFactory {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Shows a wait message dialog.
+     * 
+     * @param dialog the parent component for the dialog
+     */
     public static void waitMessagge(Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Operazione in corso, attendere prego...", "Info",

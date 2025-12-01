@@ -11,24 +11,25 @@ import javax.swing.JPanel;
 import descriptionupdate.view.View;
 import descriptionupdate.view.factory.GuiFactory;
 
+/*
+ * A dialog that shows a waiting message.
+ */
 public class WaitDialog  extends JDialog {
     private static final long serialVersionUID = 1L;
 
     private JPanel northPanel = new JPanel();
-    protected JLabel titleLabel = new JLabel("Attendere prego...");
+    private JLabel titleLabel = new JLabel("Attendere prego...");
+
 
     /**
      * Constructor for WaitDialog.
-     *
-     * @param owner the owner frame of the dialog
-     * @param title the title of the dialog
-     * @param modal whether the dialog is modal
+     * 
+     * @param view the main view
      */
     public WaitDialog(final View view) {
-        //this.view = view;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(300, 300);
+        this.setSize(300, 150);
         this.setMaximumSize(this.getSize());
         this.setLocationRelativeTo(view.getMainFrame());
         this.setResizable(true);

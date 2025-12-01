@@ -13,16 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
 import descriptionupdate.model.filter.api.FilterPrintValues;
 import descriptionupdate.view.View;
-import descriptionupdate.view.dialog.WaitDialog;
 import descriptionupdate.view.exception.BlankDescriptionException;
 import descriptionupdate.view.factory.GuiFactory;
 import descriptionupdate.view.factory.JOptionPaneFactory;
 import descriptionupdate.view.scenes.HistoryTableScene;
 import descriptionupdate.view.utils.ControllUtilies;
+import descriptionupdate.view.utils.WaitPanel;
 
 import com.toedter.calendar.JCalendar;
 
@@ -38,25 +36,20 @@ public class FilterPrintValuesPannel extends JPanel {
 
     private final JButton filterButton;
     private final JButton resetButton;
+    private final JButton exitButton;
 
     private final JPanel filterPanel = new JPanel();
 
-    View view;
 
     /**
      * Constructor for FilterPrintValuesPannel.
-     *
      * @param mainTableScene the main table scene
-     * @param view           the main view of the application
-     * @param refreshAction  a Supplier<Void> representing the action to be
-     *                       performed on refresh
+     * @param view the main view
      */
     public FilterPrintValuesPannel(HistoryTableScene mainTableScene, View view) {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
-
-        this.view = view;
 
         codeTextField
                 .setText(ControllUtilies.reversBlankReturn(view.getController().getFilterPrint().getFilter().code()));
@@ -80,7 +73,11 @@ public class FilterPrintValuesPannel extends JPanel {
                             view.getController().setCurrentPrintCodeValues(new FilterPrintValues(
                                     codeTextField.getText(),
                                     date));
-                            goToNewFilteredScene();
+
+                            new WaitPanel(() -> {
+                                view.goToTableCustomScenePrint(view.getController().getPrintHistory());
+                                return null;
+                            }, view);
 
                         } catch (BlankDescriptionException ex) {
                             JOptionPaneFactory.errorNoCodeSelection(FilterPrintValuesPannel.this);
@@ -99,7 +96,7 @@ public class FilterPrintValuesPannel extends JPanel {
                     }
                 });
 
-        JButton exitButton = GuiFactory.getButton("Exit", Color.ORANGE, Color.BLACK,
+        exitButton = GuiFactory.getButton("Exit", Color.ORANGE, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
@@ -135,39 +132,6 @@ public class FilterPrintValuesPannel extends JPanel {
      * @param refreshAction a Supplier<Void> representing the action to be performed
      */
     public void setRefreshAction(Supplier<Void> refreshAction) {
-    }
-
-    private void goToNewFilteredScene() {
-
-        Thread process = new Thread(() -> {
-            try {
-                view.goToTableCustomScenePrint(view.getController().getPrintHistory());
-            } catch (Exception e) {
-                Thread.currentThread().interrupt();
-            }
-
-        });
-
-        WaitDialog waitDialog = new WaitDialog(view);
-
-        waitDialog.setVisible(true);
-
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                process.run();
-                try {
-                    process.join();
-                    waitDialog.dispose();
-                } catch (Exception e) {
-                    Thread.currentThread().interrupt();
-                }
-
-            }
-
-        });
-
     }
 
 }
