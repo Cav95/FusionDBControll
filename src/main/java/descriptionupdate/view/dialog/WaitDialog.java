@@ -14,12 +14,11 @@ import descriptionupdate.view.factory.GuiFactory;
 /*
  * A dialog that shows a waiting message.
  */
-public class WaitDialog  extends JDialog {
+public class WaitDialog extends JDialog {
     private static final long serialVersionUID = 1L;
 
     private JPanel northPanel = new JPanel();
-    private JLabel titleLabel = new JLabel("Attendere prego...");
-
+    private JLabel titleLabel = new JLabel();
 
     /**
      * Constructor for WaitDialog.
@@ -27,9 +26,11 @@ public class WaitDialog  extends JDialog {
      * @param view the main view
      */
     public WaitDialog(final View view) {
+        //var count = 1;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(300, 150);
+        this.setAlwaysOnTop(true);
         this.setMaximumSize(this.getSize());
         this.setLocationRelativeTo(view.getMainFrame());
         this.setResizable(true);
@@ -43,7 +44,9 @@ public class WaitDialog  extends JDialog {
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
+        titleLabel.setText("Attendere prego");
+
 
     }
-    
+
 }

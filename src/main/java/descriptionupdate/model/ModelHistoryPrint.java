@@ -44,10 +44,16 @@ public class ModelHistoryPrint {
         return connection;
     }
 
+    /**
+     * Builds a stream of PrintCodeValues for a given code.
+     *
+     * @param code the code to build PrintCodeValues for
+     * @return a stream of PrintCodeValues
+     */
     private Stream<PrintCodeValues> builtPrinCodesValues(final String code) {
         var dates = printValueDAO.getAllEndValues(code, currentPrint.getFilter().dateValue());
 
-        return dates.stream()
+        return dates.stream().parallel()
                 .map(t -> new PrintCodeValues(code,
                         printValueDAO.getOneCodeValue(code, t, Reparti.OFFICINA.getRepartoName()),
                         printValueDAO.getOneCodeValue(code, t, Reparti.PREASSEMBLAGGIO.getRepartoName()),
