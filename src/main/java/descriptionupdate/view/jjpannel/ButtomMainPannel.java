@@ -60,7 +60,7 @@ public class ButtomMainPannel extends JPanel {
      * @param refreshAction  a Supplier<Void> representing the action to be
      *                       performed on refresh
      */
-    public ButtomMainPannel(MainTableScene mainTableScene, View view, Supplier<Void> refreshAction) {
+    public ButtomMainPannel(final MainTableScene mainTableScene, final View view, final Supplier<Void> refreshAction) {
 
         this.refreshAction = refreshAction;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));

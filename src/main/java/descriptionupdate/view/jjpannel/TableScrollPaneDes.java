@@ -35,7 +35,7 @@ public class TableScrollPaneDes extends JScrollPane implements TableScrollPane {
      * 
      * @param descriptions the list of descriptions to display in the table
      */
-    public TableScrollPaneDes(List<Description> descriptions) {
+    public TableScrollPaneDes(final List<Description> descriptions) {
         isAcending = true;
         this.table = new SelectionTable(
                 descriptions.stream()

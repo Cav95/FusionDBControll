@@ -55,14 +55,19 @@ public class Controller {
         return connectionFactory.doConnectionDescription(username, psw);
     }
 
+    /**
+     * Establishes a history database connection using the provided username and password.
+     *
+     * @param username the username for the connection
+     * @param psw      the password for the connection
+     * @return the established SQL Connection object
+     */
     public Connection doConnectionHistory(final String username, final String psw) {
         return connectionFactory.doConnectionHistory(username, psw);
     }
 
     /**
      * Retrieves a list of descriptions based on the provided filter criteria.
-     *
-     * @param filter the filter criteria encapsulated in a Description object
      * @return a list of descriptions matching the filter criteria
      */
     public Description getFilterDescription() {

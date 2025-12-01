@@ -25,7 +25,9 @@ public class LogInScene extends JPanel {
     private final JLabel passLabel = new JLabel("Password:");
     private final JTextField userField = new JTextField(20);
     private final JPasswordField passField = new JPasswordField(20);
+
     private final JButton accediButton;
+    private final JButton exitButton;
 
     private final Controller controller;
 
@@ -34,7 +36,7 @@ public class LogInScene extends JPanel {
      *
      * @param view the main view of the application
      */
-    public LogInScene(View view) {
+    public LogInScene(final View view) {
         this.controller = new Controller();
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(600, 400)); // Pannello più grande
@@ -84,7 +86,7 @@ public class LogInScene extends JPanel {
                     }
                 });
 
-        JButton exitButton = GuiFactory.getButton("Exit", Color.GRAY, Color.BLACK,
+        exitButton = GuiFactory.getButton("Exit", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override

@@ -29,7 +29,7 @@ public class ModelHistoryPrint {
      *
      * @param connection the database connection
      */
-    public ModelHistoryPrint(Connection connection) {
+    public ModelHistoryPrint(final Connection connection) {
         this.connection = connection;
         this.printValueDAO = new PrintValueDAOImpl(connection);
         this.currentPrint = new FilterPrintImpl();

@@ -11,7 +11,7 @@ public class ExistentDescriptionException extends RuntimeException {
      *
      * @param message the detail message
      */
-    public ExistentDescriptionException(String message) {
+    public ExistentDescriptionException(final String message) {
         super(message);
     }
 

@@ -34,7 +34,8 @@ public class PrintValueDAOImpl implements PrintValueDAO {
     public List<SinglePrintvalue> getPrintValue(final String code, final String endValue) throws DAOException {
         List<SinglePrintvalue> printValues = new ArrayList<>();
         try (
-                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE_VALUE, code, endValue);
+                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_CODE_VALUE, code,
+                        endValue);
                 final var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 printValues.add(new SinglePrintvalue(resultSet.getString(PrintValueColumn.CODICE.getColumnName()),
@@ -70,9 +71,11 @@ public class PrintValueDAOImpl implements PrintValueDAO {
      * {@inheritDoc}
      */
     @Override
-    public String getOneCodeValue(final String code, final String endValue, final String propValue) throws DAOException {
+    public String getOneCodeValue(final String code, final String endValue, final String propValue)
+            throws DAOException {
         try (
-                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ONE_CODE_VALUE, code + "%",
+                final var statement = DAOUtils.prepare(connection, QueriesHistoryPrintFiles.GET_ONE_CODE_VALUE,
+                        code + "%",
                         endValue, propValue);
                 final var resultSet = statement.executeQuery();) {
             if (resultSet.next()) {

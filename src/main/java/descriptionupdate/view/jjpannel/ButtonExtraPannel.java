@@ -26,7 +26,7 @@ public class ButtonExtraPannel extends JPanel {
      * @param mainTableScene the main table scene
      * @param view           the main view of the application
      */
-    public ButtonExtraPannel(MainTableScene mainTableScene, View view) {
+    public ButtonExtraPannel(final MainTableScene mainTableScene, final View view) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Color.WHITE);

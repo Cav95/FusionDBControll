@@ -32,7 +32,7 @@ public abstract class AbstactChangeDialog extends JDialog {
 
     private static final int SIZE_FONT = 13;
 
-    final JPanel mainPanel = new JPanel();
+    private final JPanel mainPanel = new JPanel();
     private JPanel northPanel = new JPanel();
     protected JLabel titleLabel = new JLabel("Scene");
     private JLabel itaLabel = GuiFactory.getLabel(DescrizioneEnum.ITA.getDescription(),

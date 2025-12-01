@@ -16,6 +16,7 @@ public enum Reparti {
 
     /*
      * Constructor for Reparti enum.
+     * @param repartoName the name of the reparto
      */
     Reparti(final String repartoName) {
         this.repartoName = repartoName;

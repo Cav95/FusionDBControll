@@ -25,7 +25,7 @@ public interface PrintValueDAO {
 
     /**
      * Retrieves all unique codes from the data source.
-     *
+     * @param code a code prefix to filter the results
      * @return a list of all unique codes
      * @throws DAOException if an error occurs while accessing the data
      */

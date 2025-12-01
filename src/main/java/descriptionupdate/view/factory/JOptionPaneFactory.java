@@ -155,7 +155,7 @@ public class JOptionPaneFactory {
      * 
      * @param mainTableScene the main table scene
      */
-    public static void errorNoSelection(Component mainTableScene) {
+    public static void errorNoSelection(final Component mainTableScene) {
         JOptionPane.showMessageDialog(mainTableScene,
                 "Nessuna descrizione selezionata", "Errore",
                 JOptionPane.ERROR_MESSAGE);
@@ -166,7 +166,7 @@ public class JOptionPaneFactory {
      * 
      * @param dialog the parent component for the dialog
      */
-    public static void errorNoCodeSelection(Component dialog) {
+    public static void errorNoCodeSelection(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Nessun codice selezionato\nSelezionare un codice per continuare.", "Errore",
                 JOptionPane.ERROR_MESSAGE);
@@ -177,7 +177,7 @@ public class JOptionPaneFactory {
      * 
      * @param dialog the parent component for the dialog
      */
-    public static void waitMessagge(Component dialog) {
+    public static void waitMessagge(final Component dialog) {
         JOptionPane.showMessageDialog(dialog,
                 "Operazione in corso, attendere prego...", "Info",
                 JOptionPane.INFORMATION_MESSAGE);

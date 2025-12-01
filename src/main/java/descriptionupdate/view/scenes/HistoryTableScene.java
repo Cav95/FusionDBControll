@@ -97,7 +97,6 @@ public class HistoryTableScene extends JPanel {
      * Refreshes the table to display print history based on the provided filter.
      */
     public void refreshTablePrint() {
-        // this.remove(this.tableScrollPanePrint);
         this.tableScrollPanePrint = new TableScrollPanePrint(view.getController().getPrintHistory());
         this.add(this.tableScrollPanePrint, BorderLayout.CENTER);
         this.remove(this.buttonPanel);

@@ -26,7 +26,6 @@ public class WaitDialog extends JDialog {
      * @param view the main view
      */
     public WaitDialog(final View view) {
-        //var count = 1;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(300, 150);

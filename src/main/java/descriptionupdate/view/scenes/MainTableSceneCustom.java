@@ -21,7 +21,7 @@ public class MainTableSceneCustom extends MainTableScene {
      *
      * @param view the main view of the application
      */
-    public MainTableSceneCustom(View view, Supplier<List<Description>> descriptions) {
+    public MainTableSceneCustom(final View view, final  Supplier<List<Description>> descriptions) {
         super(view);
         this.onBack = () -> {
             view.goToTableCustomScene(descriptions);

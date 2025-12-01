@@ -31,16 +31,12 @@ public class MainTableScene extends JPanel {
             GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
             Color.BLACK);
 
-    @SuppressWarnings("unused")
-    private final View view;
-
     /**
      * Constructor for MainTableScene.
      *
      * @param view the main view of the application
      */
-    public MainTableScene(View view) {
-        this.view = view;
+    public MainTableScene(final View view) {
         this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
 

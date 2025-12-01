@@ -40,13 +40,13 @@ public class FilterPrintValuesPannel extends JPanel {
 
     private final JPanel filterPanel = new JPanel();
 
-
     /**
      * Constructor for FilterPrintValuesPannel.
+     * 
      * @param mainTableScene the main table scene
-     * @param view the main view
+     * @param view           the main view
      */
-    public FilterPrintValuesPannel(HistoryTableScene mainTableScene, View view) {
+    public FilterPrintValuesPannel(final HistoryTableScene mainTableScene, final View view) {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));

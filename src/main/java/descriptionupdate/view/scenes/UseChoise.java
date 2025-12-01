@@ -25,8 +25,9 @@ public class UseChoise extends JPanel {
     private final JPanel buttonPanel = new JPanel();
     private final JLabel titleLabel = new JLabel("Description Database");
 
-    private JButton descriptionButton;
-    private JButton historyButton;
+    private final JButton descriptionButton;
+    private final JButton historyButton;
+    private final JButton exitButton;
 
     private final Controller controller;
 
@@ -35,7 +36,7 @@ public class UseChoise extends JPanel {
      *
      * @param view the main view of the application
      */
-    public UseChoise(View view, String username, String password) {
+    public UseChoise(final View view, final String username, final String password) {
         this.controller = new Controller();
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(600, 400)); // Pannello più grande
@@ -93,7 +94,7 @@ public class UseChoise extends JPanel {
                     }
                 });
 
-        JButton exitButton = GuiFactory.getButton("Exit", Color.GRAY, Color.BLACK,
+        exitButton = GuiFactory.getButton("Exit", Color.GRAY, Color.BLACK,
                 GuiFactory.getFont(GuiFactory.FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override

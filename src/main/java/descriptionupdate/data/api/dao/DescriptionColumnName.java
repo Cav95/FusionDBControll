@@ -14,7 +14,7 @@ public enum DescriptionColumnName {
     /**
      * Constructor for DescriptionColumnName enum.
      */
-    DescriptionColumnName(String columnName) {
+    DescriptionColumnName(final String columnName) {
         this.columnName = columnName;
     }
 

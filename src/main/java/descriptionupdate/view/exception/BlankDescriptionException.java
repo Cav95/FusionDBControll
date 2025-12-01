@@ -10,7 +10,7 @@ public class BlankDescriptionException extends RuntimeException {
      *
      * @param message the detail message
      */
-    public BlankDescriptionException(String message) {
+    public BlankDescriptionException(final String message) {
         super(message);
     }
 

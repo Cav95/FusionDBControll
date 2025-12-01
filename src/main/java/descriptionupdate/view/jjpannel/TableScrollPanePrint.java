@@ -36,7 +36,7 @@ public class TableScrollPanePrint extends JScrollPane implements TableScrollPane
      *
      * @param printCodeValues the list of print code values to display in the table
      */
-    public TableScrollPanePrint(List<PrintCodeValues> printCodeValues) {
+    public TableScrollPanePrint(final List<PrintCodeValues> printCodeValues) {
         isAcending = true;
         this.table = new SelectionTable(
                 printCodeValues.stream()

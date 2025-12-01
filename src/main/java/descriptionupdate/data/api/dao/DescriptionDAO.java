@@ -23,7 +23,7 @@ public interface DescriptionDAO {
          *         found
          * @throws DAOException if an error occurs while accessing the data
          */
-        Optional<Description> getDescription(String itaDescription, String engDescription, String group)
+        Optional<Description> getDescription(final String itaDescription, final String engDescription, final String group)
                         throws DAOException;
 
         /**
@@ -34,7 +34,7 @@ public interface DescriptionDAO {
          * @param group          the group type
          * @throws DAOException if an error occurs while adding the description
          */
-        void addDescription(String itaDescription, String engDescription, String group);
+        void addDescription(final String itaDescription, final String engDescription, final String group);
 
         /**
          * Deletes a description from the data store.
@@ -44,7 +44,7 @@ public interface DescriptionDAO {
          * @param group          the group type
          * @throws DAOException if an error occurs while deleting the description
          */
-        void deleteDescription(String itaDescription, String engDescription, String group);
+        void deleteDescription(final String itaDescription, final String engDescription, final String group);
 
         /**
          * Updates an existing description in the data store.
@@ -56,9 +56,9 @@ public interface DescriptionDAO {
          * @param newEngDescription the new English description
          * @throws DAOException if an error occurs while updating the description
          */
-        void updateDescription(String exItaDescription, String exEngDescription, String exGroup,
-                        String newItaDescription,
-                        String newEngDescription);
+        void updateDescription(final String exItaDescription, final String exEngDescription, final String exGroup,
+                        final String newItaDescription,
+                        final String newEngDescription);
 
         /**
          * Retrieves all group types as a list of strings.
@@ -76,7 +76,7 @@ public interface DescriptionDAO {
          * @param group          the group type
          * @return a list of descriptions matching the provided parameters
          */
-        List<Description> getListDescription(String itaDescription, String engDescription, String group);
+        List<Description> getListDescription(final String itaDescription, final String engDescription, final String group);
 
         /**
          * Retrieves a list of descriptions with similar Italian descriptions.
@@ -87,6 +87,6 @@ public interface DescriptionDAO {
          * @return a list of descriptions with similar Italian descriptions
          * @throws DAOException if an error occurs while accessing the data
          */
-        List<Description> getSimilarItalianDescriptions(String itaDescription, String engDescription, String group)
+        List<Description> getSimilarItalianDescriptions(final String itaDescription, final String engDescription, final String group)
                         throws DAOException;
 }

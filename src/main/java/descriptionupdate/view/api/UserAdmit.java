@@ -11,7 +11,7 @@ public enum UserAdmit {
     private final String username;
     private final String psw;
 
-    UserAdmit(String username, String psw) {
+    UserAdmit(final String username, final String psw) {
         this.username = username;
         this.psw = psw;
     }

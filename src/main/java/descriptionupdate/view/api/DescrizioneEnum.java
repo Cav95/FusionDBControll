@@ -15,7 +15,7 @@ public enum DescrizioneEnum {
      *
      * @param description the description string
      */
-    DescrizioneEnum(String description) {
+    DescrizioneEnum(final String description) {
         this.description = description;
     }
 
