@@ -1,13 +1,18 @@
 package descriptionupdate.model;
 
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import descriptionupdate.data.PrintValueDAOImpl;
 import descriptionupdate.data.api.dao.PrintValueDAO;
 import descriptionupdate.model.api.PrintCodeValues;
 import descriptionupdate.model.api.Reparti;
+import descriptionupdate.model.api.SinglePrintvalue;
 import descriptionupdate.model.filter.FilterPrintImpl;
 import descriptionupdate.model.filter.api.FilterPrintValues;
 
@@ -21,6 +26,8 @@ public class ModelHistoryPrint {
     private final Connection connection;
     private final PrintValueDAO printValueDAO;
     private FilterPrintImpl currentPrint;
+
+    private Map<String, Set<SinglePrintvalue>> cacheCodeValuesMap = new HashMap<>();
 
     /**
      * Constructor for Model.
@@ -55,13 +62,13 @@ public class ModelHistoryPrint {
 
         return dates.stream().parallel()
                 .map(t -> new PrintCodeValues(code,
-                        printValueDAO.getOneCodeValue(code, t, Reparti.OFFICINA.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.PREASSEMBLAGGIO.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.SARTORIA.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.PRODOTTO_FINITO.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.SPEDIZIONE.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.MONTATORI.getRepartoName()),
-                        printValueDAO.getOneCodeValue(code, t, Reparti.UFFICIO_ACQUISTI.getRepartoName()),
+                        getCachedCodes(code, t, Reparti.OFFICINA.getRepartoName()),
+                        getCachedCodes(code, t, Reparti.PREASSEMBLAGGIO.getRepartoName()),
+                        getCachedCodes(code, t, Reparti.SARTORIA.getRepartoName()),
+                        getCachedCodes(code, t, Reparti.PRODOTTO_FINITO.getRepartoName()),
+                        getCachedCodes(code, t, Reparti.SPEDIZIONE.getRepartoName()),
+                        getCachedCodes(code, t, Reparti.MONTATORI.getRepartoName()),
+                        getCachedCodes(code, t, Reparti.UFFICIO_ACQUISTI.getRepartoName()),
                         t))
                 .distinct();
     }
@@ -107,5 +114,30 @@ public class ModelHistoryPrint {
      */
     public List<String> getAllDate() {
         return printValueDAO.getAllDate();
+    }
+
+    private String getCachedCodes(String codeValue, String date, String reparto) {
+        if (cacheCodeValuesMap.containsKey(codeValue)) {
+            var cachedSet = cacheCodeValuesMap.get(codeValue);
+            try {
+                return cachedSet.stream().parallel()
+                        .filter(t -> t.codice().equals(codeValue)
+                                && t.endValue().equals(date)
+                                && t.nomeCampo().equals(reparto))
+                        .findFirst()
+                        .map(SinglePrintvalue::valoreCampo).get();
+            } catch (Exception ex) {
+                var valore = printValueDAO.getOneCodeValue(codeValue, date, reparto);
+                cachedSet.add(new SinglePrintvalue(codeValue, reparto, valore, date));
+                return valore;
+            }
+        } else {
+            var valore = printValueDAO.getOneCodeValue(codeValue, date, reparto);
+            var newSet = new HashSet<SinglePrintvalue>();
+            newSet.add(new SinglePrintvalue(codeValue, reparto, valore, date));
+            cacheCodeValuesMap.put(codeValue, newSet);
+            return valore;
+        }
+
     }
 }
