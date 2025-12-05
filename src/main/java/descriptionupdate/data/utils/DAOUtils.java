@@ -2,6 +2,7 @@ package descriptionupdate.data.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import org.slf4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +15,8 @@ import java.util.Properties;
  * as well as to prepare SQL statements with parameters.
  */
 public final class DAOUtils {
+
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(DAOUtils.class);
 
     private static final String CONFIG_DB_CONNECTION_INI = "configDBConnection.ini";
 
@@ -74,10 +77,10 @@ public final class DAOUtils {
         Properties properties = new Properties();
         String iniFilePath = System.getProperty("user.dir") + System.getProperty("file.separator")
                 + CONFIG_DB_CONNECTION_INI;
-
         try (FileInputStream fileInputStream = new FileInputStream(iniFilePath)) {
             properties.load(fileInputStream);
         } catch (IOException e) {
+            LOGGER.warn("Unable to read INI file {}: {}", iniFilePath, e.getMessage());
         }
 
         // Leggi una singola chiave dal file INI

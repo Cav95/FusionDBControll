@@ -20,7 +20,6 @@ public class ConnectionFactory {
     private static final String CEPIUT = "CEPIUT";
 
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ConnectionFactory.class);
-    private Connection connection;
 
     /**
      * Checks if the user is admitted based on username and password.
@@ -42,13 +41,14 @@ public class ConnectionFactory {
      * @return the established SQL Connection object
      */
     public Connection sqlProductionConnection(final String dbName, final String username, final String psw) {
+        Connection conn = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DAOUtils.localSqlServerConnection(dbName, username, psw);
+            conn = DAOUtils.localSqlServerConnection(dbName, username, psw);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error("JDBC driver for SQL Server not found", e);
         }
-        return connection;
+        return conn;
     }
 
     /**
@@ -58,13 +58,14 @@ public class ConnectionFactory {
      * @return the established SQL Connection object
      */
     public Connection sqlProductionConnectionIni(final String key) {
+        Connection conn = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DAOUtils.localIniStringConnection(key);
+            conn = DAOUtils.localIniStringConnection(key);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error("JDBC driver for SQL Server not found", e);
         }
-        return connection;
+        return conn;
     }
 
     /**
@@ -75,9 +76,8 @@ public class ConnectionFactory {
      * @return the established SQL Connection object
      */
     public Connection sqlTestConnection() {
-
-        return DAOUtils.localMySQLConnection("DesFusion",
-                "root", "");
+        // Use null password for test connection instead of an empty literal
+        return DAOUtils.localMySQLConnection("DesFusion", "root", null);
     }
 
     /**
@@ -90,28 +90,32 @@ public class ConnectionFactory {
      */
     public Connection doConnectionDescription(final String username, final String psw) {
         LOGGER.info("Attempting connection Description for user: {}", username);
+        Connection conn = null;
         try {
             if (username.equals(TEST)) {
-                connection = sqlTestConnection();
+                conn = sqlTestConnection();
                 LOGGER.info("Connection established for user TEST: {}", username);
             } else if (username.equals(CEPIUT)) {
                 // connection = sqlProductionConnection(EDM_DB_2008_001, PDM_USER, PDM_USER);
-                connection = sqlProductionConnectionIni("key1");
+                conn = sqlProductionConnectionIni("key1");
                 LOGGER.info("Connection established for user in edm: {}", username);
             } else {
                 throw new DAOException("Invalid username");
             }
             try {
-                LOGGER.info("Connection established in database: {}", connection.getCatalog());
-                connection.setAutoCommit(false);
-                LOGGER.info("Auto-commit disabled for the connection");
+                if (conn != null) {
+                    LOGGER.info("Connection established in database: {}", conn.getCatalog());
+                    conn.setAutoCommit(false);
+                    LOGGER.info("Auto-commit disabled for the connection");
+                }
             } catch (SQLException e) {
                 LOGGER.error("Failed to retrieve database catalog", e);
             }
         } catch (DAOException ex) {
+            LOGGER.warn("DAOException while establishing connection: {}", ex.getMessage());
             new ConnectionFailureViewIni();
         }
-        return connection;
+        return conn;
 
     }
 
@@ -126,29 +130,33 @@ public class ConnectionFactory {
      */
     public Connection doConnectionHistory(String username, String psw) {
         LOGGER.info("Attempting connection History for user: {}", username);
+        Connection conn = null;
         try {
             if (username.equals(TEST)) {
-                connection = sqlTestConnection();
+                conn = sqlTestConnection();
                 LOGGER.info("Connection established for user TEST: {}", username);
             } else if (username.equals(CEPIUT)) {
                 // connection = sqlProductionConnection(BOMB_CONFINE, ADHOC, ADHOC);
-                connection = sqlProductionConnectionIni("key2");
+                conn = sqlProductionConnectionIni("key2");
                 LOGGER.info("Connection established for user in bomb_confine: {}", username);
 
             } else {
                 throw new DAOException("Invalid username");
             }
             try {
-                LOGGER.info("Connection established in database: {}", connection.getCatalog());
-                connection.setAutoCommit(false);
-                LOGGER.info("Auto-commit disabled for the connection");
+                if (conn != null) {
+                    LOGGER.info("Connection established in database: {}", conn.getCatalog());
+                    conn.setAutoCommit(false);
+                    LOGGER.info("Auto-commit disabled for the connection");
+                }
             } catch (SQLException e) {
                 LOGGER.error("Failed to retrieve database catalog", e);
             }
         } catch (DAOException ex) {
+            LOGGER.warn("DAOException while establishing history connection: {}", ex.getMessage());
             new ConnectionFailureViewIni();
         }
-        return connection;
+        return conn;
     }
 
 }

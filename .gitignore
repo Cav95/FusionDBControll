@@ -34,4 +34,4 @@ bin/
 # Ignora VSCode workspace configs
 .vscode/
 
-*.ini
+configDBConnection.ini

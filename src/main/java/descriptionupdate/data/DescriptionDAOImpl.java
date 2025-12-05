@@ -25,7 +25,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
      * 
      * @param connection the database connection.
      */
-    public DescriptionDAOImpl(Connection connection) {
+    public DescriptionDAOImpl(final Connection connection) {
         this.connection = connection;
     }
 
